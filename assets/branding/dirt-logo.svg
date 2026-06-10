@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 680 680">
+<title>$DIRT Token Logo — Proof of Dirt</title>
+
+<circle cx="340" cy="340" r="326" fill="#C8880E"/>
+<circle cx="340" cy="340" r="314" fill="#E8A020"/>
+<circle cx="340" cy="340" r="304" fill="#C8880E"/>
+<circle cx="340" cy="340" r="293" fill="#FEFAF0"/>
+
+<defs>
+  <clipPath id="cc">
+    <circle cx="340" cy="340" r="293"/>
+  </clipPath>
+</defs>
+
+<!-- Earth -->
+<circle cx="340" cy="320" r="78" fill="#2E7D32"/>
+<ellipse cx="325" cy="305" rx="22" ry="14" fill="#43A047" opacity="0.6"/>
+<ellipse cx="360" cy="333" rx="16" ry="10" fill="#66BB6A" opacity="0.5"/>
+<ellipse cx="318" cy="337" rx="10" ry="7" fill="#81C784" opacity="0.4"/>
+<ellipse cx="315" cy="296" rx="18" ry="12" fill="white" opacity="0.12"/>
+
+<!-- Orbit ring -->
+<ellipse cx="340" cy="320" rx="130" ry="40" fill="none" stroke="#E8781A" stroke-width="3" stroke-dasharray="12 7"/>
+
+<!-- Satellite body -->
+<rect x="438" y="294" width="34" height="22" rx="4" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.5"/>
+<!-- Solar panels -->
+<rect x="408" y="300" width="26" height="10" rx="2" fill="#E8781A"/>
+<rect x="476" y="300" width="26" height="10" rx="2" fill="#E8781A"/>
+<!-- Sensor -->
+<circle cx="455" cy="305" r="4" fill="#0288D1"/>
+<circle cx="455" cy="305" r="2" fill="#29B6F6"/>
+<!-- Signal line -->
+<line x1="450" y1="316" x2="404" y2="345" stroke="#E8781A" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.7"/>
+
+<!-- Wordmark -->
+<text x="219" y="528" text-anchor="start" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="56" fill="#2E7D32">$</text>
+<text x="261" y="528" text-anchor="start" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="80" letter-spacing="5" fill="#E8781A">DIRT</text>
+<!-- Orange dot -->
+<circle cx="472" cy="503" r="11" fill="#E8781A"/>
+<circle cx="472" cy="503" r="5.5" fill="#F5A030"/>
+
+<!-- Top label -->
+<text x="340" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="6" fill="#C8880E">PROOF  OF  DIRT</text>
+
+<!-- Ring compass dots -->
+<circle cx="340" cy="30" r="5" fill="#FEFAF0"/>
+<circle cx="340" cy="650" r="5" fill="#FEFAF0"/>
+<circle cx="30" cy="340" r="5" fill="#FEFAF0"/>
+<circle cx="650" cy="340" r="5" fill="#FEFAF0"/>
+</svg>

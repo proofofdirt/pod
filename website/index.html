@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Satellite-verified, in-kind agricultural export finance for SME farms in Ethiopia. MENA investors subscribe in SAR/USD via KSA SPV. Built on Solana.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Proof of Dirt — SME Agri Export Finance | Ethiopia to MENA">
+    <meta property="og:description" content="Satellite-verified, in-kind agricultural export finance for SME farms in Ethiopia. MENA investors subscribe in SAR/USD via KSA SPV. Built on Solana.">
+    <meta property="og:url" content="https://proofofdirt.com/">
+    <meta property="og:site_name" content="Proof of Dirt">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@proofofdirt">
+    <meta name="twitter:title" content="Proof of Dirt — SME Agri Export Finance | Ethiopia to MENA">
+    <meta name="twitter:description" content="Satellite-verified, in-kind agricultural export finance for SME farms in Ethiopia. MENA investors subscribe in SAR/USD via KSA SPV. Built on Solana.">
+    <meta name="theme-color" content="#B8801E">
+    <link rel="canonical" href="https://proofofdirt.com/">
+    <title>Proof of Dirt — SME Agri Export Finance | Ethiopia to MENA | proofofdirt.com</title>    <style>
+        /* ═══════════════════════════════════════════════════════
+           DESIGN SYSTEM — "SAHARA MODERN"
+           Light, editorial, refined. Like an FT weekend meets
+           a precision instrument. Warm ivory + charcoal +
+           amber gold + sage + cerulean.
+        ═══════════════════════════════════════════════════════ */
+        :root {
+            /* Backgrounds — warm ivory spectrum */
+            --bg:         #F8F4EE;   /* main page — warm parchment */
+            --bg-2:       #F2EDE4;   /* alt sections — slightly deeper */
+            --bg-3:       #EDE5D8;   /* cards, hover states */
+            --bg-ink:     #1C1814;   /* deep soil — for hero + footer only */
+            --bg-card:    #FFFFFF;   /* pure white cards */
+
+            /* Typography */
+            --ink:        #1A1612;   /* near-black — main headings */
+            --body:       #3D3530;   /* warm dark brown — body text */
+            --subtle:     #7A6E65;   /* captions, labels */
+            --muted:      #A89E94;   /* placeholders, disabled */
+            --rule:       #DDD4C8;   /* dividers */
+            --rule-dark:  rgba(26,22,18,0.10);
+
+            /* Brand accents */
+            --amber:      #B8801E;   /* primary gold — darker for light bg */
+            --amber-glow: #D4992A;   /* hover state */
+            --amber-pale: #FBF1E0;   /* amber tinted backgrounds */
+            --sage:       #4A7A58;   /* secondary — agriculture */
+            --sage-pale:  #EAF2EC;   /* sage tinted backgrounds */
+            --cerulean:   #2E6E8A;   /* tertiary — technology/satellite */
+            --cerulean-pale: #E6F0F5;
+            --violet:     #6B4E8A;   /* builder/technical */
+            --red-signal: #C04040;   /* problem stats */
+
+            /* Borders */
+            --border:     1px solid var(--rule);
+            --border-card: 1px solid var(--rule);
+
+            /* Shadows */
+            --shadow-xs:  0 1px 3px rgba(26,22,18,0.06), 0 1px 2px rgba(26,22,18,0.04);
+            --shadow-sm:  0 2px 8px rgba(26,22,18,0.08), 0 1px 3px rgba(26,22,18,0.05);
+            --shadow-md:  0 4px 20px rgba(26,22,18,0.10), 0 2px 6px rgba(26,22,18,0.06);
+            --shadow-lg:  0 12px 40px rgba(26,22,18,0.12), 0 4px 12px rgba(26,22,18,0.07);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--body);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ─────────────────────────────────────────────── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 64px;
+            background: rgba(248,244,238,0.92);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: var(--border);
+            transition: background 0.3s;
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem; font-weight: 600;
+            color: var(--ink); letter-spacing: 0.01em;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-logo .logo-mark {
+            width: 32px; height: 32px; flex-shrink: 0;
+        }
+        .nav-logo em { font-style: italic; color: var(--amber); }
+        .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--subtle); text-decoration: none; font-size: 0.8rem;
+            font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-cta {
+            background: var(--ink) !important; color: var(--bg) !important;
+            padding: 9px 20px; border-radius: 3px;
+            letter-spacing: 0.08em !important;
+        }
+        .nav-cta:hover { background: var(--amber) !important; color: var(--bg) !important; }
+
+        /* ── HERO — dark section only ────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 120px 64px 80px;
+            background: var(--bg-ink);
+            position: relative;
+            overflow: hidden;
+            gap: 80px;
+        }
+
+        /* Subtle topographic contour lines in hero */
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 110% 50%, rgba(184,128,30,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 80% at -10% 60%, rgba(74,122,88,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Fine grid */
+        .hero-grid {
+            position: absolute; inset: 0; opacity: 0.025;
+            background-image:
+                linear-gradient(rgba(248,244,238,1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(248,244,238,1) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        .hero-left { position: relative; z-index: 1; }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--amber); margin-bottom: 32px;
+            display: flex; align-items: center; gap: 14px;
+        }
+        .hero-eyebrow::before {
+            content: ''; width: 28px; height: 1px; background: var(--amber); flex-shrink: 0;
+        }
+
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 5.5vw, 6.5rem);
+            font-weight: 600;
+            line-height: 0.96; letter-spacing: -0.02em;
+            color: #F2EDE4;
+            animation: fadeUp 1s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-headline em { font-style: italic; color: var(--amber-glow); }
+
+        .hero-sub {
+            margin-top: 28px; max-width: 520px;
+            font-size: 1.0rem; line-height: 1.75;
+            color: rgba(242,237,228,0.62); font-weight: 400;
+            animation: fadeUp 1s 0.12s ease both;
+        }
+
+        .hero-actions {
+            margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap;
+            animation: fadeUp 1s 0.24s ease both;
+        }
+        .btn-primary {
+            background: var(--amber); color: #1A1612;
+            padding: 15px 34px; border-radius: 3px; font-weight: 700;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+            box-shadow: 0 2px 12px rgba(184,128,30,0.35);
+        }
+        .btn-primary:hover { background: var(--amber-glow); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(184,128,30,0.45); }
+        .btn-outline {
+            border: 1px solid rgba(242,237,228,0.25); color: rgba(242,237,228,0.8);
+            padding: 15px 34px; border-radius: 3px; font-weight: 600;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-outline:hover { border-color: rgba(242,237,228,0.6); color: #F2EDE4; transform: translateY(-2px); }
+
+        /* Hero right: Oracle Logo */
+        .hero-right {
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            animation: fadeUp 1s 0.2s ease both;
+        }
+        .oracle-hero-logo {
+            width: 100%; max-width: 420px;
+            filter: drop-shadow(0 0 40px rgba(46,110,138,0.25)) drop-shadow(0 0 80px rgba(184,128,30,0.12));
+        }
+        .oracle-hero-caption {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; color: rgba(242,237,228,0.35);
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-top: 20px; text-align: center;
+        }
+
+        /* Hero stat strip at bottom */
+        .hero-stats-strip {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid rgba(242,237,228,0.08);
+            z-index: 1;
+        }
+        .hero-stat {
+            padding: 20px 32px;
+            border-right: 1px solid rgba(242,237,228,0.08);
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem; font-weight: 600; color: var(--amber-glow);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem; color: rgba(242,237,228,0.4);
+            letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px;
+        }
+
+        /* ── TICKER ──────────────────────────────────────────── */
+        .ticker-wrap {
+            background: var(--bg-2);
+            border-bottom: var(--border);
+            overflow: hidden; padding: 13px 0;
+        }
+        .ticker {
+            display: flex; gap: 72px; width: max-content;
+            animation: ticker 40s linear infinite;
+        }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+        .ticker-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--muted); white-space: nowrap;
+            display: flex; gap: 10px; align-items: center;
+        }
+        .ticker-item .dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+        .dot-dirt    { background: var(--amber); }
+        .dot-rwa     { background: var(--sage); }
+        .dot-oracle  { background: var(--cerulean); }
+        .ticker-item strong { color: var(--body); font-weight: 600; }
+
+        /* ── SECTION COMMONS ─────────────────────────────────── */
+        section { padding: 112px 64px; }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .eyebrow::before { content: ''; width: 20px; height: 1px; flex-shrink: 0; }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.0rem, 3.5vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.06; letter-spacing: -0.02em;
+            color: var(--ink); max-width: 680px;
+        }
+        .section-title em { font-style: italic; }
+
+        /* ── PROBLEM ─────────────────────────────────────────── */
+        .problem { background: var(--bg-ink); }
+        .problem .eyebrow { color: #E06060; }
+        .problem .eyebrow::before { background: #E06060; }
+        .problem .section-title { color: #F2EDE4; }
+
+        .problem-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+            margin-top: 56px; align-items: start;
+        }
+        .problem-text p {
+            color: rgba(242,237,228,0.62); line-height: 1.85; font-size: 1.0rem; margin-bottom: 20px;
+        }
+        .problem-text p strong { color: rgba(242,237,228,0.9); font-weight: 600; }
+
+        .problem-stats { display: flex; flex-direction: column; gap: 1px; }
+        .psr {
+            background: rgba(242,237,228,0.04);
+            padding: 22px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.2s; cursor: default;
+        }
+        .psr:hover { background: rgba(242,237,228,0.07); border-left-color: #E06060; }
+        .psr-label { font-size: 0.88rem; color: rgba(242,237,228,0.5); font-weight: 500; max-width: 60%; }
+        .psr-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem; font-weight: 600; color: #E06060; line-height: 1;
+        }
+
+        /* ── ARCHITECTURE ────────────────────────────────────── */
+        .architecture { background: var(--bg); }
+        .architecture .eyebrow { color: var(--amber); }
+        .architecture .eyebrow::before { background: var(--amber); }
+
+        .arch-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            margin-top: 52px;
+        }
+        .arch-card {
+            background: var(--bg-card);
+            border: var(--border-card);
+            border-top: 3px solid transparent;
+            padding: 40px 36px 36px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .arch-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .arch-card.dirt   { border-top-color: var(--amber); }
+        .arch-card.rwa    { border-top-color: var(--sage); }
+        .arch-card.oracle { border-top-color: var(--cerulean); }
+
+        .arch-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; letter-spacing: 0.2em; color: var(--muted);
+            margin-bottom: 28px;
+        }
+        .arch-icon-wrap {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin-bottom: 18px;
+        }
+        .arch-card.dirt   .arch-icon-wrap { background: var(--amber-pale); }
+        .arch-card.rwa    .arch-icon-wrap { background: var(--sage-pale); }
+        .arch-card.oracle .arch-icon-wrap { background: var(--cerulean-pale); }
+
+        .arch-token {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.12em; margin-bottom: 10px; font-weight: 500;
+        }
+        .arch-card.dirt   .arch-token { color: var(--amber); }
+        .arch-card.rwa    .arch-token { color: var(--sage); }
+        .arch-card.oracle .arch-token { color: var(--cerulean); }
+
+        .arch-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem; font-weight: 600; margin-bottom: 16px; line-height: 1.15; color: var(--ink);
+        }
+        .arch-desc { color: var(--subtle); line-height: 1.75; font-size: 0.9rem; margin-bottom: 28px; }
+        .arch-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+            font-weight: 500; transition: gap 0.2s;
+        }
+        .arch-card.dirt   .arch-link { color: var(--amber); }
+        .arch-card.rwa    .arch-link { color: var(--sage); }
+        .arch-card.oracle .arch-link { color: var(--cerulean); }
+        .arch-link:hover { gap: 12px; }
+
+        /* KSA strip */
+        .ksa-strip {
+            margin-top: 20px;
+            background: var(--bg-card);
+            border: var(--border-card);
+            border-left: 3px solid #B8941E;
+            border-radius: 4px;
+            padding: 24px 36px;
+            box-shadow: var(--shadow-xs);
+            display: grid; grid-template-columns: 40px 1fr auto;
+            gap: 24px; align-items: center;
+        }
+        .ksa-icon {
+            width: 40px; height: 40px; background: #FBF5E0; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+        }
+        .ksa-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            color: #B8941E; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px;
+        }
+        .ksa-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+        .ksa-desc { font-size: 0.83rem; color: var(--subtle); line-height: 1.6; }
+        .ksa-badge {
+            text-align: right; flex-shrink: 0;
+        }
+        .ksa-badge-label { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.14em; margin-bottom: 4px; }
+        .ksa-badge-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: #B8941E; }
+
+        /* ── TOKENOMICS ──────────────────────────────────────── */
+        .tokenomics { background: var(--bg-2); }
+        .tokenomics .eyebrow { color: var(--amber); }
+        .tokenomics .eyebrow::before { background: var(--amber); }
+
+        .tok-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; margin-top: 52px; align-items: start; }
+        .tok-chart-wrap { position: relative; aspect-ratio: 1; max-width: 300px; }
+        .tok-chart-wrap svg { width: 100%; height: 100%; }
+
+        .tok-legend { display: flex; flex-direction: column; gap: 3px; }
+        .tok-row {
+            display: flex; align-items: center; gap: 14px;
+            background: var(--bg-card); padding: 14px 18px;
+            border: var(--border); border-radius: 3px;
+            box-shadow: var(--shadow-xs);
+            transition: all 0.15s; cursor: default;
+        }
+        .tok-row:hover { box-shadow: var(--shadow-sm); transform: translateX(4px); }
+        .tok-swatch { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+        .tok-pct { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); min-width: 48px; line-height: 1; }
+        .tok-info { flex: 1; }
+        .tok-label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+        .tok-sublabel { font-size: 0.74rem; color: var(--subtle); margin-top: 2px; line-height: 1.4; }
+
+        /* ── ROADMAP ─────────────────────────────────────────── */
+        .roadmap { background: var(--bg); }
+        .roadmap .eyebrow { color: var(--sage); }
+        .roadmap .eyebrow::before { background: var(--sage); }
+
+        .road-timeline { margin-top: 52px; display: flex; flex-direction: column; }
+        .road-phase {
+            display: grid; grid-template-columns: 220px 1fr;
+            border-top: var(--border);
+            padding: 36px 0;
+        }
+        .road-phase:last-child { border-bottom: var(--border); }
+        .road-label { padding-right: 36px; }
+        .road-phase-num { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; }
+        .road-phase-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+        .road-phase-time { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--amber); margin-top: 6px; letter-spacing: 0.1em; }
+
+        .road-body { display: flex; flex-direction: column; gap: 12px; }
+        .road-stream {
+            background: var(--bg-card); border: var(--border); border-radius: 3px;
+            padding: 16px 20px; box-shadow: var(--shadow-xs);
+        }
+        .road-stream-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+            margin-bottom: 8px; font-weight: 500;
+        }
+        .stream-dirt { color: var(--amber); }
+        .stream-ops  { color: var(--sage); }
+        .stream-tech { color: var(--cerulean); }
+        .stream-defi { color: var(--violet); }
+        .road-stream ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+        .road-stream li { font-size: 0.85rem; color: var(--body); padding-left: 16px; position: relative; line-height: 1.5; }
+        .road-stream li::before { content: '→'; position: absolute; left: 0; color: var(--muted); font-size: 0.75rem; top: 2px; }
+
+        /* ── TURMI ───────────────────────────────────────────── */
+        .turmi { background: var(--bg-2); }
+        .turmi .eyebrow { color: var(--sage); }
+        .turmi .eyebrow::before { background: var(--sage); }
+        .turmi-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 72px; margin-top: 52px; align-items: start; }
+        .turmi-desc p { color: var(--body); line-height: 1.82; font-size: 0.97rem; margin-bottom: 18px; }
+        .turmi-desc p strong { color: var(--ink); }
+
+        .turmi-milestones { display: flex; flex-direction: column; gap: 3px; }
+        .ms {
+            background: var(--bg-card); border: var(--border); border-radius: 3px;
+            padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start;
+            box-shadow: var(--shadow-xs); transition: box-shadow 0.2s;
+        }
+        .ms:hover { box-shadow: var(--shadow-sm); }
+        .ms-badge {
+            flex-shrink: 0;
+            background: var(--sage-pale); border-radius: 3px; padding: 4px 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+            color: var(--sage); letter-spacing: 0.1em; white-space: nowrap; font-weight: 500;
+        }
+        .ms-title { font-weight: 700; font-size: 0.87rem; color: var(--ink); margin-bottom: 4px; }
+        .ms-text  { font-size: 0.8rem; color: var(--subtle); line-height: 1.55; }
+
+        /* ── ORACLE ──────────────────────────────────────────── */
+        .oracle-section { background: var(--bg); }
+        .oracle-section .eyebrow { color: var(--cerulean); }
+        .oracle-section .eyebrow::before { background: var(--cerulean); }
+        .oracle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 52px; }
+
+        .oracle-feature { margin-bottom: 28px; display: flex; gap: 16px; align-items: flex-start; }
+        .oracle-feature-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--cerulean); flex-shrink: 0; margin-top: 6px;
+        }
+        .oracle-feature-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; color: var(--ink); }
+        .oracle-feature-text  { font-size: 0.85rem; color: var(--subtle); line-height: 1.68; }
+
+        /* Oracle NDVI card */
+        .oracle-viz {
+            background: var(--bg-card); border: var(--border); border-radius: 6px;
+            padding: 28px; box-shadow: var(--shadow-md);
+            position: sticky; top: 100px;
+        }
+        .oracle-viz-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 20px; padding-bottom: 16px;
+            border-bottom: var(--border);
+        }
+        .oracle-viz-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--cerulean); letter-spacing: 0.16em;
+            text-transform: uppercase; margin-bottom: 4px;
+        }
+        .oracle-viz-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+        .oracle-status-dot {
+            display: flex; align-items: center; gap: 6px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--sage);
+        }
+        .oracle-status-dot::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--sage); animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .ndvi-bars { display: flex; flex-direction: column; gap: 9px; }
+        .ndvi-bar-row { display: flex; align-items: center; gap: 10px; }
+        .ndvi-month { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); width: 26px; }
+        .ndvi-track {
+            flex: 1; height: 5px; background: var(--bg-3); border-radius: 3px; overflow: hidden;
+        }
+        .ndvi-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, var(--cerulean), var(--sage));
+            animation: grow 1.5s ease both;
+        }
+        @keyframes grow { from { width: 0%; } }
+        .ndvi-val { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--sage); width: 32px; text-align: right; }
+
+        .oracle-meta {
+            margin-top: 18px; padding-top: 16px; border-top: var(--border);
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+        }
+        .oracle-meta-item {}
+        .oracle-meta-label { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px; }
+        .oracle-meta-value { font-size: 0.8rem; color: var(--ink); font-weight: 600; }
+
+        /* ── COMMUNITY ───────────────────────────────────────── */
+        .community { background: var(--bg-ink); }
+        .community .eyebrow { color: var(--amber); }
+        .community .eyebrow::before { background: var(--amber); }
+        .community .section-title { color: #F2EDE4; }
+        .community-intro { color: rgba(242,237,228,0.55); max-width: 600px; margin-top: 20px; font-size: 0.97rem; line-height: 1.75; }
+
+        .guild-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 44px; }
+        .guild-card {
+            background: rgba(242,237,228,0.04);
+            border: 1px solid rgba(242,237,228,0.08);
+            border-radius: 4px; padding: 32px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .guild-card:hover { background: rgba(242,237,228,0.07); border-color: rgba(242,237,228,0.14); }
+        .guild-icon { font-size: 1.6rem; margin-bottom: 14px; }
+        .guild-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; color: #F2EDE4; }
+        .guild-desc { font-size: 0.85rem; color: rgba(242,237,228,0.5); line-height: 1.68; }
+        .guild-earn {
+            margin-top: 16px; background: rgba(184,128,30,0.1); border-radius: 3px;
+            padding: 9px 13px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem; color: var(--amber-glow); letter-spacing: 0.06em;
+        }
+
+        /* ── CTA ─────────────────────────────────────────────── */
+        .cta-section {
+            background: var(--amber-pale);
+            border-top: var(--border); border-bottom: var(--border);
+            text-align: center; position: relative;
+        }
+        .cta-section .section-title { margin: 0 auto 20px; }
+        .cta-section p { color: var(--subtle); max-width: 480px; margin: 0 auto 40px; font-size: 0.97rem; line-height: 1.72; }
+        .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary-dark {
+            background: var(--ink); color: var(--bg);
+            padding: 15px 34px; border-radius: 3px; font-weight: 700;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-primary-dark:hover { background: var(--amber); transform: translateY(-2px); }
+        .btn-outline-dark {
+            border: 1px solid rgba(26,22,18,0.25); color: var(--body);
+            padding: 15px 34px; border-radius: 3px; font-weight: 600;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-outline-dark:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-2px); }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            background: var(--bg-ink);
+            padding: 64px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px;
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(242,237,228,0.08);
+        }
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600;
+            color: rgba(242,237,228,0.9); margin-bottom: 12px;
+        }
+        .footer-brand em { font-style: italic; color: var(--amber-glow); }
+        .footer-desc { color: rgba(242,237,228,0.35); font-size: 0.83rem; line-height: 1.7; }
+        .footer-col-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(242,237,228,0.3); margin-bottom: 16px;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { color: rgba(242,237,228,0.45); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+        .footer-links a:hover { color: rgba(242,237,228,0.85); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-legal { font-size: 0.75rem; color: rgba(242,237,228,0.25); }
+        .footer-anchored {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: rgba(242,237,228,0.3); letter-spacing: 0.1em;
+        }
+        .footer-anchored .eth  { color: var(--sage); }
+        .footer-anchored .ksa  { color: #C8A84A; }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 960px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            section { padding: 80px 24px; }
+            .hero {
+                grid-template-columns: 1fr; padding: 120px 24px 100px;
+                min-height: auto; gap: 48px;
+            }
+            .hero-right { display: none; }
+            .hero-stats-strip { grid-template-columns: repeat(3, 1fr); }
+            .hero-stat { padding: 16px 20px; }
+            .problem-grid, .arch-grid, .tok-layout, .turmi-grid, .oracle-grid, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .guild-grid { grid-template-columns: 1fr; }
+            .ksa-strip { grid-template-columns: 40px 1fr; }
+            .ksa-badge { display: none; }
+        }
+    </style>
+    <style>
+        /* Self-hosted fonts — upload fonts/ folder to Turbify root */
+        @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/cormorant-garamond-400-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/cormorant-garamond-500-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/cormorant-garamond-600-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/cormorant-garamond-700-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/cormorant-garamond-400-italic.woff2') format('woff2'); }
+        @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 600; font-display: swap; src: url('/fonts/cormorant-garamond-600-italic.woff2') format('woff2'); }
+        @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/archivo-400-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/archivo-500-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/archivo-600-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/archivo-700-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'Archivo'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/archivo-800-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400-normal.woff2') format('woff2'); }
+        @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500-normal.woff2') format('woff2'); }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────────── -->
+<nav>
+    <a class="nav-logo" href="index.html">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="14" stroke="#B8801E" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="8"  stroke="#B8801E" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="16" cy="16" r="3"  fill="#B8801E"/>
+            <line x1="16" y1="2"  x2="16" y2="7"  stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="16" y1="25" x2="16" y2="30" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="2"  y1="16" x2="7"  y2="16" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="25" y1="16" x2="30" y2="16" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Proof of <em>Dirt</em>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="oracle/index.html">Oracle</a></li>
+        <li><a href="contribute/index.html">Contribute</a></li>
+        <li><a href="#dao">DAO</a></li>
+        <li><a href="#donate">Donate</a></li>
+        
+        <li><a href="https://github.com/proofofdirt" class="nav-cta">GitHub ↗</a></li>
+    </ul>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-grid"></div>
+
+    <div class="hero-left">
+        <div class="hero-eyebrow">Open Source · Community-Owned DAO · Built in Ethiopia</div>
+        <h1 class="hero-headline">
+            The Open<br><em>Trust Layer</em><br>for Farm Finance
+        </h1>
+        <p class="hero-sub">
+            SAR plowing detection, NDVI crop health, RFID livestock tracing, on-chain oracle records — free for anyone to build on.
+        </p>
+        <div class="hero-actions">
+            <a href="https://github.com/proofofdirt" class="btn-primary">Build With Us</a>
+            <a href="mailto:info@proofofdirt.com" class="btn-outline">Get in Touch</a>
+        </div>
+    </div>
+
+    <!-- Oracle Hero Logo -->
+    <div class="hero-right">
+        <svg class="oracle-hero-logo" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="orbg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#2E6E8A" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#2E6E8A" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="corg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#B8801E" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="#B8801E" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+
+            <!-- Glow backgrounds -->
+            <circle cx="210" cy="210" r="180" fill="url(#orbg)"/>
+            <circle cx="210" cy="210" r="80" fill="url(#corg)"/>
+
+            <!-- Outer rings — concentric precision circles -->
+            <circle cx="210" cy="210" r="190" stroke="#2E6E8A" stroke-width="0.5" stroke-opacity="0.2"/>
+            <circle cx="210" cy="210" r="170" stroke="#2E6E8A" stroke-width="0.8" stroke-opacity="0.3"/>
+            <circle cx="210" cy="210" r="148" stroke="#2E6E8A" stroke-width="0.5" stroke-opacity="0.2"/>
+            <circle cx="210" cy="210" r="124" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.35"/>
+            <circle cx="210" cy="210" r="98"  stroke="#2E6E8A" stroke-width="0.6" stroke-opacity="0.25"/>
+            <circle cx="210" cy="210" r="72"  stroke="#B8801E" stroke-width="1.2" stroke-opacity="0.5"/>
+            <circle cx="210" cy="210" r="48"  stroke="#B8801E" stroke-width="0.8" stroke-opacity="0.35"/>
+
+            <!-- Crosshair lines -->
+            <line x1="210" y1="20"  x2="210" y2="88"  stroke="#2E6E8A" stroke-width="0.8" stroke-opacity="0.4"/>
+            <line x1="210" y1="332" x2="210" y2="400" stroke="#2E6E8A" stroke-width="0.8" stroke-opacity="0.4"/>
+            <line x1="20"  y1="210" x2="88"  y2="210" stroke="#2E6E8A" stroke-width="0.8" stroke-opacity="0.4"/>
+            <line x1="332" y1="210" x2="400" y2="210" stroke="#2E6E8A" stroke-width="0.8" stroke-opacity="0.4"/>
+
+            <!-- Diagonal tick marks at 45° -->
+            <line x1="83"  y1="83"  x2="105" y2="105" stroke="#2E6E8A" stroke-width="0.6" stroke-opacity="0.3"/>
+            <line x1="315" y1="83"  x2="337" y2="61"  stroke="#2E6E8A" stroke-width="0.6" stroke-opacity="0.3"/>
+            <line x1="83"  y1="337" x2="61"  y2="315" stroke="#2E6E8A" stroke-width="0.6" stroke-opacity="0.3"/>
+            <line x1="337" y1="337" x2="315" y2="315" stroke="#2E6E8A" stroke-width="0.6" stroke-opacity="0.3"/>
+
+            <!-- NDVI Waveform band — the key visual identity -->
+            <!-- Base line -->
+            <line x1="48" y1="290" x2="372" y2="290" stroke="#4A7A58" stroke-width="0.5" stroke-opacity="0.3"/>
+            <!-- NDVI curve — smooth bezier representing seasonal vegetation cycle -->
+            <path d="M 48,290 C 80,290 96,282 112,268 C 128,254 136,232 152,210 C 164,192 172,178 186,164 C 198,152 206,148 210,148 C 214,148 222,152 234,164 C 248,178 256,192 268,210 C 284,232 292,254 308,268 C 324,282 340,290 372,290"
+                  stroke="#4A7A58" stroke-width="2" fill="none" stroke-opacity="0.8" filter="url(#glow)"/>
+            <!-- Fill under curve -->
+            <path d="M 48,290 C 80,290 96,282 112,268 C 128,254 136,232 152,210 C 164,192 172,178 186,164 C 198,152 206,148 210,148 C 214,148 222,152 234,164 C 248,178 256,192 268,210 C 284,232 292,254 308,268 C 324,282 340,290 372,290 L 372,310 L 48,310 Z"
+                  fill="#4A7A58" fill-opacity="0.06"/>
+
+            <!-- SAR radar wave band — offset slightly above -->
+            <path d="M 48,240 C 68,240 80,236 92,228 C 104,220 110,208 124,200 C 136,193 144,190 158,193 C 172,196 182,206 196,212 C 208,217 210,218 210,218 C 210,218 212,217 224,212 C 238,206 248,196 262,193 C 276,190 284,193 298,200 C 312,208 318,220 330,228 C 342,236 354,240 372,240"
+                  stroke="#2E6E8A" stroke-width="1.5" fill="none" stroke-opacity="0.6"
+                  stroke-dasharray="4 3"/>
+
+            <!-- Center precision dot -->
+            <circle cx="210" cy="210" r="6" fill="#B8801E" filter="url(#glow)"/>
+            <circle cx="210" cy="210" r="3" fill="#D4992A"/>
+
+            <!-- Satellite orbit arc (animated) -->
+            <circle cx="210" cy="210" r="155"
+                    stroke="#B8801E" stroke-width="0.8" stroke-opacity="0.2"
+                    stroke-dasharray="3 8" fill="none"/>
+
+            <!-- Orbiting satellite dot -->
+            <g>
+                <animateTransform attributeName="transform" attributeType="XML"
+                    type="rotate" from="0 210 210" to="360 210 210"
+                    dur="20s" repeatCount="indefinite"/>
+                <circle cx="365" cy="210" r="5" fill="#B8801E" opacity="0.8"/>
+                <circle cx="365" cy="210" r="8" fill="none" stroke="#B8801E" stroke-width="0.8" opacity="0.4"/>
+            </g>
+
+            <!-- Corner tick marks — instrument feel -->
+            <line x1="40" y1="40" x2="60" y2="40" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="40" y1="40" x2="40" y2="60" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="380" y1="40" x2="360" y2="40" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="380" y1="40" x2="380" y2="60" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="40" y1="380" x2="60" y2="380" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="40" y1="380" x2="40" y2="360" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="380" y1="380" x2="360" y2="380" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="380" y1="380" x2="380" y2="360" stroke="#2E6E8A" stroke-width="1" stroke-opacity="0.4"/>
+
+            <!-- Data labels — precision instrument feel -->
+            <text x="48"  y="340" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4A7A58" opacity="0.6">NDVI</text>
+            <text x="48"  y="352" font-family="'JetBrains Mono', monospace" font-size="7" fill="#4A7A58" opacity="0.4">VEG INDEX</text>
+            <text x="318" y="340" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2E6E8A" opacity="0.6">SAR</text>
+            <text x="310" y="352" font-family="'JetBrains Mono', monospace" font-size="7" fill="#2E6E8A" opacity="0.4">C-BAND</text>
+            <text x="188" y="136" font-family="'JetBrains Mono', monospace" font-size="7" fill="#B8801E" opacity="0.5">PEAK</text>
+            <text x="185" y="128" font-family="'JetBrains Mono', monospace" font-size="7" fill="#B8801E" opacity="0.5">0.88</text>
+
+            <!-- Degree marks around outer ring -->
+            <text x="207" y="18" font-family="'JetBrains Mono', monospace" font-size="7" fill="#2E6E8A" opacity="0.3" text-anchor="middle">N</text>
+            <text x="207" y="410" font-family="'JetBrains Mono', monospace" font-size="7" fill="#2E6E8A" opacity="0.3" text-anchor="middle">S</text>
+            <text x="14"  y="213" font-family="'JetBrains Mono', monospace" font-size="7" fill="#2E6E8A" opacity="0.3" text-anchor="middle">W</text>
+            <text x="406" y="213" font-family="'JetBrains Mono', monospace" font-size="7" fill="#2E6E8A" opacity="0.3" text-anchor="middle">E</text>
+
+            <!-- POD label at bottom -->
+            <text x="210" y="400" font-family="'JetBrains Mono', monospace" font-size="9" fill="#B8801E" opacity="0.5" text-anchor="middle" letter-spacing="4">PROOF OF DIRT ORACLE</text>
+        </svg>
+        <div class="oracle-hero-caption">Sentinel-1 SAR · Sentinel-2 NDVI · On-Chain Verification</div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats-strip">
+        <div class="hero-stat">
+            <div class="hero-stat-num">Open Source</div>
+            <div class="hero-stat-label">No Token · Grant Funded</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-num">POD Oracle</div>
+            <div class="hero-stat-label">Satellite Trust Layer</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-num">1 ha+</div>
+            <div class="hero-stat-label">Plot-Level Trust Tech</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── TICKER ────────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+    <div class="ticker">
+        <div class="ticker-item"><span class="dot dot-dirt"></span><strong>Open Source</strong> — MIT — SAR · NDVI · RFID Tracing · Tranche Oracle</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span><strong>POD Oracle</strong> Sentinel-1 SAR + Sentinel-2 + Contract Farming Compliance</div>
+        <div class="ticker-item"><span class="dot dot-dirt"></span>Trust Tech for Plots 1 ha+ — Operated with Turmi Technologies PLC, Addis Ababa, 2026</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span>Target Exports: Animal Feed · Live Animals · Halal Carcass Meat → KSA / UAE</div>
+        <div class="ticker-item"><span class="dot dot-dirt"></span>Capital Rails: Buyer Offtake · Ethiopian FI Loans · DFI Impact Debt — All Fiat</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span>Producer Credit Scoring: Verified Repayment History → Better Terms Each Season</div>
+        <!-- repeat -->
+        <div class="ticker-item"><span class="dot dot-dirt"></span><strong>Open Source</strong> — MIT — SAR · NDVI · RFID Tracing · Tranche Oracle</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span><strong>POD Oracle</strong> Sentinel-1 SAR + Sentinel-2 + Contract Farming Compliance</div>
+        <div class="ticker-item"><span class="dot dot-dirt"></span>Trust Tech for Plots 1 ha+ — Operated with Turmi Technologies PLC, Addis Ababa, 2026</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span>Target Exports: Animal Feed · Live Animals · Halal Carcass Meat → KSA / UAE</div>
+        <div class="ticker-item"><span class="dot dot-dirt"></span>Capital Rails: Buyer Offtake · Ethiopian FI Loans · DFI Impact Debt — All Fiat</div>
+        <div class="ticker-item"><span class="dot dot-oracle"></span>Producer Credit Scoring: Verified Repayment History → Better Terms Each Season</div>
+    </div>
+</div>
+
+<!-- ── HOW IT WORKS ─────────────────────────────────────────────── -->
+<section id="how" style="padding:110px 7vw;background:var(--bg);">
+    <div class="eyebrow" style="color:var(--cerulean)"><span style="display:inline-block;width:20px;height:1px;background:var(--cerulean)"></span>How It Works</div>
+    <h2 class="section-title">Verify. Record. <em>Release.</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:48px;">
+        <div style="background:var(--bg-card);border:var(--border-card);border-radius:8px;padding:38px 32px;box-shadow:var(--shadow-sm);">
+            <div style="font-family:monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--cerulean);margin-bottom:14px;">01 · VERIFY</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ink);margin-bottom:10px;">From orbit &amp; field</h3>
+            <p style="font-size:0.9rem;line-height:1.7;">Sentinel-1 radar confirms plowing. NDVI tracks crop health and yield. RFID traces every animal. Field agents capture the ground truth.</p>
+        </div>
+        <div style="background:var(--bg-card);border:var(--border-card);border-radius:8px;padding:38px 32px;box-shadow:var(--shadow-sm);">
+            <div style="font-family:monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--amber);margin-bottom:14px;">02 · RECORD</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ink);margin-bottom:10px;">On-chain oracle</h3>
+            <p style="font-size:0.9rem;line-height:1.7;">Every verification becomes a permanent, auditable record. Producers build a credit history that compounds season after season.</p>
+        </div>
+        <div style="background:var(--bg-card);border:var(--border-card);border-radius:8px;padding:38px 32px;box-shadow:var(--shadow-sm);">
+            <div style="font-family:monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--sage);margin-bottom:14px;">03 · RELEASE</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ink);margin-bottom:10px;">Milestone financing</h3>
+            <p style="font-size:0.9rem;line-height:1.7;">Capital releases in tranches as verified milestones are met — paid in local currency to the service providers doing the work.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── OPEN SOURCE ──────────────────────────────────────────────── -->
+<section id="open" style="padding:100px 7vw;background:var(--bg-2);text-align:center;border-top:var(--border);border-bottom:var(--border);">
+    <div class="eyebrow" style="color:var(--sage);justify-content:center;"><span style="display:inline-block;width:20px;height:1px;background:var(--sage)"></span>Open Source</div>
+    <h2 class="section-title">All of it is <em>free to build on.</em></h2>
+    <p style="max-width:620px;margin:18px auto 26px;font-size:0.95rem;line-height:1.8;">The satellite models, the tranche logic, the oracle programs — open for anyone, anywhere, to audit, improve, and reuse. AI challenge datasets coming to Zindi, Kaggle, and AI&nbsp;for&nbsp;Good.</p>
+    <div style="font-family:monospace;font-size:0.72rem;letter-spacing:0.12em;color:var(--subtle);">SAR PLOWING DETECTION · NDVI YIELD · RFID TRACING · TRANCHE ORACLE · SOLANA RECORDS</div>
+    <div style="margin-top:34px;"><a href="contribute/index.html" class="btn-primary">How to contribute</a><span style="display:inline-block;width:12px;"></span><a href="oracle/index.html" class="btn-outline" style="color:var(--ink);border-color:var(--rule);">Explore the Oracle</a></div>
+</section>
+
+<!-- ── DAO ──────────────────────────────────────────────────────── -->
+<section id="dao" style="padding:100px 7vw;background:var(--bg);">
+    <div class="eyebrow" style="color:var(--amber)"><span style="display:inline-block;width:20px;height:1px;background:var(--amber)"></span>The DAO</div>
+    <h2 class="section-title">No token. <em>No speculation.</em> Just the mission.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:48px;">
+        <div style="border-left:3px solid var(--amber);padding-left:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink);margin-bottom:8px;">Farmers</h3>
+            <p style="font-size:0.88rem;line-height:1.7;">Your verified work becomes your collateral. Financing for inputs, feed, and services — no land pledged.</p>
+        </div>
+        <div style="border-left:3px solid var(--cerulean);padding-left:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink);margin-bottom:8px;">Financiers</h3>
+            <p style="font-size:0.88rem;line-height:1.7;">Banks, buyers, and DFIs watch every funded farm live — from plowing to export settlement. <a href="mailto:ir@proofofdirt.com" style="color:var(--cerulean);">ir@proofofdirt.com</a></p>
+        </div>
+        <div style="border-left:3px solid var(--sage);padding-left:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink);margin-bottom:8px;">Builders</h3>
+            <p style="font-size:0.88rem;line-height:1.7;">Open bounties paid from a grant-funded treasury. Help build trust infrastructure for agricultural finance.</p>
+        </div>
+    </div>
+    <div style="margin-top:48px;background:var(--bg-card);border:var(--border-card);border-left:3px solid var(--amber);border-radius:8px;padding:32px 36px;box-shadow:var(--shadow-sm);max-width:760px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">Multisig Governance</div>
+        <p style="font-size:0.92rem;line-height:1.8;color:var(--body);">Proof of Dirt is a <strong>community-owned, builder-managed DAO</strong>. Every key decision — treasury disbursements, bounty payouts, oracle parameter changes, new financing rules — must clear a <strong>multisig approval</strong>. The signers represent the full length of the chain: <strong>developers</strong> who build the trust tech, <strong>field operations and producers</strong> who grow the product, and <strong>buyers</strong> who take it to market. No single party controls the treasury or the rules.</p>
+    </div>
+
+    <!-- ── DONATE / TREASURY ────────────────────────────────────── -->
+    <div id="donate" style="margin-top:56px;background:var(--bg-ink);border-radius:10px;padding:44px 40px;color:#F2EDE4;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-glow);margin-bottom:14px;">Donate · No Forms · No Emails</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;margin-bottom:10px;">Send SOL or USDC straight to the treasury.</h3>
+        <p style="font-size:0.88rem;line-height:1.75;color:rgba(242,237,228,0.55);max-width:560px;margin-bottom:24px;">Anonymous donations welcome — no questions asked. This is the DAO's only wallet — a multisig signed by representatives from developers to producers to buyers. Every inflow and outflow is public and verifiable on-chain.</p>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <code id="treasury-addr" style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;background:rgba(0,0,0,0.35);border:1px solid rgba(242,237,228,0.15);border-radius:5px;padding:12px 16px;color:var(--amber-glow);word-break:break-all;">POD_TREASURY_MULTISIG_ADDRESS</code>
+            <button onclick="copyAddr(this)" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;background:var(--amber);color:#1C1814;border:none;border-radius:4px;padding:12px 20px;cursor:pointer;font-weight:700;">COPY</button>
+            <a href="https://solscan.io/account/POD_TREASURY_MULTISIG_ADDRESS" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;color:rgba(242,237,228,0.6);text-decoration:none;border:1px solid rgba(242,237,228,0.2);border-radius:4px;padding:12px 20px;">VERIFY ON SOLSCAN ↗</a>
+        </div>
+        <p style="margin-top:22px;font-size:0.78rem;color:rgba(242,237,228,0.4);">Institutional / DFI giving or fiat donations: <a href="mailto:info@proofofdirt.com" style="color:var(--amber-glow);">info@proofofdirt.com</a> · Financiers: <a href="mailto:ir@proofofdirt.com" style="color:var(--amber-glow);">ir@proofofdirt.com</a></p>
+    </div>
+    <script>
+    function copyAddr(btn){
+        navigator.clipboard.writeText(document.getElementById('treasury-addr').textContent.trim()).then(function(){
+            btn.textContent = 'COPIED ✓';
+            setTimeout(function(){ btn.textContent = 'COPY'; }, 2000);
+        });
+    }
+    </script>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="footer-brand">Proof of <em>Dirt</em></div>
+            <p class="footer-desc">The open trust layer for farm finance. Satellite-verified, on-chain recorded, fiat-financed. Open source, community-owned, built in Ethiopia.</p>
+        </div>
+        <div>
+            <div class="footer-col-title">Ecosystem</div>
+            <ul class="footer-links">
+                <li><a href="oracle/index.html">POD Oracle</a></li>
+                <li><a href="contribute/index.html">Contribute</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Build</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/proofofdirt">GitHub Repositories</a></li>
+                <li><a href="https://github.com/proofofdirt/pod">Oracle Pipeline</a></li>
+                <li><a href="https://github.com/proofofdirt">Bounty Board</a></li>
+                <li><a href="https://github.com/proofofdirt/pod" target="_blank" rel="noopener">Documentation</a></li>
+                <li><a href="https://grants.gitcoin.co" target="_blank" rel="noopener">Support the Protocol</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Community</div>
+            <ul class="footer-links">
+                <li><a href="https://discord.gg/proofofdirt" target="_blank" rel="noopener">Discord — The Shed &amp; Field</a></li>
+                <li><a href="https://t.me/proofofdirt" target="_blank" rel="noopener">Telegram</a></li>
+                <li><a href="https://twitter.com/proofofdirt" target="_blank" rel="noopener">Twitter / X</a></li>
+                <li><a href="mailto:info@proofofdirt.com">info@proofofdirt.com</a></li>
+                <li><a href="mailto:ir@proofofdirt.com">ir@proofofdirt.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-legal">© 2026 Proof of Dirt · Open-source, community-owned DAO · No token</div>
+        <div class="footer-anchored">Operations: <span class="eth">Turmi Technologies PLC</span>, Ethiopia</div>
+    </div>
+</footer>
+
+</body>
+</html>

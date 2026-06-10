@@ -1,0 +1,348 @@
+{
+  "metadata": {
+    "report_period": "2026-05",
+    "generated": "2026-06-07",
+    "description": "POD Open Oracle -- May 2026 MENA commodity price snapshot. Intended for on-chain publication as Switchboard oracle feed on Solana.",
+    "unit_notes": "Livestock prices in USD/kg live weight (LW). Feed prices in USD/ton CIF unless noted.",
+    "sources": ["selinawamucii.com", "USDA FAS", "FAO GIEWS", "CEIC", "UN COMTRADE", "IndexBox (est.)", "POD market contacts"],
+    "status_notes": {
+      "live_small_ruminants": "CONFIRMED -- May 2026 data from selinawamucii",
+      "alfalfa_hay": "ESTIMATED -- April 2026 actuals + May 2026 MENA spread from CEIC/USDA FAS",
+      "corn_silage": "ESTIMATED -- derived from corn futures + regional processing premium",
+      "sorghum": "ESTIMATED -- USDA FAS / Australia-origin CIF",
+      "live_cattle": "ESTIMATED -- 2025 FAO / trade contacts, no May 2026 update yet",
+      "carcass_small_ruminants": "ESTIMATED -- IndexBox 2025 base, no May 2026 update yet",
+      "carcass_cattle": "ESTIMATED -- FAO GIEWS 2025 base, no May 2026 update yet"
+    }
+  },
+
+  "live_small_ruminants": {
+    "commodity": "Live Small Ruminants (Sheep / Goat)",
+    "hs_codes": ["0104.10", "0104.20"],
+    "unit": "USD/kg live weight",
+    "period": "2026-05",
+    "data_quality": "confirmed",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 3.67,
+        "price_usd_per_kg_lw_high": 4.20,
+        "price_midpoint": 3.94,
+        "source": "selinawamucii.com",
+        "notes": "Eid al-Adha 2026 ~June 6 -- prices at seasonal peak"
+      },
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "animal": "goat",
+        "price_usd_per_kg_lw_low": 3.50,
+        "price_usd_per_kg_lw_high": 4.00,
+        "price_midpoint": 3.75,
+        "source": "selinawamucii.com (est.)",
+        "notes": "Estimate based on sheep price with typical 5-8% discount"
+      },
+      {
+        "market": "UAE",
+        "port": "Jebel Ali",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 4.00,
+        "price_usd_per_kg_lw_high": 4.60,
+        "price_midpoint": 4.30,
+        "source": "POD estimate (+$0.30-0.60 vs KSA premium)",
+        "notes": "Re-export premium, higher quality spec"
+      },
+      {
+        "market": "UAE",
+        "port": "Jebel Ali",
+        "animal": "goat",
+        "price_usd_per_kg_lw_low": 3.80,
+        "price_usd_per_kg_lw_high": 4.40,
+        "price_midpoint": 4.10,
+        "source": "POD estimate",
+        "notes": "Re-export premium applied"
+      },
+      {
+        "market": "Kuwait",
+        "port": "Shuwaikh",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 3.87,
+        "price_usd_per_kg_lw_high": 4.60,
+        "price_midpoint": 4.14,
+        "source": "POD estimate (+$0.20-0.40 vs KSA)",
+        "notes": "Consistent demand, smaller volumes"
+      },
+      {
+        "market": "Qatar",
+        "port": "Hamad Port",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 4.07,
+        "price_usd_per_kg_lw_high": 4.80,
+        "price_midpoint": 4.44,
+        "source": "POD estimate (+$0.40-0.60 vs KSA)",
+        "notes": "Highest quality premium market"
+      },
+      {
+        "market": "Egypt",
+        "port": "Alexandria",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 2.47,
+        "price_usd_per_kg_lw_high": 3.40,
+        "price_midpoint": 2.94,
+        "source": "POD estimate (-$0.80-1.20 vs KSA)",
+        "notes": "Lower grade accepted, high volume market"
+      },
+      {
+        "market": "Oman",
+        "port": "Muscat",
+        "animal": "sheep",
+        "price_usd_per_kg_lw_low": 3.77,
+        "price_usd_per_kg_lw_high": 4.50,
+        "price_midpoint": 4.14,
+        "source": "POD estimate (+$0.10-0.30 vs KSA)",
+        "notes": "Growing dairy sector demand"
+      }
+    ],
+    "ethiopia_origin_adjustments": {
+      "shipping_and_handling_usd_per_kg": [0.30, 0.60],
+      "halal_certified_premium_usd_per_kg": [0.10, 0.20],
+      "quarantine_jeddah_days": 21,
+      "quarantine_cost_usd_per_kg": [0.15, 0.25],
+      "bcs_below_3_discount_usd_per_kg": [-0.60, -0.30],
+      "active_rfv_ban": false,
+      "note": "Monitor OIE for active Rift Valley Fever ban -- triggers full market exclusion"
+    },
+    "seasonality": {
+      "current_season": "Eid al-Adha peak",
+      "eid_adha_2026_date": "2026-06-06",
+      "price_multiplier_vs_baseline": "1.40-1.80",
+      "note": "Prices at or near seasonal peak as of May 2026 report"
+    }
+  },
+
+  "alfalfa_hay": {
+    "commodity": "Alfalfa Hay (CIF Import)",
+    "hs_code": "1214.10",
+    "unit": "USD/ton CIF",
+    "period": "2026-04/2026-05",
+    "data_quality": "estimated",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "grade": "Premium",
+        "price_usd_per_ton": 430,
+        "price_range_low": 420,
+        "price_range_high": 440,
+        "origin": "Australia",
+        "source": "CEIC / USDA FAS (April 2026 actuals)",
+        "notes": "May 2026 estimate flat vs April -- no significant shift reported"
+      },
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "grade": "Standard",
+        "price_usd_per_ton": 382,
+        "price_range_low": 370,
+        "price_range_high": 395,
+        "origin": "Sudan",
+        "source": "USDA FAS estimate",
+        "notes": "Sudan supply growing, quality inconsistent"
+      },
+      {
+        "market": "UAE",
+        "port": "Jebel Ali",
+        "grade": "Premium",
+        "price_usd_per_ton": 450,
+        "price_range_low": 435,
+        "price_range_high": 465,
+        "origin": "Australia / USA",
+        "source": "POD estimate (+$15-25 vs Jeddah)",
+        "notes": "Re-export premium, higher quality grade required"
+      },
+      {
+        "market": "Kuwait",
+        "port": "Shuwaikh",
+        "grade": "Premium",
+        "price_usd_per_ton": 445,
+        "price_range_low": 430,
+        "price_range_high": 460,
+        "origin": "Australia",
+        "source": "POD estimate (+$10-20 vs Jeddah)"
+      },
+      {
+        "market": "Qatar",
+        "port": "Hamad Port",
+        "grade": "Premium",
+        "price_usd_per_ton": 455,
+        "price_range_low": 440,
+        "price_range_high": 470,
+        "origin": "USA / Australia",
+        "source": "POD estimate (+$20-30 vs Jeddah)",
+        "notes": "Premium quality required"
+      },
+      {
+        "market": "Egypt",
+        "port": "Alexandria",
+        "grade": "Standard",
+        "price_usd_per_ton": 350,
+        "price_range_low": 330,
+        "price_range_high": 370,
+        "origin": "Sudan / Argentina",
+        "source": "POD estimate (-$30-50 vs Jeddah)",
+        "notes": "Lower grade accepted, high volume"
+      }
+    ],
+    "sar_per_ton_conversion": {
+      "usd_sar_peg": 3.75,
+      "premium_jeddah_sar": 1612.5,
+      "standard_jeddah_sar": 1432.5
+    }
+  },
+
+  "corn_silage": {
+    "commodity": "Corn Silage (CIF Import)",
+    "hs_code": "2308.00",
+    "unit": "USD/ton CIF",
+    "period": "2026-05",
+    "data_quality": "estimated",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "price_usd_per_ton": 97,
+        "price_range_low": 85,
+        "price_range_high": 110,
+        "origin": "Regional / Brazil",
+        "source": "POD estimate (corn futures + processing)",
+        "notes": "Limited CIF data available -- derived from corn feed price + regional processing premium. Brazilian harvest Apr-Jun may soften Q2 pricing."
+      }
+    ]
+  },
+
+  "sorghum": {
+    "commodity": "Sorghum (Feed Grade, CIF)",
+    "hs_code": "1007.90",
+    "unit": "USD/ton CIF",
+    "period": "2026-05",
+    "data_quality": "estimated",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "price_usd_per_ton": 240,
+        "price_range_low": 220,
+        "price_range_high": 260,
+        "origin": "Australia / Argentina",
+        "source": "USDA FAS / POD estimate",
+        "notes": "Halal-compatible corn substitute. Demand growing in KSA feedlots."
+      }
+    ]
+  },
+
+  "live_cattle": {
+    "commodity": "Live Cattle (Brahman / Zebu)",
+    "hs_codes": ["0102.21", "0102.29"],
+    "unit": "USD/kg live weight",
+    "period": "2025 (no May 2026 update)",
+    "data_quality": "estimated",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "animal": "Brahman / Zebu",
+        "price_usd_per_kg_lw_low": 2.20,
+        "price_usd_per_kg_lw_high": 2.80,
+        "price_midpoint": 2.50,
+        "source": "FAO / trade contacts (2025)",
+        "notes": "STUB -- update required from USDA FAS / FAO GIEWS for May 2026"
+      }
+    ]
+  },
+
+  "carcass_small_ruminants": {
+    "commodity": "Carcass Small Ruminants (Frozen / Chilled)",
+    "hs_codes": ["0204.10", "0204.21", "0204.22", "0204.23", "0204.30", "0204.41", "0204.42", "0204.43"],
+    "unit": "USD/kg",
+    "period": "2025 (no May 2026 update)",
+    "data_quality": "estimated",
+    "markets": [
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "animal": "goat carcass",
+        "price_usd_per_kg_low": 6.50,
+        "price_usd_per_kg_high": 8.00,
+        "source": "IndexBox (2025, paid source)",
+        "notes": "STUB -- update required from IndexBox / FAO GIEWS for May 2026"
+      },
+      {
+        "market": "Saudi Arabia",
+        "port": "Jeddah",
+        "animal": "sheep carcass",
+        "price_usd_per_kg_low": 5.80,
+        "price_usd_per_kg_high": 7.50,
+        "source": "IndexBox (2025, paid source)",
+        "notes": "STUB -- update required from IndexBox / FAO GIEWS for May 2026"
+      }
+    ]
+  },
+
+  "carcass_cattle": {
+    "commodity": "Carcass Cattle (Frozen / Chilled)",
+    "hs_codes": ["0201", "0202"],
+    "unit": "USD/ton",
+    "period": "2025 (no May 2026 update)",
+    "data_quality": "stub",
+    "markets": [],
+    "notes": "No data collected yet. Sources: FAO GIEWS, USDA FAS, trade contacts. Target markets: Jeddah, Jebel Ali, Kuwait, Qatar, Egypt."
+  },
+
+  "oracle_feed_schema": {
+    "description": "Proposed on-chain feed structure for Switchboard v2 publication",
+    "feed_id_prefix": "POD_COMMODITY_",
+    "feeds": [
+      {
+        "feed_id": "POD_COMMODITY_SHEEP_KSA_LW",
+        "name": "POD Live Sheep KSA Jeddah USD/kg LW",
+        "value_field": "live_small_ruminants.markets[0].price_midpoint",
+        "value_may_2026": 3.94,
+        "precision": 4,
+        "unit": "USD/kg"
+      },
+      {
+        "feed_id": "POD_COMMODITY_GOAT_KSA_LW",
+        "name": "POD Live Goat KSA Jeddah USD/kg LW",
+        "value_field": "live_small_ruminants.markets[1].price_midpoint",
+        "value_may_2026": 3.75,
+        "precision": 4,
+        "unit": "USD/kg"
+      },
+      {
+        "feed_id": "POD_COMMODITY_ALFALFA_KSA_PREMIUM",
+        "name": "POD Alfalfa Hay Premium KSA Jeddah USD/ton CIF",
+        "value_field": "alfalfa_hay.markets[0].price_usd_per_ton",
+        "value_may_2026": 430,
+        "precision": 2,
+        "unit": "USD/ton"
+      },
+      {
+        "feed_id": "POD_COMMODITY_ALFALFA_KSA_STANDARD",
+        "name": "POD Alfalfa Hay Standard KSA Jeddah USD/ton CIF",
+        "value_field": "alfalfa_hay.markets[1].price_usd_per_ton",
+        "value_may_2026": 382,
+        "precision": 2,
+        "unit": "USD/ton"
+      },
+      {
+        "feed_id": "POD_COMMODITY_SORGHUM_KSA",
+        "name": "POD Sorghum Feed Grade KSA Jeddah USD/ton CIF",
+        "value_field": "sorghum.markets[0].price_usd_per_ton",
+        "value_may_2026": 240,
+        "precision": 2,
+        "unit": "USD/ton"
+      }
+    ]
+  }
+}

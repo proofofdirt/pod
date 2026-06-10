@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PODRWA Dev Docs — Combined Dev Guidance (Tracks A &amp; B)</title>
+<style>
+:root {
+  --soil:#1A120B; --earth:#2C1F14; --loam:#3D2B1F;
+  --harvest:#C8962A; --sprout:#6BAA75; --sky:#4A8FA8;
+  --cream:#F5EFE6; --mist:#B8A898; --fog:#786860;
+  --border:rgba(255,255,255,0.08); --card:rgba(44,31,20,0.7);
+  --red:#E07070; --purple:#B478C8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--soil);color:var(--cream);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:220px;min-width:220px;background:var(--earth);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;}
+.sidebar-logo{font-family:monospace;font-size:0.75rem;color:var(--harvest);padding:0 18px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;letter-spacing:0.1em;}
+.sidebar-logo span{color:var(--sprout);}
+.nav-section{font-family:monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);padding:10px 18px 4px;}
+.sidebar a{display:block;padding:6px 18px;color:var(--mist);text-decoration:none;font-size:0.78rem;transition:color 0.15s,background 0.15s;border-left:2px solid transparent;}
+.sidebar a:hover{color:var(--cream);background:rgba(255,255,255,0.03);}
+.sidebar a.active{color:var(--harvest);border-left-color:var(--harvest);}
+.sidebar a.doc-link{font-weight:600;color:var(--cream);margin-top:4px;}
+.sidebar a.sub-link{padding-left:28px;font-size:0.72rem;}
+
+/* MAIN */
+.main{flex:1;padding:48px 56px;max-width:900px;}
+@media(max-width:900px){.main{padding:24px 20px;}.sidebar{display:none;}}
+
+/* HEADERS */
+.doc-header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.doc-badge{font-family:monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sprout);margin-bottom:10px;}
+.doc-header h1{font-size:2rem;font-weight:700;line-height:1.15;margin-bottom:10px;}
+.doc-header h1 em{color:var(--harvest);font-style:normal;}
+.doc-meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;}
+.meta-chip{font-family:monospace;font-size:0.65rem;padding:3px 10px;border-radius:2px;letter-spacing:0.06em;}
+.chip-a{background:rgba(107,170,117,0.15);color:var(--sprout);}
+.chip-b{background:rgba(74,143,168,0.15);color:var(--sky);}
+.chip-c{background:rgba(200,150,42,0.15);color:var(--harvest);}
+
+/* SECTION */
+.doc-section{margin-bottom:52px;}
+h2{font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--cream);}
+h2 .doc-id{font-family:monospace;font-size:0.7rem;color:var(--harvest);letter-spacing:0.1em;display:inline-block;margin-right:10px;vertical-align:middle;}
+h3{font-size:1rem;font-weight:600;margin:24px 0 10px;color:var(--mist);border-left:3px solid var(--harvest);padding-left:10px;}
+h4{font-size:0.88rem;font-weight:600;margin:18px 0 8px;color:var(--sprout);font-family:monospace;letter-spacing:0.05em;}
+p{margin-bottom:12px;color:var(--mist);line-height:1.75;}
+ul,ol{margin:0 0 14px 20px;color:var(--mist);}
+li{margin-bottom:5px;line-height:1.6;}
+li strong{color:var(--cream);}
+strong{color:var(--cream);}
+a{color:var(--sky);text-decoration:none;}
+
+/* CODE */
+pre{background:rgba(0,0,0,0.5);border:1px solid var(--border);border-radius:5px;padding:18px 20px;overflow-x:auto;margin:14px 0;font-family:'Courier New',monospace;font-size:0.78rem;line-height:1.65;color:#d4c8bc;}
+code{font-family:'Courier New',monospace;font-size:0.8rem;background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;color:var(--harvest);}
+pre code{background:none;padding:0;color:inherit;}
+.comment{color:#786860;}
+.kw{color:#4A8FA8;}
+.str{color:#6BAA75;}
+.fn-name{color:#C8962A;}
+.ty{color:#B478C8;}
+
+/* CALLOUTS */
+.callout{border-radius:5px;padding:14px 18px;margin:16px 0;font-size:0.85rem;line-height:1.7;}
+.callout-warn{background:rgba(200,150,42,0.1);border-left:3px solid var(--harvest);color:var(--mist);}
+.callout-info{background:rgba(74,143,168,0.1);border-left:3px solid var(--sky);color:var(--mist);}
+.callout-ok{background:rgba(107,170,117,0.1);border-left:3px solid var(--sprout);color:var(--mist);}
+.callout-warn strong,.callout-info strong,.callout-ok strong{color:var(--cream);}
+
+/* STEPS */
+.steps{counter-reset:step;margin:16px 0;}
+.step{counter-increment:step;display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;}
+.step-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--loam);border:1px solid var(--harvest);display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.7rem;color:var(--harvest);font-weight:700;margin-top:2px;}
+.step-content{flex:1;}
+.step-content strong{display:block;color:var(--cream);margin-bottom:4px;font-size:0.9rem;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.82rem;}
+th{font-family:monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fog);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2);}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--mist);vertical-align:top;}
+td code{font-size:0.72rem;}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:2px solid var(--border);margin:52px 0;}
+.tag{display:inline-block;font-family:monospace;font-size:0.62rem;padding:2px 7px;border-radius:2px;letter-spacing:0.06em;}
+.tag-rust{background:rgba(200,150,42,0.15);color:var(--harvest);}
+.tag-python{background:rgba(74,143,168,0.15);color:var(--sky);}
+.tag-ts{background:rgba(107,170,117,0.15);color:var(--sprout);}
+.tag-sh{background:rgba(180,120,200,0.15);color:var(--purple);}
+.checklist{list-style:none;margin-left:0;}
+.checklist li::before{content:'☐ ';color:var(--harvest);font-size:0.9rem;}
+.checklist li.done::before{content:'☑ ';color:var(--sprout);}
+
+/* merged from Track B doc */
+.file-tree{background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:5px;padding:16px 18px;font-family:monospace;font-size:0.78rem;color:var(--mist);line-height:1.8;margin:14px 0;}
+.file-tree .comment{color:var(--fog);}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">$PODRWA · <span>Tracks A+B</span><br>Dev Guidance (Combined)</div>
+  <div class="nav-section">Start Here</div>
+  <a href="#priorities" class="doc-link">Build Priority Stack</a>
+  <div class="nav-section">Foundation</div>
+  <a href="#dev00" class="doc-link">DEV-00 Architecture</a>
+  <a href="#dev00-monorepo" class="sub-link">Monorepo</a>
+  <a href="#dev00-env" class="sub-link">Environment Setup</a>
+  <a href="#dev00-accounts" class="sub-link">Account Map</a>
+  <a href="#dev00-sprint0" class="sub-link">Sprint 0</a>
+  <div class="nav-section">Chain (Track A)</div>
+  <a href="#dev01" class="doc-link">DEV-01 Vault Records</a>
+  <a href="#dev01-program" class="sub-link">Anchor Program</a>
+  <a href="#dev01-tranche" class="sub-link">Tranche Logic</a>
+  <a href="#dev01-deploy" class="sub-link">Deploy &amp; Test</a>
+  <a href="#dev02" class="doc-link">DEV-02 Bounty System</a>
+  <a href="#dev02-design" class="sub-link">Registry (Off-Chain)</a>
+  <a href="#dev02-state" class="sub-link">Lifecycle</a>
+  <a href="#dev02-backend" class="sub-link">Backend &amp; Payouts</a>
+  <div class="nav-section">Oracle &amp; Satellite (Track A)</div>
+  <a href="#dev03" class="doc-link">DEV-03 Oracle / Switchboard</a>
+  <a href="#dev03-setup" class="sub-link">Queue &amp; Aggregator</a>
+  <a href="#dev03-feeds" class="sub-link">Feed Registry</a>
+  <a href="#dev03-publisher" class="sub-link">Python Publisher</a>
+  <a href="#dev04" class="doc-link">DEV-04 SAR + NDVI</a>
+  <a href="#dev04-gee" class="sub-link">GEE Setup</a>
+  <a href="#dev04-sar" class="sub-link">SAR Plowing</a>
+  <a href="#dev04-ndvi" class="sub-link">NDVI / Yield</a>
+  <a href="#dev04-publish" class="sub-link">Publish to Oracle</a>
+  <div class="nav-section">Investor (Track B)</div>
+  <a href="#dev05" class="doc-link">DEV-05 Investor Dashboard</a>
+  <a href="#dev05-setup" class="sub-link">Next.js Setup</a>
+  <a href="#dev05-walletless" class="sub-link">Walletless View</a>
+  <a href="#dev05-wallet" class="sub-link">Phantom Connect</a>
+  <a href="#dev05-components" class="sub-link">Components</a>
+  <div class="nav-section">Contributor Web (Track B)</div>
+  <a href="#dev06" class="doc-link">DEV-06 Contributor Dashboard</a>
+  <a href="#dev06-auth" class="sub-link">GitHub Auth</a>
+  <a href="#dev06-bounties" class="sub-link">Bounty Browser</a>
+  <a href="#dev06-claim" class="sub-link">Claim &amp; Submit</a>
+  <div class="nav-section">Mobile (Track B)</div>
+  <a href="#dev07" class="doc-link">DEV-07 Agent App (RN)</a>
+  <a href="#dev07-offline" class="sub-link">Offline Architecture</a>
+  <a href="#dev07-sqlite" class="sub-link">SQLite Queue</a>
+  <a href="#dev07-capture" class="sub-link">GPS + Camera</a>
+  <a href="#dev07-sync" class="sub-link">Sync Worker</a>
+  <div class="nav-section">Testing (Both)</div>
+  <a href="#dev08" class="doc-link">DEV-08 Integration Testing</a>
+  <a href="#dev08-anchor" class="sub-link">Anchor Tests</a>
+  <a href="#dev08-e2e" class="sub-link">E2E Flows</a>
+  <a href="#dev08-ci" class="sub-link">GitHub Actions CI</a>
+</nav>
+
+<div class="main">
+
+<!-- ============================================================ -->
+<!-- BUILD PRIORITY STACK (from POD_ROADMAP_V2) -->
+<!-- ============================================================ -->
+<div class="doc-section" id="priorities">
+  <div class="doc-header">
+    <div class="doc-badge">Roadmap v2 · Supervisors A + B · Coordinate &amp; Divide</div>
+    <h1>Build <em>Priority</em> Stack</h1>
+    <p style="color:var(--mist);margin-top:8px;">This combined guide replaces the separate Supervisor A (Chain &amp; Data) and Supervisor B (Interfaces) documents. Supervisors A and B coordinate weekly, divide the work below between their students, and lock shared interfaces at Sprint 0 (DEV-00). Priorities come from <code>POD_ROADMAP_V2.md</code>.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A: Chain &amp; Data</span>
+      <span class="meta-chip chip-b">Track B: Interfaces</span>
+      <span class="meta-chip chip-c">Roadmap v2 · June 2026</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warn"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Investor capital is raised in fiat (SAR/USD) by PODRWA SPV (KSA) and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Field agents are paid in ETB by Turmi — no wallets. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
+
+  <table>
+    <thead><tr><th>Priority</th><th>Component</th><th>Bounty / Doc</th><th>Lead</th><th>Unblocks</th></tr></thead>
+    <tbody>
+      <tr><td>🔴 P0</td><td>SAR Plowing Detection</td><td>BOUNTY-001 · DEV-04</td><td>Supervisor A</td><td>Oracle credibility, T1 tranche gate</td></tr>
+      <tr><td>🔴 P0</td><td>NDVI Crop Health + Yield Prediction</td><td>BOUNTY-002 · DEV-04</td><td>Supervisor A</td><td>T2/T3 tranche gates, investor pitch</td></tr>
+      <tr><td>🔴 P0</td><td>Agent App + Contract Farming Module</td><td>BOUNTY-004 · DEV-07</td><td>Supervisor B</td><td>Farm onboarding, ground truth data</td></tr>
+      <tr><td>🔴 P0</td><td>Commodity Price + Cost-of-Production datasets</td><td>Finance Guild · feeds DEV-03</td><td>Finance Guild (not student work)</td><td>Export Margin Calculator, investor pitch</td></tr>
+      <tr><td>🟠 P1</td><td>BCS Livestock Scoring</td><td>BOUNTY-005</td><td>A (ML model) + B (app capture)</td><td>Livestock vault, animal cycle T1 gate</td></tr>
+      <tr><td>🟠 P1</td><td>$PODRWA Vault Contracts (receipt + state)</td><td>ESCROW-003 · DEV-01</td><td>Supervisor A</td><td>On-chain financing records, financier reporting</td></tr>
+      <tr><td>🟠 P1</td><td>Tranche Dashboard (SPV ops)</td><td>DEV-05 extension</td><td>Supervisor B</td><td>SPV can execute fiat wires from oracle approvals</td></tr>
+      <tr><td>⏸ HOLD</td><td>Receipt-record bridge (no token)</td><td>BRIDGE-008</td><td>—</td><td>Only if fiat recordkeeping ever requires it</td></tr>
+      <tr><td>🟡 P2</td><td>On-chain Disbursement Log</td><td>part of DEV-01 vault</td><td>Supervisor A</td><td>Audit trail for fiat tranches</td></tr>
+      <tr><td>🟢 P3</td><td>Oracle white-label / licensing</td><td>Post-Phase 4</td><td>—</td><td>Revenue diversification</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-info"><strong>Sequencing rule:</strong> P0 items unblock everything else — do not start P1 work that competes for the same student's time until the Phase 1 deliverable gate is met (at least one Oracle module returning real satellite data on a real Ethiopian plot). Full phase gates and timeline: <code>POD_ROADMAP_V2.md</code>.</div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-00 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev00">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-00 · All Developers · Read First</div>
+    <h1>Platform <em>Architecture</em> Overview</h1>
+    <p style="color:var(--mist);margin-top:8px;">Monorepo structure, module boundaries, environment setup, feed ID registry, and Sprint 0 checklist. Every developer reads this before touching code.</p>
+    <div class="callout callout-warn" style="margin-top:14px;"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Investor capital is raised in fiat (SAR/USD) by PODRWA SPV (KSA) and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">All Tracks</span>
+      <span class="meta-chip chip-b">Devnet First</span>
+      <span class="meta-chip chip-c">Sprint 0</span>
+    </div>
+  </div>
+
+  <h3 id="dev00-monorepo">Monorepo Structure</h3>
+  <pre><code>pod/
+├── programs/                   <span class="comment"># Solana on-chain programs (Rust/Anchor)</span>
+│   └── pod-vault/              <span class="comment"># financing records + tranche approval logic (no token)</span>
+│                               <span class="comment"># (pod-bounty program DEPRECATED — bounties paid by direct transfer)</span>
+├── app/                        <span class="comment"># React Native agent app (Expo)</span>
+│   └── apps/agent-app/
+├── web/                        <span class="comment"># Web frontends (Next.js)</span>
+│   ├── investor-dashboard/
+│   └── agent-dashboard/
+├── agents/                     <span class="comment"># Python data agents</span>
+│   ├── oracle-publisher/       <span class="comment"># Switchboard price feed updater</span>
+│   └── satellite/              <span class="comment"># GEE SAR/NDVI pipeline</span>
+├── tests/                      <span class="comment"># Anchor integration tests (TypeScript)</span>
+├── scripts/                    <span class="comment"># Admin CLI scripts</span>
+├── Anchor.toml
+├── package.json                <span class="comment"># workspaces root</span>
+└── .env.template               <span class="comment"># copy to .env — never commit .env</span></code></pre>
+
+  <h3 id="dev00-env">Environment Setup</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content">
+      <strong>Solana CLI + Anchor</strong>
+      <pre><code><span class="comment"># Install Solana CLI (v1.18+)</span>
+sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
+solana --version
+
+<span class="comment"># Install Anchor (v0.30+)</span>
+cargo install --git https://github.com/coral-xyz/anchor avm --locked
+avm install latest && avm use latest
+anchor --version
+
+<span class="comment"># Set devnet and create keypair</span>
+solana config set --url devnet
+solana-keygen new --outfile ~/.config/solana/id.json
+solana airdrop 5  <span class="comment"># repeat if needed</span></code></pre>
+    </div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content">
+      <strong>Node + Python</strong>
+      <pre><code><span class="comment"># Node 20+ (use nvm)</span>
+nvm install 20 && nvm use 20
+npm install -g yarn
+
+<span class="comment"># Python 3.11+</span>
+pip install earthengine-api switchboard-py anchorpy solana --break-system-packages
+pip install rasterio numpy pandas scikit-learn --break-system-packages</code></pre>
+    </div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content">
+      <strong>Clone &amp; install</strong>
+      <pre><code>git clone https://github.com/proofofdirt/pod && cd pod
+cp .env.template .env           <span class="comment"># fill in your keys</span>
+yarn install                    <span class="comment"># installs all workspaces</span>
+anchor build                    <span class="comment"># compile Rust programs</span></code></pre>
+    </div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content">
+      <strong>Google Earth Engine auth</strong>
+      <pre><code>earthengine authenticate        <span class="comment"># opens browser — sign in with project account</span>
+earthengine set_project YOUR_GEE_PROJECT_ID</code></pre>
+      <div class="callout callout-warn"><strong>Apply for GEE Research Credits first</strong> — free, 1 week approval. Apply at <a href="https://earthengine.google.com/noncommercial_signup">earthengine.google.com/noncommercial_signup</a>. Unblocks DEV-04.</div>
+    </div></div>
+  </div>
+
+  <h3 id="dev00-accounts">Program Account Map &amp; Feed IDs</h3>
+  <table>
+    <thead><tr><th>Account / Feed ID</th><th>Type</th><th>Owner</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td><code>POD_VAULT_PROGRAM_ID</code></td><td>Program</td><td>Track A / Student 1</td><td>Anchor vault program — set after first deploy</td></tr>
+      <tr><td><code>POD_BOUNTY_PROGRAM_ID</code></td><td>—</td><td>Track A / Student 2</td><td>DEPRECATED — bounty system is off-chain + direct USDC/SOL transfer (see DEV-02)</td></tr>
+      <tr><td><code>DIRT_MINT</code></td><td>—</td><td>—</td><td>REMOVED — the project does not issue a token</td></tr>
+      <tr><td><code>POD_COMMODITY_SHEEP_KSA_LW</code></td><td>Switchboard Feed</td><td>Track A / Student 2</td><td>Live sheep KSA Jeddah USD/kg LW</td></tr>
+      <tr><td><code>POD_COMMODITY_GOAT_KSA_LW</code></td><td>Switchboard Feed</td><td>Track A / Student 2</td><td>Live goat KSA</td></tr>
+      <tr><td><code>POD_SAR_PLOWING_PROOF</code></td><td>Switchboard Feed</td><td>Track A / Student 1</td><td>Plowed area hectares — UKE Welega AOI</td></tr>
+      <tr><td><code>POD_NDVI_HEALTH_SCORE</code></td><td>Switchboard Feed</td><td>Track A / Student 1</td><td>Mean NDVI 0–100 scaled — UKE Welega AOI</td></tr>
+      <tr><td><code>POD_YIELD_PREDICTION</code></td><td>Switchboard Feed</td><td>Track A / Student 1</td><td>Predicted yield kg/ha — current season</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="dev00-sprint0">Sprint 0 Checklist — Before Students Write Code</h3>
+  <p>Supervisors A+B complete this together in week 1. This locks the shared interface so both tracks can build in parallel.</p>
+  <ul class="checklist">
+    <li>Agree on Anchor program IDL (vault account structs, instruction signatures) + off-chain bounty registry schema</li>
+    <li>Deploy placeholder programs to devnet — get program IDs into <code>.env</code></li>
+    <li>Create Switchboard oracle queue — get <code>SWITCHBOARD_QUEUE_PUBKEY</code></li>
+    <li>Create all aggregator feeds — record pubkeys in feed registry table above</li>
+    <li>Set up GitHub repo: branch strategy, PR template, issue labels (see COMM-01)</li>
+    <li>Apply for GEE research credits (Intern G — day 1)</li>
+    <li>Apply for Solana Foundation grant (Intern G — week 1)</li>
+    <li>Discord server live with dev channels (Student 5 — day 1)</li>
+    <li>All students have devnet wallets with SOL</li>
+    <li>All students have run <code>anchor test</code> successfully on local clone</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-01 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev01">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-01 · Supervisor A · Student 1</div>
+    <h1>Vault <em>Records</em> Program</h1>
+    <p style="color:var(--mist);margin-top:8px;">Anchor vault program — on-chain financing records and tranche <em>approval</em> logic tied to oracle price and satellite proofs. The chain verifies and audits; fiat moves off-chain via the KSA SPV. Greenfield — build from scratch.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A</span>
+      <span class="meta-chip chip-c">Rust · Anchor · SPL</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warn"><strong>V1 architecture — read before coding:</strong> Ethiopian law prohibits stablecoin/cryptocurrency transactions. The vault holds <strong>no investor funds on-chain</strong>. Investors subscribe in <strong>fiat (SAR/USD)</strong> with PODRWA SPV (KSA); the SPV authority records each confirmed financing on-chain as a plain record (no tokens are minted — the project does not issue a token). When oracle conditions are met (KSA sheep price ≥ threshold AND SAR confirms plowing AND NDVI confirms crop health), the program <strong>approves</strong> the tranche — it emits an on-chain approval event with a disbursement hash, and SPV ops execute a <strong>fiat bank wire</strong> to Turmi (or another Ethiopian operator) via the Ethiopian financial institution partner. In V1 the chain carries <strong>verified data only</strong>: oracle records, subscriptions, approvals, audit logs. Fully on-chain settlement is a V2 goal, contingent on Ethiopian regulation.</div>
+
+  <div class="callout callout-info"><strong>No token:</strong> the project does not mint an SPL token. The vault program works entirely with plain account records. (A non-transferable receipt instrument may be revisited later only if fiat recordkeeping requires it.)</div>
+
+  <h3 id="dev01-program">Step 2 — Anchor Program Structure</h3>
+  <pre><code><span class="kw">use</span> anchor_lang::prelude::*;
+<span class="kw">use</span> anchor_spl::token::{self, Mint, Token, TokenAccount};
+<span class="kw">use</span> switchboard_solana::AggregatorAccountData;
+
+<span class="comment">// programs/pod-vault/src/lib.rs</span>
+declare_id!(<span class="str">"VAULT_PROGRAM_ID_AFTER_DEPLOY"</span>);
+
+#[program]
+<span class="kw">pub mod</span> pod_vault {
+    <span class="kw">use super</span>::*;
+
+    <span class="comment">/// Admin calls once to create the vault</span>
+    <span class="kw">pub fn</span> <span class="fn-name">initialize_vault</span>(ctx: Context&lt;InitializeVault&gt;, params: InitVaultParams) -&gt; Result&lt;()&gt; {
+        instructions::initialize::handler(ctx, params)
+    }
+
+    <span class="comment">/// SPV authority records a confirmed FIAT financing (no USDC on-chain);</span>
+    <span class="comment">/// creates a plain financing record account — no token is minted</span>
+    <span class="kw">pub fn</span> <span class="fn-name">record_subscription</span>(ctx: Context&lt;RecordSubscription&gt;, usd_cents: u64) -&gt; Result&lt;()&gt; {
+        instructions::subscribe::handler(ctx, usd_cents)
+    }
+
+    <span class="comment">/// SPV authority approves a tranche after oracle conditions are met.</span>
+    <span class="comment">/// NO token transfer — emits approval event; SPV ops execute fiat wire off-chain</span>
+    <span class="kw">pub fn</span> <span class="fn-name">approve_tranche</span>(ctx: Context&lt;ApproveTranche&gt;, disbursement_hash: [u8; 32]) -&gt; Result&lt;()&gt; {
+        instructions::approve::handler(ctx, disbursement_hash)
+    }
+}</code></pre>
+
+  <h4>VaultState Account</h4>
+  <pre><code><span class="comment">// programs/pod-vault/src/state/vault.rs</span>
+#[account]
+<span class="kw">pub struct</span> <span class="ty">VaultState</span> {
+    <span class="kw">pub</span> bump: u8,
+    <span class="kw">pub</span> authority: Pubkey,              <span class="comment">// admin/multisig</span>
+    <span class="kw">pub</span> spv_authority: Pubkey,          <span class="comment">// PODRWA SPV (KSA) signing key</span>
+    <span class="kw">pub</span> total_subscribed_usd_cents: u64, <span class="comment">// total FIAT subscribed via SPV (no USDC held on-chain)</span>
+    <span class="kw">pub</span> financing_count: u64,           <span class="comment">// number of financing records</span>
+    <span class="kw">pub</span> current_tranche: u8,            <span class="comment">// 0 = none released, 1-5 = tranches</span>
+    <span class="kw">pub</span> tranches: [TrancheConfig; 5],
+    <span class="comment">// Oracle feeds (Switchboard)</span>
+    <span class="kw">pub</span> sheep_price_feed: Pubkey,       <span class="comment">// POD_COMMODITY_SHEEP_KSA_LW</span>
+    <span class="kw">pub</span> sar_proof_feed: Pubkey,         <span class="comment">// POD_SAR_PLOWING_PROOF</span>
+    <span class="kw">pub</span> ndvi_feed: Pubkey,              <span class="comment">// POD_NDVI_HEALTH_SCORE</span>
+    <span class="comment">// KSA SPV reference</span>
+    <span class="kw">pub</span> ksa_spv_ref: [u8; 32],          <span class="comment">// off-chain SPV document hash</span>
+    <span class="kw">pub</span> created_at: i64,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, Default)]
+<span class="kw">pub struct</span> <span class="ty">TrancheConfig</span> {
+    <span class="kw">pub</span> usd_cents: u64,                 <span class="comment">// FIAT amount SPV wires on approval (USD cents)</span>
+    <span class="kw">pub</span> min_sheep_price_bps: u64,       <span class="comment">// min KSA sheep price * 10000 (e.g. 35000 = $3.50)</span>
+    <span class="kw">pub</span> min_sar_hectares: u64,          <span class="comment">// min plowed hectares confirmed</span>
+    <span class="kw">pub</span> min_ndvi_score: u8,             <span class="comment">// 0-100; 0 = no NDVI requirement</span>
+    <span class="kw">pub</span> approved: bool,
+    <span class="kw">pub</span> approved_at: i64,
+    <span class="kw">pub</span> disbursement_hash: [u8; 32],    <span class="comment">// hash of off-chain fiat wire record (audit trail)</span>
+}</code></pre>
+
+  <h3 id="dev01-tranche">Step 3 — Tranche Approval Logic (no token transfer)</h3>
+  <pre><code><span class="comment">// programs/pod-vault/src/instructions/approve.rs</span>
+<span class="kw">pub fn</span> <span class="fn-name">handler</span>(ctx: Context&lt;ApproveTranche&gt;, disbursement_hash: [u8; 32]) -&gt; Result&lt;()&gt; {
+    <span class="kw">let</span> vault = &amp;<span class="kw">mut</span> ctx.accounts.vault;
+    <span class="kw">let</span> tranche_idx = vault.current_tranche <span class="kw">as</span> usize;
+
+    require!(tranche_idx &lt; 5, VaultError::AllTranchesApproved);
+    <span class="kw">let</span> tranche = vault.tranches[tranche_idx];
+    require!(!tranche.approved, VaultError::TrancheAlreadyApproved);
+
+    <span class="comment">// --- Read Switchboard oracle feeds ---</span>
+    <span class="kw">let</span> sheep_feed = &amp;ctx.accounts.sheep_price_feed.load()?;
+    <span class="kw">let</span> sheep_price = sheep_feed.get_result()?.try_into_i128()? <span class="kw">as</span> u64;
+    <span class="comment">// sheep_price is USD/kg * 10000 (4 decimal places in oracle)</span>
+
+    <span class="kw">let</span> sar_feed = &amp;ctx.accounts.sar_proof_feed.load()?;
+    <span class="kw">let</span> plowed_ha = sar_feed.get_result()?.try_into_i128()? <span class="kw">as</span> u64;
+
+    <span class="kw">let</span> ndvi_feed = &amp;ctx.accounts.ndvi_feed.load()?;
+    <span class="kw">let</span> ndvi_score = ndvi_feed.get_result()?.try_into_i128()? <span class="kw">as</span> u8;
+
+    <span class="comment">// --- Verify conditions ---</span>
+    require!(
+        sheep_price >= tranche.min_sheep_price_bps,
+        VaultError::SheeepPriceTooLow
+    );
+    require!(
+        plowed_ha >= tranche.min_sar_hectares,
+        VaultError::InsufficientPlowedArea
+    );
+    <span class="kw">if</span> tranche.min_ndvi_score > 0 {
+        require!(ndvi_score >= tranche.min_ndvi_score, VaultError::NDVITooLow);
+    }
+
+    <span class="comment">// --- NO on-chain money movement (Ethiopia: fiat only) ---</span>
+    <span class="comment">// Record approval + disbursement hash; SPV ops dashboard watches this</span>
+    <span class="comment">// event and executes the fiat bank wire to Turmi off-chain.</span>
+    vault.tranches[tranche_idx].approved = true;
+    vault.tranches[tranche_idx].approved_at = Clock::get()?.unix_timestamp;
+    vault.tranches[tranche_idx].disbursement_hash = disbursement_hash;
+    vault.current_tranche += 1;
+
+    emit!(TrancheApprovedEvent {
+        tranche: tranche_idx <span class="kw">as</span> u8,
+        usd_cents: tranche.usd_cents,
+        disbursement_hash,           <span class="comment">// audit link to the off-chain fiat wire record</span>
+        sheep_price,
+        plowed_ha,
+        ndvi_score,
+    });
+
+    Ok(())
+}</code></pre>
+  <div class="callout callout-info"><strong>Why no transfer:</strong> the on-chain program is the verification and audit layer (V1). The fiat wire itself is executed by PODRWA SPV (KSA) through the Ethiopian financial institution partner; the <code>disbursement_hash</code> ties the wire record immutably to the on-chain approval. Direct on-chain settlement moves to V2 when Ethiopian regulation allows.</div>
+
+  <h3 id="dev01-deploy">Step 4 — Deploy &amp; Test</h3>
+  <pre><code><span class="comment"># Build and deploy to devnet</span>
+anchor build
+anchor deploy --provider.cluster devnet
+
+<span class="comment"># Save the program ID to Anchor.toml and .env</span>
+<span class="comment"># Then run integration tests</span>
+anchor test --provider.cluster devnet</code></pre>
+
+  <h4>Test Checklist</h4>
+  <ul class="checklist">
+    <li>initialize_vault succeeds with valid params</li>
+    <li>record_subscription creates a financing record with correct usd_cents; only SPV authority can call</li>
+    <li>approve_tranche fails if sheep price below threshold</li>
+    <li>approve_tranche succeeds when all conditions met — no token transfer occurs</li>
+    <li>TrancheApprovedEvent emitted with correct disbursement_hash</li>
+    <li>Cannot approve same tranche twice</li>
+    <li>Cannot approve tranche 2 before tranche 1</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-02 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev02">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-02 · Supervisor A · Student 2</div>
+    <h1>Bounty <em>System</em> (Simplified)</h1>
+    <p style="color:var(--mist);margin-top:8px;">Off-chain bounty registry for developer bounties, paid by <strong>direct USDC/SOL transfer</strong> from the DAO treasury multisig. No Anchor bounty program, no claim/escrow transactions. Field agents are <strong>not</strong> part of this system.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A</span>
+      <span class="meta-chip chip-c">TypeScript · Postgres · SPL transfer</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warn"><strong>Design decision (June 2026):</strong> the original on-chain BountyTask program (create/claim/submit/verify/pay PDAs) was judged too complicated — especially for the field agent workforce, where web3 literacy is non-existent. The model is now: <strong>(1) Field agents</strong> never touch wallets or bounties. They submit data through the mobile Agent App; Gutu validates; <strong>Turmi pays them in local currency (ETB)</strong> via its payroll, based on a verified-submission report from the Oracle API. <strong>(2) Developers, supervisors, and Agent Management</strong> are paid in <strong>USDC or SOL</strong> by direct transfer from the DAO treasury multisig (funded by grants and donations) — the transfer's transaction signature is the payment record.</div>
+
+  <h3 id="dev02-design">Bounty Registry (Off-Chain, Postgres)</h3>
+  <pre><code><span class="comment">// scripts/bounty-api/types.ts — bounty lifecycle is tracked off-chain</span>
+<span class="kw">type</span> <span class="ty">BountyType</span> = <span class="str">'developer'</span> | <span class="str">'oracle-data'</span> | <span class="str">'sar-ground-truth'</span>;
+<span class="comment">// NOTE: no 'field-agent' type — agent work is NOT a bounty.</span>
+<span class="comment">// Agent submissions flow: Agent App → Oracle API → Gutu validation → Turmi ETB payroll.</span>
+
+<span class="kw">type</span> <span class="ty">BountyStatus</span> =
+  | <span class="str">'open'</span>        <span class="comment">// listed on bounty board (GitHub issue is source of truth)</span>
+  | <span class="str">'assigned'</span>    <span class="comment">// claimed via GitHub issue comment, recorded by backend</span>
+  | <span class="str">'submitted'</span>   <span class="comment">// PR opened, awaiting supervisor review</span>
+  | <span class="str">'verified'</span>    <span class="comment">// PR merged + supervisor sign-off</span>
+  | <span class="str">'paid'</span>        <span class="comment">// direct USDC/SOL transfer sent — tx signature stored</span>
+  | <span class="str">'expired'</span> | <span class="str">'rejected'</span>;
+
+<span class="kw">interface</span> <span class="ty">Bounty</span> {
+  id: number;
+  type: BountyType;
+  title: string;
+  githubIssueUrl: string;        <span class="comment">// canonical brief + claim thread</span>
+  rewardUsd: number;
+  status: BountyStatus;
+  assignee?: string;             <span class="comment">// GitHub handle</span>
+  payoutWallet?: string;         <span class="comment">// Solana address supplied in the PR</span>
+  payoutTxSig?: string;          <span class="comment">// SPL transfer signature = on-chain payment record</span>
+  verifiedBy?: string;           <span class="comment">// supervisor who signed off</span>
+}</code></pre>
+
+  <h3 id="dev02-state">Lifecycle (no on-chain transactions until payout)</h3>
+  <table>
+    <thead><tr><th>Step</th><th>Who</th><th>Transition</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Create bounty</td><td>Supervisor</td><td>→ open</td><td>GitHub issue + row in registry; reward stated in USD, paid in USDC/SOL</td></tr>
+      <tr><td>Claim</td><td>Developer</td><td>open → assigned</td><td>Comment on the GitHub issue; backend records assignee</td></tr>
+      <tr><td>Submit</td><td>Developer</td><td>assigned → submitted</td><td>Open PR; include Solana wallet address for payout</td></tr>
+      <tr><td>Verify</td><td>Supervisor</td><td>submitted → verified</td><td>PR review + merge; oracle/SAR bounties cross-checked against feed output</td></tr>
+      <tr><td>Pay</td><td>Treasury multisig (3/5)</td><td>verified → paid</td><td><strong>Direct USDC/SOL transfer</strong> to the developer's wallet; tx signature stored in registry and posted in #treasury-log</td></tr>
+      <tr><td>Expire / reject</td><td>Supervisor</td><td>assigned → open</td><td>Deadline passed or submission rejected</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="dev02-backend">Backend API + Payout Script</h3>
+  <p>A lightweight backend serves the bounty board and records payouts. Payment is a plain SPL token transfer — no escrow program.</p>
+  <pre><code><span class="comment">// scripts/bounty-api/server.ts</span>
+<span class="comment">// POST /bounties — supervisor creates bounty (stores metadata + GitHub issue URL)</span>
+<span class="comment">// GET  /bounties — list open bounties for the dashboard</span>
+<span class="comment">// POST /bounties/:id/verify — supervisor marks verified after PR merge</span>
+<span class="comment">// POST /bounties/:id/payout — records tx signature after multisig executes transfer</span>
+
+<span class="comment">// scripts/pay-bounty.ts — run by treasury multisig signers (USDC)</span>
+<span class="kw">import</span> { getOrCreateAssociatedTokenAccount, transfer } from <span class="str">'@solana/spl-token'</span>;
+
+<span class="kw">async function</span> <span class="fn-name">payBounty</span>(recipient: PublicKey, amountUsd: number) {
+  <span class="kw">const</span> ata = <span class="kw">await</span> getOrCreateAssociatedTokenAccount(connection, payer, USDC_MINT, recipient);
+  <span class="kw">const</span> sig = <span class="kw">await</span> transfer(connection, payer, treasuryAta.address, ata.address,
+                             multisigAuthority, amountUsd * 1e6);  <span class="comment">// USDC 6 decimals</span>
+  <span class="kw">return</span> sig;  <span class="comment">// store in registry: payoutTxSig — this IS the audit record</span>
+}</code></pre>
+
+  <div class="callout callout-ok"><strong>Why this is enough:</strong> every payout is already an immutable on-chain record (the transfer signature). The registry + GitHub issue thread supply the context. An escrow state machine added complexity without adding trust at this scale; revisit on-chain escrow in V2 if bounty volume demands it.</div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-03 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev03">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-03 · Supervisor A · Student 2</div>
+    <h1>Oracle Publishing — <em>Switchboard v2</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">Create Switchboard oracle queue, configure aggregator feeds for commodity prices and satellite proofs, and run the monthly Python publisher. Builds on the existing POD Oracle Publishing Guide.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A</span>
+      <span class="meta-chip chip-c">Python · Switchboard CLI · Solana</span>
+    </div>
+  </div>
+
+  <h3 id="dev03-setup">Queue &amp; Aggregator Setup</h3>
+  <pre><code><span class="comment"># Install Switchboard CLI</span>
+npm install -g @switchboard-xyz/cli
+sb config set-cluster devnet
+sb config set-keypair ~/.config/solana/id.json
+
+<span class="comment"># Create oracle queue (one-time)</span>
+sb queue create --name "POD-Oracle-Queue" --cluster devnet
+<span class="comment"># → Save QUEUE_PUBKEY to .env</span>
+
+<span class="comment"># Create aggregators for each feed (run once per feed)</span>
+sb aggregator create $QUEUE_PUBKEY \
+  --name "POD_COMMODITY_SHEEP_KSA_LW" \
+  --batchSize 1 \
+  --minRequiredOracleResults 1 \
+  --minRequiredJobResults 1 \
+  --updateInterval 2592000 \   <span class="comment"># 30 days in seconds</span>
+  --keypair ~/.config/solana/id.json \
+  --cluster devnet
+<span class="comment"># → Save each AGGREGATOR_PUBKEY to .env</span>
+
+<span class="comment"># Create feeds for: GOAT_KSA, SHEEP_UAE, SHEEP_CARCASS_KSA,</span>
+<span class="comment">#   CORN_KSA, SORGHUM_KSA, ALFALFA_KSA_PREMIUM, ALFALFA_KSA_STANDARD,</span>
+<span class="comment">#   SAR_PLOWING_PROOF, NDVI_HEALTH_SCORE, YIELD_PREDICTION</span></code></pre>
+
+  <h3 id="dev03-feeds">Feed Registry</h3>
+  <table>
+    <thead><tr><th>Feed ID</th><th>Unit</th><th>Source</th><th>Update cadence</th></tr></thead>
+    <tbody>
+      <tr><td><code>POD_COMMODITY_SHEEP_KSA_LW</code></td><td>USD/kg × 10000</td><td>selinawamucii.com</td><td>Monthly</td></tr>
+      <tr><td><code>POD_COMMODITY_GOAT_KSA_LW</code></td><td>USD/kg × 10000</td><td>selinawamucii.com</td><td>Monthly</td></tr>
+      <tr><td><code>POD_COMMODITY_CORN_KSA</code></td><td>USD/ton × 100</td><td>USDA FAS estimate</td><td>Monthly</td></tr>
+      <tr><td><code>POD_COMMODITY_SORGHUM_KSA</code></td><td>USD/ton × 100</td><td>USDA FAS estimate</td><td>Monthly</td></tr>
+      <tr><td><code>POD_COMMODITY_ALFALFA_KSA_PREMIUM</code></td><td>USD/ton × 100</td><td>USDA FAS / CEIC</td><td>Monthly</td></tr>
+      <tr><td><code>POD_SAR_PLOWING_PROOF</code></td><td>Hectares × 100</td><td>GEE SAR pipeline</td><td>Monthly</td></tr>
+      <tr><td><code>POD_NDVI_HEALTH_SCORE</code></td><td>NDVI × 10000</td><td>GEE Sentinel-2</td><td>Monthly</td></tr>
+      <tr><td><code>POD_YIELD_PREDICTION</code></td><td>kg/ha</td><td>GEE yield model</td><td>Monthly</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-warn"><strong>Scaling convention:</strong> All USD prices stored as integers with implicit decimals. Sheep price $3.94/kg → stored as <code>39400</code>. Vault program divides by 10000 when comparing. This avoids floating-point on-chain.</div>
+
+  <h3 id="dev03-publisher">Python Publisher Script</h3>
+  <pre><code><span class="comment"># agents/oracle-publisher/publish.py</span>
+<span class="kw">import</span> subprocess, json, os
+<span class="kw">from</span> pathlib <span class="kw">import</span> Path
+
+NETWORK = os.getenv(<span class="str">"SOLANA_CLUSTER"</span>, <span class="str">"devnet"</span>)
+KEYPAIR = os.getenv(<span class="str">"KEYPAIR_PATH"</span>, <span class="str">"~/.config/solana/id.json"</span>)
+
+<span class="comment"># Load latest data file (generated by price agent)</span>
+<span class="kw">with</span> open(<span class="str">"data/latest.json"</span>) <span class="kw">as</span> f:
+    data = json.load(f)
+
+FEEDS = {
+    <span class="str">"POD_COMMODITY_SHEEP_KSA_LW"</span>: os.getenv(<span class="str">"FEED_SHEEP_KSA"</span>),
+    <span class="str">"POD_COMMODITY_GOAT_KSA_LW"</span>:  os.getenv(<span class="str">"FEED_GOAT_KSA"</span>),
+    <span class="str">"POD_COMMODITY_CORN_KSA"</span>:      os.getenv(<span class="str">"FEED_CORN_KSA"</span>),
+    <span class="str">"POD_COMMODITY_SORGHUM_KSA"</span>:   os.getenv(<span class="str">"FEED_SORGHUM_KSA"</span>),
+    <span class="str">"POD_SAR_PLOWING_PROOF"</span>:       os.getenv(<span class="str">"FEED_SAR_PROOF"</span>),
+    <span class="str">"POD_NDVI_HEALTH_SCORE"</span>:       os.getenv(<span class="str">"FEED_NDVI"</span>),
+}
+
+<span class="kw">def</span> <span class="fn-name">get_scaled_value</span>(feed_id: str) -&gt; int:
+    <span class="kw">for</span> feed <span class="kw">in</span> data[<span class="str">"feeds"</span>]:
+        <span class="kw">if</span> feed[<span class="str">"feed_id"</span>] == feed_id:
+            v = feed[<span class="str">"value"</span>]
+            <span class="comment"># prices &lt; 100: USD/kg → ×10000; prices &gt;= 100: USD/ton → ×100</span>
+            <span class="kw">return</span> int(v * 10000) <span class="kw">if</span> v &lt; 100 <span class="kw">else</span> int(v * 100)
+    <span class="kw">raise</span> ValueError(f<span class="str">"Feed {feed_id} not found in data"</span>)
+
+<span class="kw">for</span> feed_id, pubkey <span class="kw">in</span> FEEDS.items():
+    <span class="kw">if not</span> pubkey:
+        print(f<span class="str">"SKIP {feed_id} — pubkey not set in .env"</span>)
+        <span class="kw">continue</span>
+    value = get_scaled_value(feed_id)
+    result = subprocess.run([
+        <span class="str">"sb"</span>, <span class="str">"aggregator"</span>, <span class="str">"update"</span>, pubkey,
+        <span class="str">"--keypair"</span>, KEYPAIR,
+        <span class="str">"--cluster"</span>, NETWORK,
+        <span class="str">"--value"</span>, str(value),
+    ], capture_output=True, text=True)
+    status = <span class="str">"✓"</span> <span class="kw">if</span> result.returncode == 0 <span class="kw">else</span> <span class="str">"✗"</span>
+    print(f<span class="str">"{status} {feed_id}: {value} (raw) | returncode={result.returncode}"</span>)
+    <span class="kw">if</span> result.returncode != 0:
+        print(<span class="str">"  STDERR:"</span>, result.stderr[:200])</code></pre>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-04 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev04">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-04 · Supervisor A · Student 1</div>
+    <h1>SAR + NDVI + <em>Yield Prediction</em> Pipeline</h1>
+    <p style="color:var(--mist);margin-top:8px;">Google Earth Engine (Phase 1) satellite data pipeline. Sentinel-1 SAR for plowing detection, Sentinel-2 NDVI for crop health, T3 yield prediction model. Results published to Switchboard oracle.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A</span>
+      <span class="meta-chip chip-c">Python · GEE API · scikit-learn</span>
+    </div>
+  </div>
+
+  <div class="callout callout-info"><strong>Phase 1 (now):</strong> Use Google Earth Engine Python API for all satellite processing. <strong>Phase 2 (rev 2):</strong> Pull data directly from Copernicus CDSE into PODRWA's own virtual database. This document covers Phase 1 only. A separate DEV-04b document will cover Phase 2.</div>
+
+  <div class="callout callout-warn"><strong>Do first:</strong> Apply for GEE non-commercial research project at <a href="https://earthengine.google.com/noncommercial_signup">earthengine.google.com/noncommercial_signup</a>. Free. Takes ~1 week. You cannot run GEE API calls without an approved project.</div>
+
+  <h3 id="dev04-gee">GEE Setup &amp; Authentication</h3>
+  <pre><code><span class="comment"># Install</span>
+pip install earthengine-api --break-system-packages
+
+<span class="comment"># Authenticate (one-time per machine)</span>
+earthengine authenticate
+earthengine set_project YOUR_GEE_PROJECT_ID
+
+<span class="comment"># Test connection</span>
+python3 -c "import ee; ee.Initialize(); print(ee.Image('USGS/SRTMGL1_003').getInfo()['type'])"</code></pre>
+
+  <pre><code><span class="comment"># agents/satellite/config.py</span>
+<span class="kw">import</span> ee
+ee.Initialize(project=<span class="str">'your-gee-project-id'</span>)
+
+<span class="comment"># UKE Welega AOI — Horo Guduru Welega Zone, West Ethiopia (pilot)</span>
+<span class="comment"># Adjust polygon to exact pilot field boundaries when known</span>
+AOI = ee.Geometry.Polygon([[
+    [36.2, 9.1], [37.3, 9.1], [37.3, 10.2],
+    [36.2, 10.2], [36.2, 9.1]
+]])
+
+SCALE = 10  <span class="comment"># metres — Sentinel native resolution</span></code></pre>
+
+  <h3 id="dev04-sar">T1 — Sentinel-1 SAR Plowing Detection</h3>
+  <p>Plowing creates a sudden decrease in SAR backscatter (soil goes from rough to smooth). We detect pixels where VV backscatter drops below –15 dB, which indicates bare prepared soil.</p>
+  <pre><code><span class="comment"># agents/satellite/sar_plowing.py</span>
+<span class="kw">import</span> ee
+<span class="kw">from</span> config <span class="kw">import</span> AOI, SCALE
+
+<span class="kw">def</span> <span class="fn-name">detect_plowing</span>(year: int, month: int) -&gt; dict:
+    <span class="str">"""
+    Returns plowed area in hectares for UKE Welega AOI.
+    Best run for Nov-Dec (harvest window) and Jan-Mar (land prep).
+    """</span>
+    start = ee.Date.fromYMD(year, month, 1)
+    end   = start.advance(1, <span class="str">'month'</span>)
+
+    s1 = (ee.ImageCollection(<span class="str">'COPERNICUS/S1_GRD'</span>)
+          .filter(ee.Filter.eq(<span class="str">'instrumentMode'</span>, <span class="str">'IW'</span>))
+          .filter(ee.Filter.listContains(<span class="str">'transmitterReceiverPolarisation'</span>, <span class="str">'VV'</span>))
+          .filter(ee.Filter.eq(<span class="str">'orbitProperties_pass'</span>, <span class="str">'DESCENDING'</span>))
+          .filterBounds(AOI)
+          .filterDate(start, end)
+          .select(<span class="str">'VV'</span>)
+          .mean())  <span class="comment"># mean composite for the month</span>
+
+    <span class="comment"># Pixels below -15 dB = bare/plowed soil</span>
+    plowing_mask = s1.lt(-15)
+
+    <span class="comment"># Calculate area</span>
+    area_m2 = (plowing_mask
+               .multiply(ee.Image.pixelArea())
+               .reduceRegion(
+                   reducer=ee.Reducer.sum(),
+                   geometry=AOI,
+                   scale=SCALE,
+                   maxPixels=1e10
+               ).get(<span class="str">'VV'</span>))
+
+    plowed_ha = float(area_m2.getInfo()) / 10000
+
+    <span class="kw">return</span> {
+        <span class="str">"period"</span>: f<span class="str">"{year}-{month:02d}"</span>,
+        <span class="str">"plowed_ha"</span>: round(plowed_ha, 2),
+        <span class="str">"oracle_value"</span>: int(plowed_ha * 100),  <span class="comment"># scaled for Switchboard (2 decimals)</span>
+        <span class="str">"source"</span>: <span class="str">"Sentinel-1 GRD VV &lt;-15dB"</span>,
+        <span class="str">"quality"</span>: <span class="str">"confirmed"</span>
+    }</code></pre>
+
+  <h3 id="dev04-ndvi">T2 — NDVI Crop Health &amp; T3 Yield Prediction</h3>
+  <pre><code><span class="comment"># agents/satellite/ndvi_yield.py</span>
+<span class="kw">import</span> ee, numpy <span class="kw">as</span> np
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LinearRegression
+<span class="kw">from</span> config <span class="kw">import</span> AOI, SCALE
+
+<span class="kw">def</span> <span class="fn-name">compute_ndvi</span>(year: int, month: int) -&gt; dict:
+    <span class="str">"""Compute mean NDVI for AOI. Returns 0-1 float and scaled integer."""</span>
+    start = ee.Date.fromYMD(year, month, 1)
+    end   = start.advance(1, <span class="str">'month'</span>)
+
+    s2 = (ee.ImageCollection(<span class="str">'COPERNICUS/S2_SR_HARMONIZED'</span>)
+          .filterBounds(AOI)
+          .filterDate(start, end)
+          .filter(ee.Filter.lt(<span class="str">'CLOUDY_PIXEL_PERCENTAGE'</span>, 20))
+          .median())
+
+    ndvi = s2.normalizedDifference([<span class="str">'B8'</span>, <span class="str">'B4'</span>]).rename(<span class="str">'NDVI'</span>)
+
+    mean_ndvi = (ndvi.reduceRegion(
+        reducer=ee.Reducer.mean(),
+        geometry=AOI, scale=SCALE, maxPixels=1e10
+    ).get(<span class="str">'NDVI'</span>))
+
+    ndvi_val = float(mean_ndvi.getInfo() <span class="kw">or</span> 0)
+
+    <span class="kw">return</span> {
+        <span class="str">"period"</span>: f<span class="str">"{year}-{month:02d}"</span>,
+        <span class="str">"mean_ndvi"</span>: round(ndvi_val, 4),
+        <span class="str">"health_score"</span>: int(ndvi_val * 100),   <span class="comment"># 0-100 scale</span>
+        <span class="str">"oracle_value"</span>: int(ndvi_val * 10000), <span class="comment"># 4 decimal precision for Switchboard</span>
+        <span class="str">"interpretation"</span>: (
+            <span class="str">"poor"</span> <span class="kw">if</span> ndvi_val &lt; 0.2 <span class="kw">else</span>
+            <span class="str">"moderate"</span> <span class="kw">if</span> ndvi_val &lt; 0.4 <span class="kw">else</span>
+            <span class="str">"good"</span> <span class="kw">if</span> ndvi_val &lt; 0.6 <span class="kw">else</span> <span class="str">"excellent"</span>
+        )
+    }
+
+<span class="comment"># T3 — Yield prediction (simple linear model on NDVI peak)</span>
+<span class="comment"># Calibrate with historical Ethiopia corn yield data from FAO</span>
+<span class="comment"># FAO: Ethiopia average corn yield ~3,200 kg/ha, range 1,800–5,200</span>
+YIELD_MODEL_SLOPE     = 8500   <span class="comment"># kg/ha per NDVI unit (empirical)</span>
+YIELD_MODEL_INTERCEPT = -500   <span class="comment"># kg/ha base</span>
+
+<span class="kw">def</span> <span class="fn-name">predict_yield</span>(peak_ndvi: float) -&gt; int:
+    <span class="str">"""Returns predicted yield in kg/ha based on peak NDVI reading."""</span>
+    predicted = YIELD_MODEL_SLOPE * peak_ndvi + YIELD_MODEL_INTERCEPT
+    <span class="kw">return</span> max(0, int(predicted))  <span class="comment"># kg/ha, cannot be negative</span></code></pre>
+
+  <h3 id="dev04-publish">T4 — Publish Results to Switchboard</h3>
+  <pre><code><span class="comment"># agents/satellite/run_pipeline.py</span>
+<span class="kw">import</span> subprocess, os
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">from</span> sar_plowing <span class="kw">import</span> detect_plowing
+<span class="kw">from</span> ndvi_yield <span class="kw">import</span> compute_ndvi, predict_yield
+
+<span class="kw">def</span> <span class="fn-name">run_and_publish</span>(year: int, month: int):
+    <span class="comment"># 1. Run satellite analysis</span>
+    sar_result  = detect_plowing(year, month)
+    ndvi_result = compute_ndvi(year, month)
+    yield_val   = predict_yield(ndvi_result[<span class="str">"mean_ndvi"</span>])
+
+    print(f<span class="str">"SAR: {sar_result['plowed_ha']} ha plowed"</span>)
+    print(f<span class="str">"NDVI: {ndvi_result['mean_ndvi']} ({ndvi_result['interpretation']})"</span>)
+    print(f<span class="str">"Yield prediction: {yield_val} kg/ha"</span>)
+
+    <span class="comment"># 2. Publish to Switchboard</span>
+    feeds = [
+        (os.getenv(<span class="str">"FEED_SAR_PROOF"</span>),   sar_result[<span class="str">"oracle_value"</span>]),
+        (os.getenv(<span class="str">"FEED_NDVI"</span>),         ndvi_result[<span class="str">"oracle_value"</span>]),
+        (os.getenv(<span class="str">"FEED_YIELD_PRED"</span>),   yield_val),
+    ]
+    <span class="kw">for</span> pubkey, value <span class="kw">in</span> feeds:
+        <span class="kw">if not</span> pubkey: <span class="kw">continue</span>
+        subprocess.run([
+            <span class="str">"sb"</span>, <span class="str">"aggregator"</span>, <span class="str">"update"</span>, pubkey,
+            <span class="str">"--keypair"</span>, os.getenv(<span class="str">"KEYPAIR_PATH"</span>),
+            <span class="str">"--cluster"</span>, os.getenv(<span class="str">"SOLANA_CLUSTER"</span>, <span class="str">"devnet"</span>),
+            <span class="str">"--value"</span>, str(value),
+        ], check=True)
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    now = datetime.utcnow()
+    run_and_publish(now.year, now.month)</code></pre>
+
+  <h4>Phase 2 Roadmap Note</h4>
+  <div class="callout callout-info"><strong>Phase 2 (future):</strong> Replace GEE with direct Copernicus CDSE (creodias.eu) API. Benefits: no GEE quota limits, data stored in PODRWA's own PostGIS database, faster iteration. CDSE provides free access to Sentinel data with an EU account. Architecture: CDSE → rasterio/GDAL processing → PostGIS raster storage → same oracle publish step. Create DEV-04b when team is ready.</div>
+
+  <h4>Pipeline Test Checklist</h4>
+  <ul class="checklist">
+    <li>GEE authentication succeeds without error</li>
+    <li>SAR query returns non-zero hectare result for Nov–Dec period</li>
+    <li>NDVI query returns value between 0.0 and 1.0</li>
+    <li>Oracle values are correctly scaled integers</li>
+    <li>Switchboard update returns exit code 0</li>
+    <li>Vault program reads updated SAR oracle value correctly</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-05 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev05">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-05 · Supervisor B · Student 3</div>
+    <h1>Investor <em>Dashboard</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">Next.js web app. Works fully without a wallet (public read-only view of vault state and oracle prices). Optional Phantom/Backpack wallet connect to show personal investor positions.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-b">Track B</span>
+      <span class="meta-chip chip-c">Next.js · @solana/wallet-adapter · Chart.js</span>
+    </div>
+  </div>
+
+  <div class="callout callout-info"><strong>Design principle:</strong> Anyone can view vault progress and MENA prices without connecting a wallet. Wallet connect is optional and unlocks the personal portfolio view. The walletless view should be the primary experience for most visitors.</div>
+
+  <h3 id="dev05-setup">Project Setup</h3>
+  <pre><code><span class="comment"># Scaffold Next.js app inside web/investor-dashboard/</span>
+npx create-next-app@latest investor-dashboard --typescript --tailwind --app
+cd investor-dashboard
+
+<span class="comment"># Add Solana dependencies</span>
+npm install @solana/web3.js @solana/wallet-adapter-react \
+  @solana/wallet-adapter-react-ui @solana/wallet-adapter-wallets \
+  @switchboard-xyz/solana.js chart.js react-chartjs-2</code></pre>
+
+  <div class="file-tree">web/investor-dashboard/
+├── app/
+│   ├── layout.tsx              <span class="comment"># WalletProvider wraps app</span>
+│   ├── page.tsx                <span class="comment"># Public dashboard (no wallet needed)</span>
+│   └── portfolio/
+│       └── page.tsx            <span class="comment"># Wallet-connected personal view</span>
+├── components/
+│   ├── VaultProgress.tsx       <span class="comment"># Tranche progress bar</span>
+│   ├── OraclePricePanel.tsx    <span class="comment"># Live MENA price feed display</span>
+│   ├── TrancheTimeline.tsx     <span class="comment"># Tranche release history</span>
+│   ├── SatelliteStatus.tsx     <span class="comment"># SAR/NDVI oracle values</span>
+│   └── WalletButton.tsx        <span class="comment"># Optional connect button</span>
+├── lib/
+│   ├── vault.ts                <span class="comment"># Read vault state from chain</span>
+│   └── oracle.ts               <span class="comment"># Read Switchboard feeds</span>
+└── constants.ts                <span class="comment"># Program IDs, feed pubkeys</span></div>
+
+  <h3 id="dev05-walletless">Walletless Data Reading</h3>
+  <p>All vault state and oracle data is public on Solana — no wallet signature required to read.</p>
+  <pre><code><span class="comment">// lib/vault.ts</span>
+<span class="kw">import</span> { Connection, PublicKey } from <span class="str">'@solana/web3.js'</span>;
+<span class="kw">import</span> { Program, AnchorProvider, Idl } from <span class="str">'@coral-xyz/anchor'</span>;
+
+<span class="kw">const</span> RPC = process.env.NEXT_PUBLIC_RPC_URL || <span class="str">'https://api.devnet.solana.com'</span>;
+<span class="kw">const</span> connection = <span class="kw">new</span> Connection(RPC, <span class="str">'confirmed'</span>);
+
+<span class="kw">export async function</span> <span class="fn-name">fetchVaultState</span>() {
+  <span class="comment">// Read-only provider — no wallet needed</span>
+  <span class="kw">const</span> provider = <span class="kw">new</span> AnchorProvider(connection, null <span class="kw">as any</span>, {});
+  <span class="kw">const</span> program = <span class="kw">new</span> Program(VAULT_IDL, VAULT_PROGRAM_ID, provider);
+
+  <span class="kw">const</span> [vaultPDA] = PublicKey.findProgramAddressSync(
+    [Buffer.from(<span class="str">'vault'</span>)],
+    VAULT_PROGRAM_ID
+  );
+
+  <span class="kw">const</span> vault = <span class="kw">await</span> program.account.vaultState.fetch(vaultPDA);
+  <span class="kw">return</span> {
+    totalSubscribedUsd: vault.totalSubscribedUsdCents.toNumber() / 100, <span class="comment">// fiat via SPV — no USDC on-chain</span>
+    financingCount:     vault.financingCount.toNumber(),
+    currentTranche:     vault.currentTranche,
+    tranches:           vault.tranches,
+  };
+}</code></pre>
+
+  <pre><code><span class="comment">// lib/oracle.ts — read Switchboard feeds (no wallet)</span>
+<span class="kw">import</span> { AggregatorAccount, SwitchboardProgram } from <span class="str">'@switchboard-xyz/solana.js'</span>;
+
+<span class="kw">export async function</span> <span class="fn-name">fetchOraclePrices</span>() {
+  <span class="kw">const</span> sbProgram = <span class="kw">await</span> SwitchboardProgram.load(<span class="str">'devnet'</span>, connection);
+  <span class="kw">const</span> feedIds = {
+    sheep_ksa:  process.env.NEXT_PUBLIC_FEED_SHEEP_KSA,
+    goat_ksa:   process.env.NEXT_PUBLIC_FEED_GOAT_KSA,
+    sar_proof:  process.env.NEXT_PUBLIC_FEED_SAR_PROOF,
+    ndvi:       process.env.NEXT_PUBLIC_FEED_NDVI,
+  };
+
+  <span class="kw">const</span> results: Record&lt;string, number&gt; = {};
+  <span class="kw">for</span> (<span class="kw">const</span> [key, pubkeyStr] <span class="kw">of</span> Object.entries(feedIds)) {
+    <span class="kw">if</span> (!pubkeyStr) <span class="kw">continue</span>;
+    <span class="kw">const</span> agg = <span class="kw">new</span> AggregatorAccount(sbProgram, <span class="kw">new</span> PublicKey(pubkeyStr));
+    <span class="kw">const</span> val = <span class="kw">await</span> agg.fetchLatestValue();
+    results[key] = val?.toNumber() ?? 0;
+  }
+  <span class="kw">return</span> results;
+}</code></pre>
+
+  <h3 id="dev05-wallet">Optional Phantom Wallet Connect</h3>
+  <pre><code><span class="comment">// app/layout.tsx</span>
+<span class="str">'use client'</span>;
+<span class="kw">import</span> { WalletAdapterNetwork } from <span class="str">'@solana/wallet-adapter-base'</span>;
+<span class="kw">import</span> { PhantomWalletAdapter, SolflareWalletAdapter } from <span class="str">'@solana/wallet-adapter-wallets'</span>;
+<span class="kw">import</span> { ConnectionProvider, WalletProvider } from <span class="str">'@solana/wallet-adapter-react'</span>;
+<span class="kw">import</span> { WalletModalProvider } from <span class="str">'@solana/wallet-adapter-react-ui'</span>;
+
+<span class="kw">const</span> wallets = [<span class="kw">new</span> PhantomWalletAdapter(), <span class="kw">new</span> SolflareWalletAdapter()];
+
+<span class="kw">export default function</span> <span class="fn-name">RootLayout</span>({ children }) {
+  <span class="kw">return</span> (
+    &lt;ConnectionProvider endpoint={process.env.NEXT_PUBLIC_RPC_URL}&gt;
+      &lt;WalletProvider wallets={wallets} autoConnect={false}&gt;
+        &lt;WalletModalProvider&gt;{children}&lt;/WalletModalProvider&gt;
+      &lt;/WalletProvider&gt;
+    &lt;/ConnectionProvider&gt;
+  );
+}</code></pre>
+
+  <h3 id="dev05-components">Key Components</h3>
+  <h4>VaultProgress.tsx — Tranche progress visualization</h4>
+  <pre><code><span class="kw">export function</span> <span class="fn-name">VaultProgress</span>({ vault }) {
+  <span class="kw">const</span> pct = (vault.currentTranche / 5) * 100;
+  <span class="kw">return</span> (
+    &lt;div className=<span class="str">"vault-card"</span>&gt;
+      &lt;div className=<span class="str">"stat"</span>&gt;${vault.totalSubscribedUsd.toLocaleString()} subscribed (fiat via PODRWA SPV)&lt;/div&gt;
+      &lt;div className=<span class="str">"progress-bar"</span>&gt;
+        &lt;div style={{ width: `${pct}%` }} className=<span class="str">"progress-fill"</span>/&gt;
+      &lt;/div&gt;
+      &lt;div className=<span class="str">"label"</span>&gt;Tranche {vault.currentTranche} of 5 approved&lt;/div&gt;
+      {<span class="comment">/* Show each tranche with oracle condition status */</span>}
+      {vault.tranches.map((t, i) =&gt; (
+        &lt;TrancheRow key={i} tranche={t} index={i} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+  <h4>SatelliteStatus.tsx — SAR/NDVI oracle display</h4>
+  <pre><code><span class="kw">export function</span> <span class="fn-name">SatelliteStatus</span>({ sarHectares, ndviScore }) {
+  <span class="kw">return</span> (
+    &lt;div className=<span class="str">"satellite-panel"</span>&gt;
+      &lt;h3&gt;UKE Welega Field Status&lt;/h3&gt;
+      &lt;div className=<span class="str">"stat-row"</span>&gt;
+        &lt;span&gt;SAR Plowed Area&lt;/span&gt;
+        &lt;span className=<span class="str">"value"</span>&gt;{sarHectares} ha&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className=<span class="str">"stat-row"</span>&gt;
+        &lt;span&gt;NDVI Health Score&lt;/span&gt;
+        &lt;span className={`value ${ndviScore > 50 ? 'good' : 'warn'}`}&gt;
+          {ndviScore}/100
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p className=<span class="str">"source-note"</span>&gt;Source: Sentinel-1/2 via Google Earth Engine · Updated monthly&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+  <h4>Test Checklist</h4>
+  <ul class="checklist">
+    <li>Public page loads and shows vault data with no wallet connected</li>
+    <li>Oracle prices display correctly (divide raw value by 10000 for sheep price)</li>
+    <li>Phantom wallet connects and disconnects cleanly</li>
+    <li>Portfolio page shows investor position when wallet connected</li>
+    <li>Mobile responsive layout works on 375px width</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-06 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev06">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-06 · Supervisor B · Student 3</div>
+    <h1>Contributor <em>Dashboard</em> (Web)</h1>
+    <p style="color:var(--mist);margin-top:8px;">React web app for <strong>developers, supervisors, and Agent Management</strong> — bounty board, submission tracking, payout history, oracle status panel. <strong>Field agents do not use this dashboard</strong> and never need a wallet.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-b">Track B</span>
+      <span class="meta-chip chip-c">React · REST API · Solana (read-only)</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warn"><strong>Who gets paid what (June 2026 decision):</strong> Field agents have no web3 literacy and no wallets — they work only through the mobile Agent App and are <strong>paid in local currency (ETB) by Turmi</strong>, based on the verified-submission report from the Oracle API. <strong>Developers, supervisors, and Agent Management</strong> are paid in <strong>USDC or SOL via direct transfer</strong> from the DAO treasury multisig (funded by grants and donations) to their Phantom or other wallets. No on-chain bounty escrow program — the bounty lifecycle is tracked off-chain (see DEV-02), and the payout transfer signature is the on-chain record.</div>
+
+  <h3 id="dev06-auth">Authentication</h3>
+  <pre><code><span class="comment">// GitHub OAuth login — identity = GitHub handle (matches bounty registry).</span>
+<span class="comment">// A wallet is NOT required to browse, claim, or submit.</span>
+<span class="comment">// Contributors paste a Solana address into their profile to receive USDC/SOL payouts.</span>
+
+<span class="kw">export function</span> <span class="fn-name">ContributorApp</span>() {
+  <span class="kw">const</span> { user } = useGithubAuth();          <span class="comment">// session from backend OAuth</span>
+  <span class="kw">if</span> (!user) <span class="kw">return</span> &lt;LoginWithGithub /&gt;;
+  <span class="kw">return</span> &lt;BountyDashboard handle={user.login} /&gt;;
+}</code></pre>
+
+  <h3 id="dev06-bounties">Bounty Browser</h3>
+  <pre><code><span class="comment">// Bounties come from the off-chain registry API (DEV-02) — no PDA scans</span>
+<span class="kw">async function</span> <span class="fn-name">fetchOpenBounties</span>() {
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/bounties?status=open'</span>);
+  <span class="kw">const</span> bounties = <span class="kw">await</span> res.json();
+  <span class="kw">return</span> bounties.sort((a, b) =&gt; b.rewardUsd - a.rewardUsd);
+}
+
+<span class="comment">// Types: 'developer' | 'oracle-data' | 'sar-ground-truth' — no field-agent bounties</span></code></pre>
+
+  <h3 id="dev06-claim">Claim &amp; Submit Flow</h3>
+  <pre><code><span class="comment">// Claim — backend records assignee; canonical thread is the GitHub issue</span>
+<span class="kw">async function</span> <span class="fn-name">claimBounty</span>(bountyId: number) {
+  <span class="kw">await</span> fetch(<span class="str">`/api/bounties/${bountyId}/claim`</span>, { method: <span class="str">'POST'</span> });
+  <span class="comment">// backend also comments on the GitHub issue on the user's behalf</span>
+}
+
+<span class="comment">// Submit — PR URL + payout wallet address</span>
+<span class="kw">async function</span> <span class="fn-name">submitWork</span>(bountyId: number, prUrl: string, payoutWallet: string) {
+  <span class="kw">await</span> fetch(<span class="str">`/api/bounties/${bountyId}/submit`</span>, {
+    method: <span class="str">'POST'</span>,
+    body: JSON.stringify({ prUrl, payoutWallet }),
+  });
+}
+
+<span class="comment">// After supervisor verifies (PR merge), treasury multisig sends a direct</span>
+<span class="comment">// USDC transfer; the dashboard shows payoutTxSig linking to the explorer.</span></code></pre>
+
+  <h4>Pages &amp; Routing</h4>
+  <table>
+    <thead><tr><th>Route</th><th>Content</th><th>Auth required</th></tr></thead>
+    <tbody>
+      <tr><td><code>/</code></td><td>Bounty board — open tasks, filter by type</td><td>No (view only)</td></tr>
+      <tr><td><code>/bounties/:id</code></td><td>Bounty detail + claim button</td><td>GitHub login to claim</td></tr>
+      <tr><td><code>/my-tasks</code></td><td>Contributor's claimed + submitted tasks</td><td>Yes</td></tr>
+      <tr><td><code>/payouts</code></td><td>Payout history with on-chain tx signatures</td><td>Yes</td></tr>
+      <tr><td><code>/agents</code></td><td>Agent Management view: verified field submissions per agent → ETB payroll report for Turmi</td><td>Yes (Agent Management role)</td></tr>
+      <tr><td><code>/oracle</code></td><td>Live oracle feed status (read-only)</td><td>No</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-07 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev07">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-07 · Supervisor B · Student 4</div>
+    <h1>Agent App — <em>React Native</em> (Offline-First)</h1>
+    <p style="color:var(--mist);margin-top:8px;">Mobile app for field agents in Ethiopia. Build on existing v0 codebase. Offline-first is a hard requirement — network connectivity is unreliable in the field. All data queued locally, synced when signal available.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-b">Track B</span>
+      <span class="meta-chip chip-c">React Native · Expo · SQLite</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warn"><strong>Offline-first is non-negotiable.</strong> Field agents in UKE Welega (West Ethiopia) frequently have no internet. The app must work completely without network access. Data is stored locally and synced in batches when connectivity is detected. Never block the user from completing a task due to network issues.</div>
+
+  <div class="callout callout-info"><strong>No wallets, no tokens:</strong> agents log in with a phone-number-based agent ID (OTP). Task rewards are shown in <strong>ETB</strong> and paid by Turmi payroll against verified submissions — the app never touches crypto.</div>
+
+  <h3 id="dev07-sqlite">SQLite Offline Queue</h3>
+  <pre><code><span class="kw">import</span> * as SQLite from <span class="str">'expo-sqlite'</span>;
+<span class="kw">const</span> db = SQLite.openDatabase(<span class="str">'pod_agent.db'</span>);
+
+<span class="kw">export function</span> <span class="fn-name">initDatabase</span>() {
+  db.transaction(tx =&gt; {
+    <span class="comment">// Main submission queue</span>
+    tx.executeSql(`
+      CREATE TABLE IF NOT EXISTS submission_queue (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        task_id         TEXT NOT NULL,
+        submission_type TEXT NOT NULL,   <span class="comment">-- 'field_agent' | 'sar_ground_truth'</span>
+        latitude        REAL,
+        longitude       REAL,
+        accuracy_m      REAL,
+        photo_uri       TEXT,            <span class="comment">-- local file path</span>
+        form_data       TEXT,            <span class="comment">-- JSON blob of form fields</span>
+        status          TEXT DEFAULT 'pending',  <span class="comment">-- pending|uploading|synced|failed</span>
+        retry_count     INTEGER DEFAULT 0,
+        created_at      INTEGER,         <span class="comment">-- unix timestamp</span>
+        synced_at       INTEGER          <span class="comment">-- null until synced</span>
+      )
+    `);
+
+    <span class="comment">// Cached task list (so agent can browse without network)</span>
+    <span class="comment">// NOTE: agents are paid in ETB by Turmi — reward shown in Birr, no tokens/wallets</span>
+    tx.executeSql(`
+      CREATE TABLE IF NOT EXISTS tasks_cache (
+        task_id         TEXT PRIMARY KEY,
+        title           TEXT,
+        description     TEXT,
+        reward_etb      INTEGER,         <span class="comment">-- payout in Ethiopian Birr via Turmi payroll</span>
+        task_type       TEXT,
+        expires_at      INTEGER,
+        cached_at       INTEGER
+      )
+    `);
+
+    <span class="comment">// Agent's own assigned tasks</span>
+    tx.executeSql(`
+      CREATE TABLE IF NOT EXISTS my_tasks (
+        task_id TEXT PRIMARY KEY,
+        status TEXT,
+        claimed_at INTEGER,
+        submission_queue_id INTEGER
+      )
+    `);
+  });
+}
+
+<span class="comment">// Write a new submission to the local queue</span>
+<span class="kw">export function</span> <span class="fn-name">queueSubmission</span>(submission: SubmissionData): Promise&lt;number&gt; {
+  <span class="kw">return new</span> Promise((resolve, reject) =&gt; {
+    db.transaction(tx =&gt; {
+      tx.executeSql(
+        `INSERT INTO submission_queue
+         (task_id, submission_type, latitude, longitude, accuracy_m,
+          photo_uri, form_data, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          submission.taskId, submission.type,
+          submission.gps?.latitude, submission.gps?.longitude, submission.gps?.accuracy,
+          submission.photoUri, JSON.stringify(submission.formData),
+          Date.now(),
+        ],
+        (_, result) =&gt; resolve(result.insertId),
+        (_, err) =&gt; { reject(err); <span class="kw">return</span> false; }
+      );
+    });
+  });
+}</code></pre>
+
+  <h3 id="dev07-capture">GPS + Camera Capture</h3>
+  <pre><code><span class="kw">import</span> * as Location from <span class="str">'expo-location'</span>;
+<span class="kw">import</span> * as ImagePicker from <span class="str">'expo-image-picker'</span>;
+
+<span class="kw">export async function</span> <span class="fn-name">captureGPS</span>(): Promise&lt;GPSResult&gt; {
+  <span class="kw">const</span> { status } = <span class="kw">await</span> Location.requestForegroundPermissionsAsync();
+  <span class="kw">if</span> (status !== <span class="str">'granted'</span>) <span class="kw">throw new</span> Error(<span class="str">'Location permission denied'</span>);
+
+  <span class="kw">const</span> loc = <span class="kw">await</span> Location.getCurrentPositionAsync({
+    accuracy: Location.Accuracy.High,  <span class="comment">// best accuracy, may take a few seconds</span>
+  });
+
+  <span class="kw">return</span> {
+    latitude:  loc.coords.latitude,
+    longitude: loc.coords.longitude,
+    accuracy_m: loc.coords.accuracy,
+    timestamp: loc.timestamp,
+  };
+}
+
+<span class="kw">export async function</span> <span class="fn-name">capturePhoto</span>(): Promise&lt;string | null&gt; {
+  <span class="kw">const</span> { status } = <span class="kw">await</span> ImagePicker.requestCameraPermissionsAsync();
+  <span class="kw">if</span> (status !== <span class="str">'granted'</span>) <span class="kw">return</span> null;
+
+  <span class="kw">const</span> result = <span class="kw">await</span> ImagePicker.launchCameraAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    quality: 0.6,       <span class="comment">// compress — saves space + faster upload</span>
+    exif: true,         <span class="comment">// keep EXIF for timestamp verification</span>
+  });
+
+  <span class="kw">if</span> (result.canceled) <span class="kw">return</span> null;
+  <span class="kw">return</span> result.assets[0].uri;  <span class="comment">// local file URI</span>
+}</code></pre>
+
+  <h3 id="dev07-sync">Background Sync Worker</h3>
+  <pre><code><span class="kw">import</span> NetInfo from <span class="str">'@react-native-community/netinfo'</span>;
+
+<span class="comment">// Run sync whenever connectivity is detected</span>
+NetInfo.addEventListener(<span class="kw">async</span> state =&gt; {
+  <span class="kw">if</span> (state.isConnected && state.isInternetReachable) {
+    <span class="kw">await</span> syncQueue();
+  }
+});
+
+<span class="kw">async function</span> <span class="fn-name">syncQueue</span>() {
+  <span class="kw">const</span> pending = <span class="kw">await</span> getPendingSubmissions();  <span class="comment">// from SQLite</span>
+  <span class="kw">if</span> (pending.length === 0) <span class="kw">return</span>;
+
+  <span class="kw">for</span> (<span class="kw">const</span> submission <span class="kw">of</span> pending) {
+    <span class="kw">try</span> {
+      <span class="kw">await</span> markUploading(submission.id);
+
+      <span class="comment">// Upload photo to IPFS if present</span>
+      <span class="kw">let</span> ipfsUri = null;
+      <span class="kw">if</span> (submission.photo_uri) {
+        ipfsUri = <span class="kw">await</span> uploadPhoto(submission.photo_uri);
+      }
+
+      <span class="comment">// Submit to backend API</span>
+      <span class="kw">await</span> fetch(<span class="str">`${API_BASE}/tasks/${submission.task_id}/evidence`</span>, {
+        method: <span class="str">'POST'</span>,
+        headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+        body: JSON.stringify({
+          submissionType: submission.submission_type,
+          gps:    { lat: submission.latitude, lng: submission.longitude },
+          ipfsUri,
+          formData: JSON.parse(submission.form_data),
+          agentId: <span class="kw">await</span> getStoredAgentId(),  <span class="comment">// phone-number-based ID — agents have NO wallets</span>
+        }),
+      });
+
+      <span class="kw">await</span> markSynced(submission.id);
+    } <span class="kw">catch</span> (err) {
+      <span class="kw">await</span> markFailed(submission.id);  <span class="comment">// will retry on next sync</span>
+      console.error(<span class="str">'Sync failed for:'</span>, submission.id, err);
+    }
+  }
+}</code></pre>
+
+  <h4>Task Flow (Screen Sequence)</h4>
+  <ol>
+    <li><strong>Task List</strong> — loaded from cache; refresh button when online</li>
+    <li><strong>Task Detail</strong> — title, reward in ETB, description, GPS area required</li>
+    <li><strong>Accept Screen</strong> — "Accept Task" → simple API call, no wallet, no signing (if offline, queue and warn)</li>
+    <li><strong>Field Collection</strong> — GPS capture → photo → form questions → "Submit"</li>
+    <li><strong>Confirmation</strong> — "Saved! Will upload when connected." — never block completion</li>
+    <li><strong>My Tasks</strong> — shows pending/synced/verified with ETB earned (paid by Turmi payroll)</li>
+  </ol>
+
+  <h4>Build &amp; Run</h4>
+  <pre><code><span class="comment"># Start on existing v0 codebase</span>
+cd apps/agent-app
+npm install
+npx expo start
+
+<span class="comment"># Test on physical device (important for GPS accuracy)</span>
+npx expo start --tunnel  <span class="comment"># use tunnel if on same WiFi not working</span>
+
+<span class="comment"># Android build for field testing</span>
+eas build --platform android --profile preview</code></pre>
+
+  <h4>Test Checklist</h4>
+  <ul class="checklist">
+    <li>App launches with no network — shows cached tasks</li>
+    <li>GPS captures coordinates even in degraded signal conditions</li>
+    <li>Photo saves to local storage and queue shows "pending"</li>
+    <li>Turning on WiFi triggers automatic background sync</li>
+    <li>After sync: submission shows "synced" status in My Tasks</li>
+    <li>App does not crash or freeze when network disconnects mid-submission</li>
+    <li>SQLite queue is not lost on app restart (persistence test)</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- DEV-08 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev08">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-08 · Supervisor B · Both Tracks</div>
+    <h1>Integration &amp; <em>Testing Guide</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">End-to-end test flows, Anchor test setup, mock oracle data, CI/CD pipeline. Run after each module is complete. Both tracks contribute tests.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-b">Both Tracks</span>
+      <span class="meta-chip chip-c">Jest · Anchor Tests · GitHub Actions</span>
+    </div>
+  </div>
+
+  <h3 id="dev08-anchor">Anchor Integration Tests</h3>
+  <pre><code><span class="comment">// tests/vault.test.ts</span>
+<span class="kw">import</span> * <span class="kw">as</span> anchor from <span class="str">'@coral-xyz/anchor'</span>;
+
+describe(<span class="str">'POD Vault'</span>, () =&gt; {
+  <span class="kw">const</span> provider = anchor.AnchorProvider.local();
+
+  it(<span class="str">'initializes vault'</span>, <span class="kw">async</span> () =&gt; {
+    <span class="comment">// ... create vault, assert VaultState fields</span>
+  });
+
+  it(<span class="str">'records fiat financing'</span>, <span class="kw">async</span> () =&gt; {
+    <span class="comment">// SPV authority calls record_subscription($1000) → assert financing record created</span>
+    <span class="comment">// no USDC moves on-chain — Ethiopia prohibits stablecoins</span>
+  });
+
+  it(<span class="str">'rejects tranche approval when sheep price too low'</span>, <span class="kw">async</span> () =&gt; {
+    <span class="comment">// mock oracle feed returning $2.50/kg (below $3.50 threshold)</span>
+    <span class="comment">// assert approve_tranche throws VaultError::SheepPriceTooLow</span>
+  });
+
+  it(<span class="str">'approves tranche 1 when all oracle conditions met'</span>, <span class="kw">async</span> () =&gt; {
+    <span class="comment">// mock: sheep price $4.20, SAR 500 ha, NDVI 65</span>
+    <span class="comment">// assert: TrancheApprovedEvent emitted with disbursement_hash,</span>
+    <span class="comment">// tranche 1 marked approved, NO token transfer occurs</span>
+  });
+});</code></pre>
+
+  <h3 id="dev08-e2e">End-to-End Test Flows</h3>
+  <table>
+    <thead><tr><th>Flow</th><th>Steps</th><th>Expected outcome</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Investor subscription (fiat via SPV)</td>
+        <td>1. SPV confirms fiat receipt off-chain → 2. SPV authority calls record_subscription($1000) → 3. Check investor balance</td>
+        <td>Financing record created; total_subscribed_usd_cents increases (no tokens, no USDC on-chain)</td>
+      </tr>
+      <tr>
+        <td>Developer bounty lifecycle</td>
+        <td>1. Supervisor creates bounty (GitHub issue) → 2. Dev claims → 3. Dev submits PR + payout wallet → 4. Supervisor merges/verifies → 5. Treasury multisig sends direct USDC transfer</td>
+        <td>Dev receives USDC; payoutTxSig recorded in registry; status = paid</td>
+      </tr>
+      <tr>
+        <td>Oracle auto-verify</td>
+        <td>1. SAR bounty created with oracle threshold → 2. SAR pipeline publishes result ≥ threshold → 3. Call auto_verify</td>
+        <td>Bounty auto-verified without manual verifier</td>
+      </tr>
+      <tr>
+        <td>Tranche approval</td>
+        <td>1. Sheep price updated on oracle → 2. SAR + NDVI feeds updated → 3. SPV authority calls approve_tranche</td>
+        <td>TrancheApprovedEvent emitted; SPV ops dashboard flags fiat wire for execution to Turmi (off-chain)</td>
+      </tr>
+      <tr>
+        <td>Offline submission</td>
+        <td>1. App offline → 2. Agent submits form → 3. Check SQLite queue → 4. Turn on network → 5. Check backend</td>
+        <td>Evidence appears in backend after sync</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="dev08-ci">GitHub Actions CI</h3>
+  <pre><code><span class="comment"># .github/workflows/test.yml</span>
+name: Test
+on: [push, pull_request]
+
+jobs:
+  anchor-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Solana
+        run: sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
+      - name: Install Anchor
+        run: cargo install --git https://github.com/coral-xyz/anchor avm --locked && avm install latest && avm use latest
+      - name: Install deps
+        run: yarn install
+      - name: Build programs
+        run: anchor build
+      - name: Run tests
+        run: anchor test --provider.cluster localnet
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: yarn install
+      - run: yarn workspace investor-dashboard test --passWithNoTests
+      - run: yarn workspace agent-dashboard test --passWithNoTests</code></pre>
+
+  <div class="callout callout-ok"><strong>Branch strategy:</strong> <code>main</code> = production-ready only. <code>develop</code> = integration branch. Students work on <code>feature/dev0X-description</code> branches and open PRs into <code>develop</code>. Supervisor reviews and merges. See COMM-01 for full GitHub conventions.</div>
+</div>
+
+</div><!-- end .main -->
+</body>
+</html>

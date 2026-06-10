@@ -1,0 +1,21 @@
+# ── PRIVATE — never push ─────────────────────────────
+MANAGEMENT PRIVATE DOCUMENTS NO GIT PUSH/
+docs/budget.html
+docs/financiers/
+docs/legal/msa-template.md
+
+# proprietary datasets (the moat) — keep in a private repo when they materialize
+oracle/costs/data/
+oracle/pricing/data/
+
+# secrets & env
+.env
+.env.*
+*.pem
+*.key
+
+# junk
+node_modules/
+__pycache__/
+.next/
+.DS_Store

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bounties, AI competitions, and volunteer seats. Every Proof of Dirt module is open source and free to build on.">
+    <title>Contribute — Open Source Modules | Proof of Dirt</title>
+    <style>
+        /* ═══════════════════════════════════════════════════════
+           DESIGN SYSTEM — "SAHARA MODERN"
+           Light, editorial, refined. Like an FT weekend meets
+           a precision instrument. Warm ivory + charcoal +
+           amber gold + sage + cerulean.
+        ═══════════════════════════════════════════════════════ */
+        :root {
+            /* Backgrounds — warm ivory spectrum */
+            --bg:         #F8F4EE;   /* main page — warm parchment */
+            --bg-2:       #F2EDE4;   /* alt sections — slightly deeper */
+            --bg-3:       #EDE5D8;   /* cards, hover states */
+            --bg-ink:     #1C1814;   /* deep soil — for hero + footer only */
+            --bg-card:    #FFFFFF;   /* pure white cards */
+
+            /* Typography */
+            --ink:        #1A1612;   /* near-black — main headings */
+            --body:       #3D3530;   /* warm dark brown — body text */
+            --subtle:     #7A6E65;   /* captions, labels */
+            --muted:      #A89E94;   /* placeholders, disabled */
+            --rule:       #DDD4C8;   /* dividers */
+            --rule-dark:  rgba(26,22,18,0.10);
+
+            /* Brand accents */
+            --amber:      #B8801E;   /* primary gold — darker for light bg */
+            --amber-glow: #D4992A;   /* hover state */
+            --amber-pale: #FBF1E0;   /* amber tinted backgrounds */
+            --sage:       #4A7A58;   /* secondary — agriculture */
+            --sage-pale:  #EAF2EC;   /* sage tinted backgrounds */
+            --cerulean:   #2E6E8A;   /* tertiary — technology/satellite */
+            --cerulean-pale: #E6F0F5;
+            --violet:     #6B4E8A;   /* builder/technical */
+            --red-signal: #C04040;   /* problem stats */
+
+            /* Borders */
+            --border:     1px solid var(--rule);
+            --border-card: 1px solid var(--rule);
+
+            /* Shadows */
+            --shadow-xs:  0 1px 3px rgba(26,22,18,0.06), 0 1px 2px rgba(26,22,18,0.04);
+            --shadow-sm:  0 2px 8px rgba(26,22,18,0.08), 0 1px 3px rgba(26,22,18,0.05);
+            --shadow-md:  0 4px 20px rgba(26,22,18,0.10), 0 2px 6px rgba(26,22,18,0.06);
+            --shadow-lg:  0 12px 40px rgba(26,22,18,0.12), 0 4px 12px rgba(26,22,18,0.07);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--body);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ─────────────────────────────────────────────── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 64px;
+            background: rgba(248,244,238,0.92);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: var(--border);
+            transition: background 0.3s;
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem; font-weight: 600;
+            color: var(--ink); letter-spacing: 0.01em;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-logo .logo-mark {
+            width: 32px; height: 32px; flex-shrink: 0;
+        }
+        .nav-logo em { font-style: italic; color: var(--amber); }
+        .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--subtle); text-decoration: none; font-size: 0.8rem;
+            font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-cta {
+            background: var(--ink) !important; color: var(--bg) !important;
+            padding: 9px 20px; border-radius: 3px;
+            letter-spacing: 0.08em !important;
+        }
+        .nav-cta:hover { background: var(--amber) !important; color: var(--bg) !important; }
+
+        /* ── HERO — dark section only ────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 120px 64px 80px;
+            background: var(--bg-ink);
+            position: relative;
+            overflow: hidden;
+            gap: 80px;
+        }
+
+        /* Subtle topographic contour lines in hero */
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(ellipse 90% 70% at 110% 50%, rgba(184,128,30,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 80% at -10% 60%, rgba(74,122,88,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Fine grid */
+        .hero-grid {
+            position: absolute; inset: 0; opacity: 0.025;
+            background-image:
+                linear-gradient(rgba(248,244,238,1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(248,244,238,1) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        .hero-left { position: relative; z-index: 1; }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--amber); margin-bottom: 32px;
+            display: flex; align-items: center; gap: 14px;
+        }
+        .hero-eyebrow::before {
+            content: ''; width: 28px; height: 1px; background: var(--amber); flex-shrink: 0;
+        }
+
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 5.5vw, 6.5rem);
+            font-weight: 600;
+            line-height: 0.96; letter-spacing: -0.02em;
+            color: #F2EDE4;
+            animation: fadeUp 1s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-headline em { font-style: italic; color: var(--amber-glow); }
+
+        .hero-sub {
+            margin-top: 28px; max-width: 520px;
+            font-size: 1.0rem; line-height: 1.75;
+            color: rgba(242,237,228,0.62); font-weight: 400;
+            animation: fadeUp 1s 0.12s ease both;
+        }
+
+        .hero-actions {
+            margin-top: 44px; display: flex; gap: 14px; flex-wrap: wrap;
+            animation: fadeUp 1s 0.24s ease both;
+        }
+        .btn-primary {
+            background: var(--amber); color: #1A1612;
+            padding: 15px 34px; border-radius: 3px; font-weight: 700;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+            box-shadow: 0 2px 12px rgba(184,128,30,0.35);
+        }
+        .btn-primary:hover { background: var(--amber-glow); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(184,128,30,0.45); }
+        .btn-outline {
+            border: 1px solid rgba(242,237,228,0.25); color: rgba(242,237,228,0.8);
+            padding: 15px 34px; border-radius: 3px; font-weight: 600;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-outline:hover { border-color: rgba(242,237,228,0.6); color: #F2EDE4; transform: translateY(-2px); }
+
+        /* Hero right: Oracle Logo */
+        .hero-right {
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            animation: fadeUp 1s 0.2s ease both;
+        }
+        .oracle-hero-logo {
+            width: 100%; max-width: 420px;
+            filter: drop-shadow(0 0 40px rgba(46,110,138,0.25)) drop-shadow(0 0 80px rgba(184,128,30,0.12));
+        }
+        .oracle-hero-caption {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; color: rgba(242,237,228,0.35);
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-top: 20px; text-align: center;
+        }
+
+        /* Hero stat strip at bottom */
+        .hero-stats-strip {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid rgba(242,237,228,0.08);
+            z-index: 1;
+        }
+        .hero-stat {
+            padding: 20px 32px;
+            border-right: 1px solid rgba(242,237,228,0.08);
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem; font-weight: 600; color: var(--amber-glow);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem; color: rgba(242,237,228,0.4);
+            letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px;
+        }
+
+        /* ── TICKER ──────────────────────────────────────────── */
+        .ticker-wrap {
+            background: var(--bg-2);
+            border-bottom: var(--border);
+            overflow: hidden; padding: 13px 0;
+        }
+        .ticker {
+            display: flex; gap: 72px; width: max-content;
+            animation: ticker 40s linear infinite;
+        }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+        .ticker-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--muted); white-space: nowrap;
+            display: flex; gap: 10px; align-items: center;
+        }
+        .ticker-item .dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+        .dot-dirt    { background: var(--amber); }
+        .dot-rwa     { background: var(--sage); }
+        .dot-oracle  { background: var(--cerulean); }
+        .ticker-item strong { color: var(--body); font-weight: 600; }
+
+        /* ── SECTION COMMONS ─────────────────────────────────── */
+        section { padding: 112px 64px; }
+
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .eyebrow::before { content: ''; width: 20px; height: 1px; flex-shrink: 0; }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.0rem, 3.5vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.06; letter-spacing: -0.02em;
+            color: var(--ink); max-width: 680px;
+        }
+        .section-title em { font-style: italic; }
+
+        /* ── PROBLEM ─────────────────────────────────────────── */
+        .problem { background: var(--bg-ink); }
+        .problem .eyebrow { color: #E06060; }
+        .problem .eyebrow::before { background: #E06060; }
+        .problem .section-title { color: #F2EDE4; }
+
+        .problem-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+            margin-top: 56px; align-items: start;
+        }
+        .problem-text p {
+            color: rgba(242,237,228,0.62); line-height: 1.85; font-size: 1.0rem; margin-bottom: 20px;
+        }
+        .problem-text p strong { color: rgba(242,237,228,0.9); font-weight: 600; }
+
+        .problem-stats { display: flex; flex-direction: column; gap: 1px; }
+        .psr {
+            background: rgba(242,237,228,0.04);
+            padding: 22px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.2s; cursor: default;
+        }
+        .psr:hover { background: rgba(242,237,228,0.07); border-left-color: #E06060; }
+        .psr-label { font-size: 0.88rem; color: rgba(242,237,228,0.5); font-weight: 500; max-width: 60%; }
+        .psr-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem; font-weight: 600; color: #E06060; line-height: 1;
+        }
+
+        /* ── ARCHITECTURE ────────────────────────────────────── */
+        .architecture { background: var(--bg); }
+        .architecture .eyebrow { color: var(--amber); }
+        .architecture .eyebrow::before { background: var(--amber); }
+
+        .arch-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            margin-top: 52px;
+        }
+        .arch-card {
+            background: var(--bg-card);
+            border: var(--border-card);
+            border-top: 3px solid transparent;
+            padding: 40px 36px 36px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .arch-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .arch-card.dirt   { border-top-color: var(--amber); }
+        .arch-card.rwa    { border-top-color: var(--sage); }
+        .arch-card.oracle { border-top-color: var(--cerulean); }
+
+        .arch-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; letter-spacing: 0.2em; color: var(--muted);
+            margin-bottom: 28px;
+        }
+        .arch-icon-wrap {
+            width: 44px; height: 44px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin-bottom: 18px;
+        }
+        .arch-card.dirt   .arch-icon-wrap { background: var(--amber-pale); }
+        .arch-card.rwa    .arch-icon-wrap { background: var(--sage-pale); }
+        .arch-card.oracle .arch-icon-wrap { background: var(--cerulean-pale); }
+
+        .arch-token {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.12em; margin-bottom: 10px; font-weight: 500;
+        }
+        .arch-card.dirt   .arch-token { color: var(--amber); }
+        .arch-card.rwa    .arch-token { color: var(--sage); }
+        .arch-card.oracle .arch-token { color: var(--cerulean); }
+
+        .arch-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem; font-weight: 600; margin-bottom: 16px; line-height: 1.15; color: var(--ink);
+        }
+        .arch-desc { color: var(--subtle); line-height: 1.75; font-size: 0.9rem; margin-bottom: 28px; }
+        .arch-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+            font-weight: 500; transition: gap 0.2s;
+        }
+        .arch-card.dirt   .arch-link { color: var(--amber); }
+        .arch-card.rwa    .arch-link { color: var(--sage); }
+        .arch-card.oracle .arch-link { color: var(--cerulean); }
+        .arch-link:hover { gap: 12px; }
+
+        /* KSA strip */
+        .ksa-strip {
+            margin-top: 20px;
+            background: var(--bg-card);
+            border: var(--border-card);
+            border-left: 3px solid #B8941E;
+            border-radius: 4px;
+            padding: 24px 36px;
+            box-shadow: var(--shadow-xs);
+            display: grid; grid-template-columns: 40px 1fr auto;
+            gap: 24px; align-items: center;
+        }
+        .ksa-icon {
+            width: 40px; height: 40px; background: #FBF5E0; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+        }
+        .ksa-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+            color: #B8941E; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px;
+        }
+        .ksa-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+        .ksa-desc { font-size: 0.83rem; color: var(--subtle); line-height: 1.6; }
+        .ksa-badge {
+            text-align: right; flex-shrink: 0;
+        }
+        .ksa-badge-label { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.14em; margin-bottom: 4px; }
+        .ksa-badge-value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: #B8941E; }
+
+        /* ── TOKENOMICS ──────────────────────────────────────── */
+        .tokenomics { background: var(--bg-2); }
+        .tokenomics .eyebrow { color: var(--amber); }
+        .tokenomics .eyebrow::before { background: var(--amber); }
+
+        .tok-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; margin-top: 52px; align-items: start; }
+        .tok-chart-wrap { position: relative; aspect-ratio: 1; max-width: 300px; }
+        .tok-chart-wrap svg { width: 100%; height: 100%; }
+
+        .tok-legend { display: flex; flex-direction: column; gap: 3px; }
+        .tok-row {
+            display: flex; align-items: center; gap: 14px;
+            background: var(--bg-card); padding: 14px 18px;
+            border: var(--border); border-radius: 3px;
+            box-shadow: var(--shadow-xs);
+            transition: all 0.15s; cursor: default;
+        }
+        .tok-row:hover { box-shadow: var(--shadow-sm); transform: translateX(4px); }
+        .tok-swatch { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+        .tok-pct { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); min-width: 48px; line-height: 1; }
+        .tok-info { flex: 1; }
+        .tok-label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+        .tok-sublabel { font-size: 0.74rem; color: var(--subtle); margin-top: 2px; line-height: 1.4; }
+
+        /* ── ROADMAP ─────────────────────────────────────────── */
+        .roadmap { background: var(--bg); }
+        .roadmap .eyebrow { color: var(--sage); }
+        .roadmap .eyebrow::before { background: var(--sage); }
+
+        .road-timeline { margin-top: 52px; display: flex; flex-direction: column; }
+        .road-phase {
+            display: grid; grid-template-columns: 220px 1fr;
+            border-top: var(--border);
+            padding: 36px 0;
+        }
+        .road-phase:last-child { border-bottom: var(--border); }
+        .road-label { padding-right: 36px; }
+        .road-phase-num { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; }
+        .road-phase-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+        .road-phase-time { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--amber); margin-top: 6px; letter-spacing: 0.1em; }
+
+        .road-body { display: flex; flex-direction: column; gap: 12px; }
+        .road-stream {
+            background: var(--bg-card); border: var(--border); border-radius: 3px;
+            padding: 16px 20px; box-shadow: var(--shadow-xs);
+        }
+        .road-stream-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+            margin-bottom: 8px; font-weight: 500;
+        }
+        .stream-dirt { color: var(--amber); }
+        .stream-ops  { color: var(--sage); }
+        .stream-tech { color: var(--cerulean); }
+        .stream-defi { color: var(--violet); }
+        .road-stream ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+        .road-stream li { font-size: 0.85rem; color: var(--body); padding-left: 16px; position: relative; line-height: 1.5; }
+        .road-stream li::before { content: '→'; position: absolute; left: 0; color: var(--muted); font-size: 0.75rem; top: 2px; }
+
+        /* ── TURMI ───────────────────────────────────────────── */
+        .turmi { background: var(--bg-2); }
+        .turmi .eyebrow { color: var(--sage); }
+        .turmi .eyebrow::before { background: var(--sage); }
+        .turmi-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 72px; margin-top: 52px; align-items: start; }
+        .turmi-desc p { color: var(--body); line-height: 1.82; font-size: 0.97rem; margin-bottom: 18px; }
+        .turmi-desc p strong { color: var(--ink); }
+
+        .turmi-milestones { display: flex; flex-direction: column; gap: 3px; }
+        .ms {
+            background: var(--bg-card); border: var(--border); border-radius: 3px;
+            padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start;
+            box-shadow: var(--shadow-xs); transition: box-shadow 0.2s;
+        }
+        .ms:hover { box-shadow: var(--shadow-sm); }
+        .ms-badge {
+            flex-shrink: 0;
+            background: var(--sage-pale); border-radius: 3px; padding: 4px 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+            color: var(--sage); letter-spacing: 0.1em; white-space: nowrap; font-weight: 500;
+        }
+        .ms-title { font-weight: 700; font-size: 0.87rem; color: var(--ink); margin-bottom: 4px; }
+        .ms-text  { font-size: 0.8rem; color: var(--subtle); line-height: 1.55; }
+
+        /* ── ORACLE ──────────────────────────────────────────── */
+        .oracle-section { background: var(--bg); }
+        .oracle-section .eyebrow { color: var(--cerulean); }
+        .oracle-section .eyebrow::before { background: var(--cerulean); }
+        .oracle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 52px; }
+
+        .oracle-feature { margin-bottom: 28px; display: flex; gap: 16px; align-items: flex-start; }
+        .oracle-feature-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--cerulean); flex-shrink: 0; margin-top: 6px;
+        }
+        .oracle-feature-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; color: var(--ink); }
+        .oracle-feature-text  { font-size: 0.85rem; color: var(--subtle); line-height: 1.68; }
+
+        /* Oracle NDVI card */
+        .oracle-viz {
+            background: var(--bg-card); border: var(--border); border-radius: 6px;
+            padding: 28px; box-shadow: var(--shadow-md);
+            position: sticky; top: 100px;
+        }
+        .oracle-viz-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 20px; padding-bottom: 16px;
+            border-bottom: var(--border);
+        }
+        .oracle-viz-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--cerulean); letter-spacing: 0.16em;
+            text-transform: uppercase; margin-bottom: 4px;
+        }
+        .oracle-viz-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+        .oracle-status-dot {
+            display: flex; align-items: center; gap: 6px;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--sage);
+        }
+        .oracle-status-dot::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--sage); animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .ndvi-bars { display: flex; flex-direction: column; gap: 9px; }
+        .ndvi-bar-row { display: flex; align-items: center; gap: 10px; }
+        .ndvi-month { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); width: 26px; }
+        .ndvi-track {
+            flex: 1; height: 5px; background: var(--bg-3); border-radius: 3px; overflow: hidden;
+        }
+        .ndvi-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, var(--cerulean), var(--sage));
+            animation: grow 1.5s ease both;
+        }
+        @keyframes grow { from { width: 0%; } }
+        .ndvi-val { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--sage); width: 32px; text-align: right; }
+
+        .oracle-meta {
+            margin-top: 18px; padding-top: 16px; border-top: var(--border);
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+        }
+        .oracle-meta-item {}
+        .oracle-meta-label { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px; }
+        .oracle-meta-value { font-size: 0.8rem; color: var(--ink); font-weight: 600; }
+
+        /* ── COMMUNITY ───────────────────────────────────────── */
+        .community { background: var(--bg-ink); }
+        .community .eyebrow { color: var(--amber); }
+        .community .eyebrow::before { background: var(--amber); }
+        .community .section-title { color: #F2EDE4; }
+        .community-intro { color: rgba(242,237,228,0.55); max-width: 600px; margin-top: 20px; font-size: 0.97rem; line-height: 1.75; }
+
+        .guild-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 44px; }
+        .guild-card {
+            background: rgba(242,237,228,0.04);
+            border: 1px solid rgba(242,237,228,0.08);
+            border-radius: 4px; padding: 32px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .guild-card:hover { background: rgba(242,237,228,0.07); border-color: rgba(242,237,228,0.14); }
+        .guild-icon { font-size: 1.6rem; margin-bottom: 14px; }
+        .guild-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; color: #F2EDE4; }
+        .guild-desc { font-size: 0.85rem; color: rgba(242,237,228,0.5); line-height: 1.68; }
+        .guild-earn {
+            margin-top: 16px; background: rgba(184,128,30,0.1); border-radius: 3px;
+            padding: 9px 13px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.63rem; color: var(--amber-glow); letter-spacing: 0.06em;
+        }
+
+        /* ── CTA ─────────────────────────────────────────────── */
+        .cta-section {
+            background: var(--amber-pale);
+            border-top: var(--border); border-bottom: var(--border);
+            text-align: center; position: relative;
+        }
+        .cta-section .section-title { margin: 0 auto 20px; }
+        .cta-section p { color: var(--subtle); max-width: 480px; margin: 0 auto 40px; font-size: 0.97rem; line-height: 1.72; }
+        .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary-dark {
+            background: var(--ink); color: var(--bg);
+            padding: 15px 34px; border-radius: 3px; font-weight: 700;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-primary-dark:hover { background: var(--amber); transform: translateY(-2px); }
+        .btn-outline-dark {
+            border: 1px solid rgba(26,22,18,0.25); color: var(--body);
+            padding: 15px 34px; border-radius: 3px; font-weight: 600;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; transition: all 0.2s;
+            font-family: 'Archivo', sans-serif;
+        }
+        .btn-outline-dark:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-2px); }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            background: var(--bg-ink);
+            padding: 64px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px;
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(242,237,228,0.08);
+        }
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; font-weight: 600;
+            color: rgba(242,237,228,0.9); margin-bottom: 12px;
+        }
+        .footer-brand em { font-style: italic; color: var(--amber-glow); }
+        .footer-desc { color: rgba(242,237,228,0.35); font-size: 0.83rem; line-height: 1.7; }
+        .footer-col-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(242,237,228,0.3); margin-bottom: 16px;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { color: rgba(242,237,228,0.45); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+        .footer-links a:hover { color: rgba(242,237,228,0.85); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-legal { font-size: 0.75rem; color: rgba(242,237,228,0.25); }
+        .footer-anchored {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: rgba(242,237,228,0.3); letter-spacing: 0.1em;
+        }
+        .footer-anchored .eth  { color: var(--sage); }
+        .footer-anchored .ksa  { color: #C8A84A; }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 960px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            section { padding: 80px 24px; }
+            .hero {
+                grid-template-columns: 1fr; padding: 120px 24px 100px;
+                min-height: auto; gap: 48px;
+            }
+            .hero-right { display: none; }
+            .hero-stats-strip { grid-template-columns: repeat(3, 1fr); }
+            .hero-stat { padding: 16px 20px; }
+            .problem-grid, .arch-grid, .tok-layout, .turmi-grid, .oracle-grid, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .guild-grid { grid-template-columns: 1fr; }
+            .ksa-strip { grid-template-columns: 40px 1fr; }
+            .ksa-badge { display: none; }
+        }
+    </style>
+    <style>
+    .sub-hero{min-height:52vh;display:flex;flex-direction:column;justify-content:center;padding:160px 7vw 70px;background:var(--bg-ink);position:relative;overflow:hidden;}
+    .sub-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,4.5vw,4.6rem);font-weight:600;line-height:1.02;color:#F2EDE4;max-width:760px;}
+    .sub-hero h1 em{font-style:italic;color:var(--amber-glow);}
+    .sub-hero p{color:rgba(242,237,228,0.55);max-width:560px;margin-top:22px;font-size:1rem;line-height:1.75;}
+    .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:44px;}
+    .card{background:var(--bg-card);border:var(--border-card);border-radius:8px;padding:32px 28px;box-shadow:var(--shadow-sm);}
+    .card .tag{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;margin-bottom:12px;display:block;}
+    .card h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);margin-bottom:8px;}
+    .card p{font-size:0.88rem;line-height:1.7;color:var(--body);}
+    section.pad{padding:90px 7vw;}
+    .mono-note{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--subtle);}
+    table.reg{width:100%;border-collapse:collapse;margin-top:30px;font-size:0.86rem;background:var(--bg-card);border:var(--border-card);border-radius:8px;overflow:hidden;}
+    table.reg th{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle);text-align:left;padding:12px 16px;border-bottom:var(--border);background:var(--bg-2);}
+    table.reg td{padding:12px 16px;border-bottom:var(--border);color:var(--body);vertical-align:top;}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-logo" href="../index.html">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="14" stroke="#B8801E" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="8"  stroke="#B8801E" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="16" cy="16" r="3"  fill="#B8801E"/>
+            <line x1="16" y1="2"  x2="16" y2="7"  stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="16" y1="25" x2="16" y2="30" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="2"  y1="16" x2="7"  y2="16" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="25" y1="16" x2="30" y2="16" stroke="#B8801E" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Proof of <em>Dirt</em>
+    </a>
+    <ul class="nav-links">
+        <li><a href="../oracle/index.html">Oracle</a></li>
+        <li><a href="../contribute/index.html" style="color:var(--ink)">Contribute</a></li>
+        <li><a href="../index.html#dao">DAO</a></li>
+        <li><a href="../index.html#donate">Donate</a></li>
+        <li><a href="https://github.com/proofofdirt" class="nav-cta">GitHub ↗</a></li>
+    </ul>
+</nav>
+
+
+<section class="sub-hero">
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow">Open Source · Bounties · AI Challenges · Volunteers</div>
+    <h1>Build the <em>trust layer</em><br>with us.</h1>
+    <p>Every module is open source — MIT licensed, free for anyone to audit, improve, and reuse. Pick your door in: bounties, AI competitions, or a volunteer seat.</p>
+</section>
+
+<section class="pad" style="background:var(--bg);">
+    <div class="eyebrow" style="color:var(--cerulean)"><span style="display:inline-block;width:20px;height:1px;background:var(--cerulean)"></span>Open Modules</div>
+    <h2 class="section-title">What you can <em>work on.</em></h2>
+    <div class="grid3">
+        <div class="card"><span class="tag" style="color:var(--cerulean)">PYTHON · GEE</span><h3>SAR plowing detection</h3><p>Sentinel-1 radar change detection for plots 1 ha+. Accuracy reported per plot-size band — small plots are the open problem.</p></div>
+        <div class="card"><span class="tag" style="color:var(--sage)">PYTHON · ML</span><h3>NDVI yield prediction</h3><p>Sentinel-2 time-series to pre-harvest yield forecasts. Target: RMSE under 15% of mean yield.</p></div>
+        <div class="card"><span class="tag" style="color:var(--amber)">ML · MOBILE</span><h3>Livestock BCS model</h3><p>Body-condition scoring from field photos, running on mid-range Android in under 2 seconds.</p></div>
+        <div class="card"><span class="tag" style="color:var(--violet)">RUST · ANCHOR</span><h3>Vault records program</h3><p>Financing records, oracle-gated tranche approvals, settlement events on Solana. No tokens, no transfers — pure verification.</p></div>
+        <div class="card"><span class="tag" style="color:var(--cerulean)">REACT NATIVE · DJANGO</span><h3>Agent app</h3><p>Offline-first field data capture: plot GeoJSON, contracts, RFID intake, photos — built for low-connectivity Ethiopia.</p></div>
+        <div class="card"><span class="tag" style="color:var(--sage)">NEXT.JS</span><h3>Dashboards</h3><p>Financier dashboard (live farm verification) and contributor dashboard (bounty board and payouts).</p></div>
+    </div>
+    <div style="margin-top:36px;"><a href="https://github.com/proofofdirt" class="btn-primary">Browse the code ↗</a></div>
+</section>
+
+<section class="pad" style="background:var(--bg-2);border-top:var(--border);border-bottom:var(--border);">
+    <div class="eyebrow" style="color:var(--amber)"><span style="display:inline-block;width:20px;height:1px;background:var(--amber)"></span>Bounties</div>
+    <h2 class="section-title">Claim. Build. <em>Get paid.</em></h2>
+    <div class="grid3">
+        <div class="card"><span class="tag" style="color:var(--amber)">01</span><h3>Claim an issue</h3><p>Every bounty is a GitHub issue with a written spec and a USD reward. Comment to claim it.</p></div>
+        <div class="card"><span class="tag" style="color:var(--amber)">02</span><h3>Submit a PR</h3><p>Build to the spec, open a pull request, include your Solana address. A supervisor reviews within days.</p></div>
+        <div class="card"><span class="tag" style="color:var(--amber)">03</span><h3>Paid on merge</h3><p>USDC or SOL transferred straight from the DAO treasury multisig. The transaction signature is the receipt.</p></div>
+    </div>
+</section>
+
+<section class="pad" style="background:var(--bg);">
+    <div class="eyebrow" style="color:var(--violet)"><span style="display:inline-block;width:20px;height:1px;background:var(--violet)"></span>AI Researchers</div>
+    <h2 class="section-title">Beat our <em>baselines.</em></h2>
+    <p style="max-width:640px;font-size:0.95rem;line-height:1.8;">We publish labeled satellite datasets and run open competitions — Zindi, Kaggle, AI for Good — to push SAR and NDVI detection past our in-house models. Prize money is paid only for verified improvement, and every winning model ships open source. Small-plot accuracy (1–10 ha) is the frontier we care most about.</p>
+    <p class="mono-note" style="margin-top:16px;">SAR PLOWING · F1 PER PLOT-SIZE BAND &nbsp;|&nbsp; NDVI YIELD · RMSE &lt;15% &nbsp;|&nbsp; BCS · MAE &lt;0.5</p>
+</section>
+
+<section class="pad" style="background:var(--bg-ink);text-align:center;">
+    <div class="hero-eyebrow" style="justify-content:center;">Volunteers &amp; Internships</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:#F2EDE4;">Real deliverables. Real credit.</h2>
+    <p style="color:rgba(242,237,228,0.55);max-width:580px;margin:18px auto 30px;font-size:0.95rem;line-height:1.8;">We run a serious volunteer and internship program: scoped work packages on an open-source project, supervision, public contributor credit, recommendation letters — and first consideration for paid roles as the DAO secures funding.</p>
+    <a href="mailto:info@proofofdirt.com" class="btn-primary">Apply — info@proofofdirt.com</a>
+    <span style="display:inline-block;width:12px;"></span>
+    <a href="https://github.com/proofofdirt" class="btn-outline">Start with a good-first-issue ↗</a>
+</section>
+
+
+<footer>
+    <div class="footer-bottom" style="border-top:none;">
+        <div class="footer-legal">© 2026 Proof of Dirt · Open-source, community-owned DAO · No token</div>
+        <div class="footer-anchored"><a href="../index.html" style="color:rgba(242,237,228,0.45);">Home</a> · <a href="https://github.com/proofofdirt" style="color:rgba(242,237,228,0.45);">GitHub</a> · <a href="mailto:info@proofofdirt.com" style="color:rgba(242,237,228,0.45);">info@proofofdirt.com</a> · <a href="mailto:ir@proofofdirt.com" style="color:rgba(242,237,228,0.45);">ir@proofofdirt.com</a></div>
+    </div>
+</footer>
+</body>
+</html>

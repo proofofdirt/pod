@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proof of Dirt · DAO Governance &amp; Funding (No Token)</title>
+<style>
+:root{--soil:#1A120B;--earth:#2C1F14;--harvest:#C8962A;--sprout:#6BAA75;--sky:#4A8FA8;
+--cream:#F5EFE6;--mist:#B8A898;--fog:#786860;--border:rgba(255,255,255,0.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--soil);color:var(--cream);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.7;max-width:880px;margin:0 auto;padding:48px 28px;}
+h1{font-size:1.9rem;margin-bottom:6px;} h1 em{color:var(--harvest);font-style:normal;}
+.badge{font-family:monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sprout);}
+h2{font-size:1.25rem;margin:40px 0 10px;border-bottom:1px solid var(--border);padding-bottom:8px;}
+h3{font-size:1rem;color:var(--mist);border-left:3px solid var(--harvest);padding-left:10px;margin:22px 0 8px;}
+p,li{color:var(--mist);} strong{color:var(--cream);} ul,ol{margin:0 0 14px 22px;} li{margin-bottom:5px;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.84rem;}
+th{font-family:monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fog);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2);}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--mist);vertical-align:top;}
+.callout{border-radius:5px;padding:14px 18px;margin:16px 0;font-size:0.86rem;background:rgba(200,150,42,0.1);border-left:3px solid var(--harvest);}
+.ok{background:rgba(107,170,117,0.1);border-left-color:var(--sprout);}
+code{font-family:monospace;background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;color:var(--harvest);font-size:0.8rem;}
+.footer{margin-top:48px;font-family:monospace;font-size:0.65rem;color:var(--fog);border-top:1px solid var(--border);padding-top:14px;}
+</style>
+</head>
+<body>
+
+<div class="badge">Proof of Dirt · Governance v2.0 · June 2026</div>
+<h1>DAO Governance &amp; <em>Funding</em> — No Token</h1>
+
+<div class="callout"><strong>Core policy: the project does not mint or issue a token.</strong> A token added complexity without adding trust. The DAO operates on grants and donations, pays contributors directly, and keeps all financing verification on-chain as plain records. The name "$DIRT" is retired except as a possible future label for a <em>non-transferable on-chain recordkeeping instrument for fiat transactions</em> — to be introduced only if recordkeeping genuinely requires it, by governance vote.</div>
+
+<h2>1. Funding Scheme</h2>
+<table>
+<thead><tr><th>Source</th><th>Channel</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grants — crypto ecosystem</strong></td><td>Crypto donation wallet (DAO multisig)</td><td>Solana Foundation, Gitcoin rounds, infrastructure/oracle grants, hackathon prizes. Received in SOL/USDC.</td></tr>
+<tr><td><strong>Grants &amp; donations — DFI / institutional</strong></td><td>Fiat bank account in Ethiopia</td><td>DFI grant programs, development funds, institutional donors. Received in USD/ETB.</td></tr>
+<tr><td><strong>Direct donations — supporters (retail)</strong></td><td>Crypto donation wallet (DAO multisig)</td><td>Public donation address published on the website; SOL/USDC accepted.</td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Exactly one crypto wallet</strong> — the DAO treasury multisig. No secondary wallets, no token contracts.</li>
+<li><strong>One fiat account in Ethiopia</strong> for DFI/institutional money, operated under the registered org entity.</li>
+<li>Org structures (registered entity + DAO) are maintained specifically so the project can apply for grants and lawfully receive retail and DFI donations.</li>
+<li>Every inflow and outflow on both channels is posted to <code>#treasury-log</code> (Discord) within 48 hours.</li>
+</ul>
+
+<h2>2. DAO Structure</h2>
+<ul>
+<li><strong>Treasury multisig:</strong> 3-of-5 (Squads). Signers represent the full chain — <strong>developers</strong> (a supervisor/builder seat), <strong>producers/field operations</strong> (Gutu, Ground Truth Leader), <strong>buyers</strong> (an offtake-partner representative), plus Bekam and one external advisor. Proof of Dirt is a community-owned, builder-managed DAO: every key decision (treasury disbursements, bounty payouts, oracle parameter changes, financing rules) requires multisig approval — no single party controls the treasury or the rules.</li>
+<li><strong>Decisions:</strong> routine disbursements 3/5; payment-policy changes, new signers, and any future recordkeeping-instrument proposal require 3/5 plus 7-day community notice.</li>
+<li><strong>Oracle integrity rule:</strong> oracle feeds are the sole reference for tranche verification. No manual override by any team member or signer.</li>
+</ul>
+
+<h2>3. Payment Governance</h2>
+<table>
+<thead><tr><th>Who</th><th>Paid in</th><th>Rules</th></tr></thead>
+<tbody>
+<tr><td>Development Leaders</td><td>USDC or SOL to their own wallets</td><td>Limited stipend now — the only paid roles pre-funding (multisig-approved). Full supervisor pay once grants/donations are secured.</td></tr>
+<tr><td>DevRel / Grants / Ground Truth supervisors</td><td>USDC, SOL, or fiat</td><td><strong>Volunteers until grants or donations are secured</strong>; paid upon fund availability. Up to 20% performance bonus applies once paid.</td></tr>
+<tr><td>Student developers / interns</td><td>USDC/SOL or fiat stipend</td><td>$150–250/mo (devs), $100–150 (DevRel/Grants), set at grant receipt, 3/5 approval, quarterly review. Intern G: 5% grant-success bonus, cap $2,500/grant.</td></tr>
+<tr><td>Gutu — Ground Truth Leader</td><td>USDC or fiat stipend + bonus</td><td>$150–200/mo post-grant + batch bonus per 50 clean validated field submissions (quality score ≥85%).</td></tr>
+<tr><td><strong>Field agents</strong></td><td><strong>ETB via Turmi payroll / mobile money</strong></td><td>Never crypto, never wallets. Per-task ETB rates set by governance, paid against the Oracle API verified-submission report; top 10% volume = 1.5× multiplier.</td></tr>
+<tr><td>Developer bounties</td><td>USDC or SOL, direct transfer</td><td>Off-chain registry + GitHub issue; supervisor verifies PR; treasury multisig sends transfer — the tx signature is the payment record, logged in <code>#treasury-log</code>.</td></tr>
+</tbody>
+</table>
+<p>All compensation is disclosed in a private <code>#salary-log</code> channel visible to all supervisors and Bekam; aggregates published in the annual community report.</p>
+
+<h2>4. Transparency &amp; Reporting</h2>
+<ul>
+<li>Monthly treasury snapshot (crypto wallet balance + Ethiopian account balance) in <code>#treasury-log</code>.</li>
+<li>Quarterly grant/donation report to the community; annual public report.</li>
+<li>Grant applications and award letters archived in <code>docs/financiers/</code>.</li>
+</ul>
+
+<h2>5. Future On-Chain Recordkeeping (conditional)</h2>
+<div class="callout ok">If fiat transaction recordkeeping ever requires an on-chain instrument beyond plain records and events, the DAO may introduce a <strong>non-transferable</strong> receipt record (working name $DIRT) by governance vote. It would carry no monetary value, no transferability, and no fundraising function — bookkeeping only. Until that vote happens, it does not exist.</div>
+
+<div class="footer">Proof of Dirt · DAO Governance &amp; Funding v2.0 · June 2026 · No token · Internal draft</div>
+</body>
+</html>

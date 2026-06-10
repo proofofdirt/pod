@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PODRWA — DevRel, Community & Grants Playbook</title>
+<style>
+:root {
+  --soil:#1A120B; --earth:#2C1F14; --loam:#3D2B1F;
+  --harvest:#C8962A; --sprout:#6BAA75; --sky:#4A8FA8;
+  --cream:#F5EFE6; --mist:#B8A898; --fog:#786860;
+  --border:rgba(255,255,255,0.08); --purple:#B478C8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--soil);color:var(--cream);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.6;display:flex;min-height:100vh;}
+.sidebar{width:220px;min-width:220px;background:var(--earth);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;}
+.sidebar-logo{font-family:monospace;font-size:0.75rem;color:var(--purple);padding:0 18px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;letter-spacing:0.1em;}
+.sidebar-logo span{color:var(--harvest);}
+.nav-section{font-family:monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);padding:10px 18px 4px;}
+.sidebar a{display:block;padding:6px 18px;color:var(--mist);text-decoration:none;font-size:0.78rem;transition:color 0.15s,background 0.15s;border-left:2px solid transparent;}
+.sidebar a:hover{color:var(--cream);background:rgba(255,255,255,0.03);}
+.sidebar a.doc-link{font-weight:600;color:var(--cream);margin-top:4px;}
+.sidebar a.sub-link{padding-left:28px;font-size:0.72rem;}
+.main{flex:1;padding:48px 56px;max-width:900px;}
+@media(max-width:900px){.main{padding:24px 20px;}.sidebar{display:none;}}
+.doc-header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.doc-badge{font-family:monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.doc-header h1{font-size:2rem;font-weight:700;line-height:1.15;margin-bottom:10px;}
+.doc-header h1 em{color:var(--harvest);font-style:normal;}
+.doc-meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;}
+.meta-chip{font-family:monospace;font-size:0.65rem;padding:3px 10px;border-radius:2px;letter-spacing:0.06em;}
+.chip-c{background:rgba(200,150,42,0.15);color:var(--harvest);}
+.chip-d{background:rgba(180,120,200,0.15);color:var(--purple);}
+.doc-section{margin-bottom:52px;}
+h2{font-size:1.35rem;font-weight:700;margin-bottom:6px;color:var(--cream);}
+h3{font-size:1rem;font-weight:600;margin:24px 0 10px;color:var(--mist);border-left:3px solid var(--purple);padding-left:10px;}
+h4{font-size:0.88rem;font-weight:600;margin:18px 0 8px;color:var(--harvest);font-family:monospace;letter-spacing:0.05em;}
+p{margin-bottom:12px;color:var(--mist);line-height:1.75;}
+ul,ol{margin:0 0 14px 20px;color:var(--mist);}
+li{margin-bottom:5px;line-height:1.6;}
+li strong{color:var(--cream);}
+strong{color:var(--cream);}
+a{color:var(--sky);text-decoration:none;}
+pre{background:rgba(0,0,0,0.5);border:1px solid var(--border);border-radius:5px;padding:18px 20px;overflow-x:auto;margin:14px 0;font-family:'Courier New',monospace;font-size:0.78rem;line-height:1.65;color:#d4c8bc;}
+code{font-family:'Courier New',monospace;font-size:0.8rem;background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;color:var(--harvest);}
+pre code{background:none;padding:0;color:inherit;}
+.comment{color:#786860;}
+.callout{border-radius:5px;padding:14px 18px;margin:16px 0;font-size:0.85rem;line-height:1.7;}
+.callout-warn{background:rgba(200,150,42,0.1);border-left:3px solid var(--harvest);color:var(--mist);}
+.callout-info{background:rgba(74,143,168,0.1);border-left:3px solid var(--sky);color:var(--mist);}
+.callout-ok{background:rgba(107,170,117,0.1);border-left:3px solid var(--sprout);color:var(--mist);}
+.callout-purple{background:rgba(180,120,200,0.08);border-left:3px solid var(--purple);color:var(--mist);}
+.callout-warn strong,.callout-info strong,.callout-ok strong,.callout-purple strong{color:var(--cream);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.82rem;}
+th{font-family:monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fog);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2);}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--mist);vertical-align:top;line-height:1.6;}
+.section-divider{border:none;border-top:2px solid var(--border);margin:52px 0;}
+.checklist{list-style:none;margin-left:0;}
+.checklist li::before{content:'☐ ';color:var(--purple);font-size:0.9rem;}
+.steps{margin:16px 0;}
+.step{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;}
+.step-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--loam);border:1px solid var(--purple);display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.7rem;color:var(--purple);font-weight:700;margin-top:2px;}
+.step-content{flex:1;}
+.step-content strong{display:block;color:var(--cream);margin-bottom:4px;font-size:0.9rem;}
+.tag{display:inline-block;font-family:monospace;font-size:0.62rem;padding:2px 7px;border-radius:2px;letter-spacing:0.06em;margin-right:4px;}
+.tag-web3{background:rgba(107,170,117,0.15);color:var(--sprout);}
+.tag-agri{background:rgba(74,143,168,0.15);color:var(--sky);}
+.tag-dev{background:rgba(200,150,42,0.15);color:var(--harvest);}
+.tag-ai{background:rgba(180,120,200,0.15);color:var(--purple);}
+.priority-badge{font-family:monospace;font-size:0.6rem;padding:2px 8px;border-radius:2px;letter-spacing:0.08em;}
+.p-now{background:rgba(224,112,112,0.2);color:#E07070;}
+.p-sprint1{background:rgba(200,150,42,0.15);color:var(--harvest);}
+.p-sprint2{background:rgba(120,104,96,0.2);color:var(--fog);}
+.template-box{background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.07);border-radius:5px;padding:18px 20px;margin:14px 0;font-family:monospace;font-size:0.78rem;line-height:1.9;color:var(--mist);white-space:pre-wrap;}
+.template-box .placeholder{color:var(--harvest);font-weight:600;}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;}
+.kpi{background:var(--loam);border:1px solid var(--border);border-radius:5px;padding:14px 16px;}
+.kpi-label{font-family:monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.kpi-target{font-size:1.1rem;font-weight:700;color:var(--cream);font-family:monospace;}
+.kpi-desc{font-size:0.72rem;color:var(--fog);margin-top:4px;}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">$PODRWA · <span>Track C+D</span><br>DevRel &amp; Grants</div>
+  <div class="nav-section">Community</div>
+  <a href="#comm01" class="doc-link">COMM-01 DevRel Playbook</a>
+  <a href="#comm-github" class="sub-link">GitHub Management</a>
+  <a href="#comm-discord" class="sub-link">Discord Setup</a>
+  <a href="#comm-bounties" class="sub-link">Bounty Publishing</a>
+  <a href="#comm-social" class="sub-link">Social Calendar</a>
+  <a href="#comm-claude" class="sub-link">Claude Content Pipeline</a>
+  <a href="#comm-kpi" class="sub-link">KPIs</a>
+  <div class="nav-section">Grants</div>
+  <a href="#grant01" class="doc-link">GRANT-01 Grant Playbook</a>
+  <a href="#grant-first" class="sub-link">First Week Actions</a>
+  <a href="#grant-funders" class="sub-link">Funder Map</a>
+  <a href="#grant-workflow" class="sub-link">Application Workflow</a>
+  <a href="#grant-claude" class="sub-link">Claude Drafting Pipeline</a>
+  <a href="#grant-reporting" class="sub-link">Reporting Templates</a>
+  <a href="#grant-tracker" class="sub-link">Tracker Setup</a>
+</nav>
+
+<div class="main">
+
+<!-- ============================================================ -->
+<!-- COMM-01 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="comm01">
+  <div class="doc-header">
+    <div class="doc-badge">COMM-01 · Track C · Student 5 (DevRel Intern)</div>
+    <h1>Community &amp; DevRel <em>Playbook</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">GitHub repo management, Discord server setup, bounty publishing on AI for Good / Kaggle / Gitcoin, social media calendar, and Claude-assisted content pipeline. No CS background required — you own the PODRWA public presence.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-c">Track C</span>
+      <span class="meta-chip chip-d">GitHub · Discord · Claude Agents</span>
+    </div>
+  </div>
+
+  <div class="callout callout-purple"><strong>Your role in one sentence:</strong> You make PODRWA visible, credible, and easy to contribute to — for investors, developers, and field agents. Claude agents help you draft content; you own the judgment calls, relationships, and publishing.</div>
+
+  <h3 id="comm-github">GitHub Repository Management</h3>
+
+  <h4>Branch Strategy</h4>
+  <table>
+    <thead><tr><th>Branch</th><th>Purpose</th><th>Who merges</th></tr></thead>
+    <tbody>
+      <tr><td><code>main</code></td><td>Production-ready. Tagged releases only.</td><td>Supervisor A or B only</td></tr>
+      <tr><td><code>develop</code></td><td>Integration branch. All student work merges here first.</td><td>Supervisors, after review</td></tr>
+      <tr><td><code>feature/dev01-*</code></td><td>Student work branches (one per feature/doc)</td><td>Student opens PR → supervisor reviews → merges to develop</td></tr>
+      <tr><td><code>fix/*</code></td><td>Bug fixes</td><td>Same as feature branches</td></tr>
+    </tbody>
+  </table>
+
+  <h4>PR Template — create at <code>.github/PULL_REQUEST_TEMPLATE.md</code></h4>
+  <div class="template-box">## Summary
+<span class="placeholder">[What does this PR do? 2-3 sentences max]</span>
+
+## Related doc
+DEV-0X / COMM-0X / GRANT-0X — <span class="placeholder">[section name]</span>
+
+## Changes
+- <span class="placeholder">[bullet list of files changed and why]</span>
+
+## Testing
+- [ ] Anchor tests pass: `anchor test`
+- [ ] No console errors in browser
+- [ ] Tested on devnet wallet
+
+## Checklist
+- [ ] No `.env` files committed
+- [ ] No hardcoded private keys
+- [ ] README updated if interface changed</div>
+
+  <h4>Issue Labels to Create</h4>
+  <pre><code><span class="comment"># Create these labels in GitHub → Issues → Labels</span>
+track-a        <span class="comment">#6BAA75  — Chain & Data work</span>
+track-b        <span class="comment">#4A8FA8  — Interfaces work</span>
+track-c        <span class="comment">#B478C8  — DevRel/Community</span>
+track-d        <span class="comment">#C8962A  — Grants</span>
+bounty         <span class="comment">#FFD700  — This issue is an on-chain bounty</span>
+good-first-issue <span class="comment">#0075ca — For new contributors</span>
+bug            <span class="comment">#E07070  — Something broken</span>
+blocked        <span class="comment">#786860  — Waiting on another team/decision</span></code></pre>
+
+  <h4>Weekly GitHub Duties</h4>
+  <ul>
+    <li>Triage new issues: apply labels, assign to correct track</li>
+    <li>Check for stale PRs (open &gt;5 days with no review) — ping supervisor</li>
+    <li>Update <code>CHANGELOG.md</code> when PRs merge to <code>develop</code></li>
+    <li>Tag a release when Supervisor promotes to <code>main</code></li>
+    <li>Ensure <code>README.md</code> stays accurate — update whenever architecture changes</li>
+  </ul>
+
+  <h3 id="comm-discord">Discord Server Setup</h3>
+
+  <h4>Channel Structure</h4>
+  <table>
+    <thead><tr><th>Category</th><th>Channels</th><th>Who can post</th></tr></thead>
+    <tbody>
+      <tr><td>📢 Announcements</td><td>#announcements, #oracle-updates</td><td>Admins only</td></tr>
+      <tr><td>💼 Investors</td><td>#investor-general, #vault-status, #mena-prices</td><td>Verified investors</td></tr>
+      <tr><td>🌾 Field Agents</td><td>#agent-general, #bounty-board, #app-support</td><td>Verified agents</td></tr>
+      <tr><td>👩‍💻 Developers</td><td>#dev-general, #track-a, #track-b, #bugs</td><td>All devs</td></tr>
+      <tr><td>🌍 Community</td><td>#general, #introductions, #off-topic</td><td>Everyone</td></tr>
+      <tr><td>🔒 Internal</td><td>#supervisors, #grant-pipeline, #weekly-standup</td><td>Team only</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Moderation Rules (pin in #general)</h4>
+  <ol>
+    <li>No financial advice — PODRWA does not give investment recommendations.</li>
+    <li>POD does not issue a token — never imply a token, token sale, or price.</li>
+    <li>Be respectful. This is a project building for Ethiopia smallholder farmers.</li>
+    <li>Post in the right channel. Support questions go to #app-support.</li>
+    <li>No unsolicited DMs to team members.</li>
+  </ol>
+
+  <h4>Weekly Discord Duties</h4>
+  <ul>
+    <li>Post oracle update in #oracle-updates every 7th of the month (use template below)</li>
+    <li>Pin new bounties in #bounty-board as they are published on-chain</li>
+    <li>Welcome new members in #introductions</li>
+    <li>Escalate technical support questions to the correct supervisor</li>
+    <li>Weekly summary post in #general (Claude drafts, you review and post)</li>
+  </ul>
+
+  <h3 id="comm-bounties">Bounty Publishing — External Platforms</h3>
+  <p>Developer bounties (DEV track) and oracle/data bounties should be published on external platforms to attract contributors beyond the core team.</p>
+
+  <table>
+    <thead><tr><th>Platform</th><th>Best for</th><th>Process</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>AI for Good (ITU)</strong><br>ai4good.org</td>
+        <td>High-impact social good framing. Data/ML bounties. Also a grant opportunity.</td>
+        <td>Create project profile → publish challenge with MENA/Ethiopia context → link to GitHub</td>
+        <td><span class="priority-badge p-now">Week 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Kaggle</strong><br>kaggle.com/competitions</td>
+        <td>SAR/NDVI data science challenges. ML model competitions (yield prediction).</td>
+        <td>Create competition → upload sample GEE data → define scoring metric → set USDC reward</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Gitcoin</strong><br>gitcoin.co/explorer</td>
+        <td>Open-source dev bounties. Web3 native audience.</td>
+        <td>Connect GitHub repo → create bounty issue → post on Gitcoin → winner paid by direct USDC (or SOL) transfer from the DAO treasury multisig on merge</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Replit Bounties</strong><br>replit.com/bounties</td>
+        <td>Small scripting tasks, frontend components. Good for students.</td>
+        <td>Post individual tasks with clear specs → link to PODRWA GitHub</td>
+        <td><span class="priority-badge p-sprint2">Sprint 2</span></td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Discussions</strong></td>
+        <td>Dev RFC + community input on architecture decisions.</td>
+        <td>Enable Discussions in repo settings → create "Bounty" category</td>
+        <td><span class="priority-badge p-now">Week 1</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Bounty Brief Template (Claude-assisted)</h4>
+  <div class="template-box">## <span class="placeholder">[BOUNTY TITLE]</span>
+**Reward:** $<span class="placeholder">[USD amount]</span> paid in USDC (or SOL) from the DAO treasury
+**Deadline:** <span class="placeholder">[Date]</span>
+**Track:** <span class="placeholder">[Developer / Field Agent / Data Science]</span>
+
+### Context
+PODRWA is building an open oracle for MENA livestock commodity prices on Solana,
+supporting smallholder farmers in the East Africa → MENA export corridor.
+Pilot location: UKE Welega, West Ethiopia.
+
+### Task
+<span class="placeholder">[Clear, specific description of what needs to be built/done]</span>
+
+### Acceptance Criteria
+- [ ] <span class="placeholder">[Specific, testable requirement 1]</span>
+- [ ] <span class="placeholder">[Specific, testable requirement 2]</span>
+- [ ] Code submitted as PR to github.com/proofofdirt/pod
+
+### Resources
+- Codebase: github.com/proofofdirt/pod
+- Docs: proofofdirt.com/oracle
+- Questions: discord.gg/proofofdirt → #dev-general
+
+### How to Apply
+Comment on this issue with: your GitHub handle, relevant experience (1-2 sentences), time estimate.</div>
+
+  <h3 id="comm-social">Social Media Calendar</h3>
+  <table>
+    <thead><tr><th>Platform</th><th>Frequency</th><th>Content type</th><th>Tone</th></tr></thead>
+    <tbody>
+      <tr><td><strong>X (Twitter)</strong></td><td>3–4× per week</td><td>Oracle updates, dev progress, MENA market facts, bounty announcements</td><td>Technical, concise, data-driven</td></tr>
+      <tr><td><strong>LinkedIn</strong></td><td>1–2× per week</td><td>Project milestones, team updates, agrifinance narrative, grant news</td><td>Professional, impact-focused</td></tr>
+      <tr><td><strong>Telegram</strong></td><td>Daily (auto-feed)</td><td>Oracle price updates (automated), announcements, community chat</td><td>Casual, community</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Monthly Content Calendar</h4>
+  <table>
+    <thead><tr><th>Week</th><th>Theme</th><th>Key posts</th></tr></thead>
+    <tbody>
+      <tr><td>Week 1 (7th)</td><td>Oracle Update</td><td>Monthly MENA price report published · SAR/NDVI update · New bounties posted</td></tr>
+      <tr><td>Week 2</td><td>Education</td><td>Explainer: how Switchboard oracle works · Ethiopia field story · MENA livestock market fact</td></tr>
+      <tr><td>Week 3</td><td>Dev Progress</td><td>GitHub milestone achieved · Student spotlight · Technical thread on what was built</td></tr>
+      <tr><td>Week 4</td><td>Community</td><td>Bounty completion celebration · Grant update · Community Q&amp;A</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="comm-claude">Claude Content Pipeline</h3>
+  <p>Claude drafts content using project context; you review, adjust tone, and publish. Never publish Claude output without reading it.</p>
+
+  <h4>Setting up a daily draft session</h4>
+  <pre><code><span class="comment">## Claude prompt template — paste this at the start of each content session</span>
+
+You are the social media assistant for PODRWA (Proof of Dirt), an agricultural
+finance protocol on Solana. The project connects Ethiopian smallholder livestock
+farmers to MENA (Middle East / West Asia) markets via a blockchain-backed export
+vault. Key facts:
+- Pilot location: UKE Welega, West Ethiopia (Horo Guduru Welega Zone)
+- East Africa → MENA corridor: Jeddah, Jebel Ali, Kuwait, Qatar, Oman, Bahrain
+- On-chain oracle: Switchboard v2 on Solana, monthly MENA livestock price feeds
+- SAR/NDVI: Sentinel-1 plowing detection + Sentinel-2 crop health via Google Earth Engine
+- No token: POD is a no-token DAO. Contributors are paid in USDC/SOL from the treasury multisig; field agents in ETB via Turmi
+- Capital flow: investors subscribe in FIAT (SAR/USD) via PODRWA SPV (KSA); fiat is wired
+  to the Ethiopian operator (Turmi). Ethiopia prohibits stablecoins/crypto — the chain
+  carries verified data only in V1 (oracle records, receipts, approvals, audit logs)
+- Eid al-Adha is the peak season for livestock prices (June 2026 est.)
+- Tone: honest, data-driven, not hype. No financial advice. No price predictions.
+
+Today's task: <span class="comment">[describe what you need — e.g. "3 X posts about May 2026 oracle update"]</span>
+Context data: <span class="comment">[paste the relevant JSON/numbers]</span></code></pre>
+
+  <h4>X Post Templates</h4>
+  <div class="template-box">📡 PODRWA Oracle Update — <span class="placeholder">[Month Year]</span>
+
+🐑 KSA live sheep: $<span class="placeholder">X.XX</span>/kg LW (+<span class="placeholder">X</span>% MoM)
+🌾 Alfalfa premium CIF: $<span class="placeholder">XXX</span>/ton
+🌍 8 MENA markets tracked: Egypt → Qatar
+
+Data: proofofdirt.com/oracle | JSON: proofofdirt.com/oracle/data/<span class="placeholder">YYYY-MM</span>.json
+
+#MENA #AgriFinance #Solana #OpenOracle</div>
+
+  <h3 id="comm-kpi">Community KPIs</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Discord Members</div><div class="kpi-target">200</div><div class="kpi-desc">by end of Sprint 2</div></div>
+    <div class="kpi"><div class="kpi-label">GitHub Stars</div><div class="kpi-target">100</div><div class="kpi-desc">by end of Sprint 3</div></div>
+    <div class="kpi"><div class="kpi-label">Active Bounties</div><div class="kpi-target">5</div><div class="kpi-desc">open at all times</div></div>
+    <div class="kpi"><div class="kpi-label">Bounties Completed</div><div class="kpi-target">10</div><div class="kpi-desc">by end of Sprint 4</div></div>
+    <div class="kpi"><div class="kpi-label">X Followers</div><div class="kpi-target">500</div><div class="kpi-desc">by month 3</div></div>
+    <div class="kpi"><div class="kpi-label">Oracle Page Visits</div><div class="kpi-target">500/mo</div><div class="kpi-desc">after month 2</div></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- GRANT-01 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="grant01">
+  <div class="doc-header">
+    <div class="doc-badge">GRANT-01 · Track D · Grant Management Intern</div>
+    <h1>Grant Management <em>Playbook</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">Priority funders, application workflow, Claude-assisted drafting pipeline, reporting templates, and tracker setup. Start with the First Week Actions — two of them cost nothing and take under an hour.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-d">Track D</span>
+      <span class="meta-chip chip-c">Notion · Claude Agents · GitHub</span>
+    </div>
+  </div>
+
+  <div class="callout callout-ok"><strong>Your leverage:</strong> Claude can draft 70% of a grant application from the existing codebase, oracle data, and dev docs. Your job is the narrative, the budget, the team story, and the relationship. Supervisors sign off before any submission.</div>
+
+  <h3 id="grant-first">First Week Actions — Do These Immediately</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content">
+      <strong>Apply for Google Earth Engine Research Credits <span class="priority-badge p-now">Day 1 — Free</span></strong>
+      <p>Go to <a href="https://earthengine.google.com/noncommercial_signup">earthengine.google.com/noncommercial_signup</a>. Select "Research" category. Describe PODRWA: satellite-based agricultural yield monitoring for smallholder livestock farms in West Ethiopia, supporting Solana oracle feeds for East Africa → MENA export corridor. Takes 5 minutes to apply, ~1 week to approve. This directly unblocks DEV-04 (Student 1).</p>
+    </div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content">
+      <strong>Apply for Solana Foundation Developer Grant <span class="priority-badge p-now">Week 1</span></strong>
+      <p>Go to <a href="https://solana.org/grants">solana.org/grants</a>. Category: Infrastructure / Oracle. Use the Claude drafting prompt below. Supervisors review and sign off before submitting. PODRWA's Switchboard v2 oracle infrastructure + vault program = strong fit for Solana Foundation's infrastructure grants.</p>
+    </div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content">
+      <strong>Set up Grant Tracker in Notion/Airtable <span class="priority-badge p-now">Day 2</span></strong>
+      <p>Create a database with fields: Funder, Program, Deadline, Status (Identified/Drafting/Submitted/Active/Closed), Amount (estimated), Assigned to, Notes, Next action. Import all funders from the table below as initial rows.</p>
+    </div></div>
+  </div>
+
+  <h3 id="grant-funders">Priority Funder Map</h3>
+  <table>
+    <thead><tr><th>Funder</th><th>Program</th><th>Type</th><th>Est. Amount</th><th>Timeline</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Google (GEE)</strong><br>earthengine.google.com</td>
+        <td>Research Credits — satellite compute</td>
+        <td><span class="tag tag-ai">AI / GEE</span></td>
+        <td>Free credits</td>
+        <td>~1 week</td>
+        <td><span class="priority-badge p-now">Now</span></td>
+      </tr>
+      <tr>
+        <td><strong>Solana Foundation</strong><br>solana.org/grants</td>
+        <td>Developer Grants — Infrastructure</td>
+        <td><span class="tag tag-web3">Web3</span></td>
+        <td>$10K–$50K</td>
+        <td>6–10 weeks</td>
+        <td><span class="priority-badge p-now">Week 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Gitcoin</strong><br>gitcoin.co</td>
+        <td>Quadratic Funding rounds</td>
+        <td><span class="tag tag-web3">Web3</span></td>
+        <td>Variable (community match)</td>
+        <td>Round-based</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>USAID / Feed the Future</strong><br>feedthefuture.gov</td>
+        <td>Digital Agriculture Innovation Labs</td>
+        <td><span class="tag tag-agri">AgriFinance</span></td>
+        <td>$100K–$500K</td>
+        <td>6–12 months</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>CGIAR / ILRI</strong><br>ilri.org</td>
+        <td>Livestock Data Systems + Ethiopia partnership</td>
+        <td><span class="tag tag-agri">AgriFinance</span></td>
+        <td>Research partnership + funding</td>
+        <td>6–9 months</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>African Dev Bank</strong><br>afdb.org</td>
+        <td>Digital Agriculture &amp; Agritech Innovation Fund</td>
+        <td><span class="tag tag-dev">Dev Finance</span></td>
+        <td>$200K–$2M</td>
+        <td>9–18 months</td>
+        <td><span class="priority-badge p-sprint2">Sprint 2</span></td>
+      </tr>
+      <tr>
+        <td><strong>AI for Good (ITU/UN)</strong><br>ai4good.org</td>
+        <td>AI Innovation Challenge + Startup Prize</td>
+        <td><span class="tag tag-ai">AI</span></td>
+        <td>Prize + exposure</td>
+        <td>Ongoing</td>
+        <td><span class="priority-badge p-sprint1">Sprint 1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Bill &amp; Melinda Gates Foundation</strong><br>gatesfoundation.org</td>
+        <td>Agricultural Development + Digital Finance</td>
+        <td><span class="tag tag-agri">AgriFinance</span></td>
+        <td>$500K+</td>
+        <td>12–18 months</td>
+        <td><span class="priority-badge p-sprint2">Sprint 2</span></td>
+      </tr>
+      <tr>
+        <td><strong>EU Horizon / EIC</strong><br>eic.ec.europa.eu</td>
+        <td>Agri-food Innovation Pathfinder</td>
+        <td><span class="tag tag-dev">Dev Finance</span></td>
+        <td>€100K–€2.5M</td>
+        <td>12–18 months</td>
+        <td><span class="priority-badge p-sprint2">Sprint 2</span></td>
+      </tr>
+      <tr>
+        <td><strong>Heifer International</strong><br>heifer.org</td>
+        <td>Livestock value chain + digital tools</td>
+        <td><span class="tag tag-agri">AgriFinance</span></td>
+        <td>Partnership + funding</td>
+        <td>6–9 months</td>
+        <td><span class="priority-badge p-sprint2">Sprint 2</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="grant-workflow">Application Workflow</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content">
+      <strong>Identify — Weekly scan</strong>
+      <p>Every Monday: ask Claude to search for new open grant calls matching PODRWA (prompt below). Score relevance 1–3. Add any 2–3 rated opportunities to tracker. Set reminder for deadline –4 weeks.</p>
+    </div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content">
+      <strong>Brief — 1-page fit summary</strong>
+      <p>For each opportunity you decide to pursue: write a 1-page brief covering fit, required effort, estimated timeline, and any eligibility questions. Share with Supervisor A for go/no-go decision before spending time drafting.</p>
+    </div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content">
+      <strong>Draft — Claude-assisted</strong>
+      <p>Use the Claude drafting prompt below. Claude writes the technical sections (oracle architecture, satellite pipeline, Solana program design). You write the narrative (why Ethiopia, team story, impact model). Never submit a draft without supervisor review.</p>
+    </div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content">
+      <strong>Review &amp; Budget</strong>
+      <p>Supervisor A reviews technical accuracy. Add a budget table: personnel (intern hours), infrastructure (GEE, RPC nodes, server), travel (if applicable), overhead. Budget must be realistic — do not inflate.</p>
+    </div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content">
+      <strong>Submit &amp; Log</strong>
+      <p>Submit through funder portal. Record submission date, confirmation number, and expected response timeline in tracker. Set calendar reminder for follow-up at 4 weeks if no response.</p>
+    </div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content">
+      <strong>Report (for active grants)</strong>
+      <p>Most grants require progress reports at 3, 6, and 12 months. Link deliverables to GitHub milestones and releases. Use the reporting template below.</p>
+    </div></div>
+  </div>
+
+  <h3 id="grant-claude">Claude Drafting Pipeline</h3>
+  <h4>Technical Section Prompt</h4>
+  <pre><code><span class="comment">## Claude prompt for grant technical sections</span>
+
+You are writing the technical section of a grant application for PODRWA.
+
+PROJECT SUMMARY:
+PODRWA (Proof of Dirt) is a decentralized agricultural finance protocol on
+Solana that enables Ethiopian smallholder livestock farmers to access structured
+export finance via blockchain-backed vaults. The pilot corridor is West Ethiopia
+(UKE Welega, Horo Guduru Welega Zone) → MENA markets (KSA, UAE, Kuwait, Qatar,
+Oman, Bahrain, Egypt, Jordan).
+
+TECHNICAL COMPONENTS:
+1. Vault Program (Anchor/Rust on Solana): records fiat (SAR/USD)
+   financing positions arranged via the SPV, maintains plain on-chain records,
+   and approves tranches when oracle conditions are met. No funds are held or
+   moved on-chain in V1 — Ethiopia prohibits stablecoins/crypto, so the SPV wires
+   fiat to the Ethiopian operator (Turmi) on each on-chain tranche approval.
+   Fully on-chain settlement is planned for V2, when Ethiopian regulation allows.
+2. Oracle feeds (Switchboard v2): monthly MENA livestock prices (10 feeds across
+   8 markets), SAR plowing proof, NDVI crop health score, yield prediction.
+3. Satellite pipeline (Google Earth Engine Phase 1): Sentinel-1 SAR plowing
+   detection, Sentinel-2 NDVI time series for UKE Welega AOI.
+4. Bounty system (Anchor program): on-chain task marketplace for field agents
+   (GPS+photo evidence) and developers (GitHub PRs).
+5. Agent app (React Native, offline-first): critical for field use in low-connectivity Ethiopia.
+6. Web interfaces: investor dashboard (Next.js, public + optional wallet) and
+   agent dashboard (wallet-required).
+
+GRANT FUNDER: <span class="comment">[insert funder name and program]</span>
+SECTION TO WRITE: <span class="comment">[e.g. "Technical Approach — 500 words"]</span>
+FOCUS: <span class="comment">[e.g. "emphasize the open oracle data and satellite verification"]</span></code></pre>
+
+  <h4>Weekly Discovery Prompt</h4>
+  <pre><code><span class="comment">## Claude prompt for weekly grant discovery</span>
+
+Search for currently open grant opportunities relevant to this project profile:
+- Agricultural finance technology for smallholder farmers in Sub-Saharan Africa
+- Blockchain / Web3 infrastructure (Solana ecosystem preferred)
+- Satellite data for agriculture (GEE, Sentinel, remote sensing)
+- East Africa → MENA trade corridor development
+- Digital tools for livestock value chains
+- Open data / open oracle infrastructure
+
+Identify 3–5 currently open calls. For each, provide:
+- Funder and program name
+- Eligibility requirements
+- Funding range
+- Deadline
+- Application URL
+- Relevance score for PODRWA (1–3) with 1-sentence reason</code></pre>
+
+  <h3 id="grant-reporting">Reporting Template</h3>
+  <div class="template-box">## PODRWA Progress Report — <span class="placeholder">[Grant Name]</span>
+**Reporting period:** <span class="placeholder">[Start] – [End date]</span>
+**Submitted by:** <span class="placeholder">[Name, Title]</span>
+**Grant reference:** <span class="placeholder">[Grant ID]</span>
+
+### 1. Summary of Progress
+<span class="placeholder">[2-3 paragraph summary of what was accomplished this period]</span>
+
+### 2. Milestones Achieved
+| Milestone | Target date | Status | Evidence |
+|-----------|-------------|--------|----------|
+| <span class="placeholder">Deploy vault program to devnet</span> | <span class="placeholder">Date</span> | ✅ Complete | <span class="placeholder">github.com/proofofdirt/pod/releases/v0.1</span> |
+| <span class="placeholder">Oracle feeds live</span> | <span class="placeholder">Date</span> | ✅ Complete | <span class="placeholder">proofofdirt.com/oracle + Switchboard pubkeys</span> |
+
+### 3. Milestones Delayed / At Risk
+<span class="placeholder">[Honest description of any delays, reasons, and recovery plan]</span>
+
+### 4. Key Outputs
+- **Code:** <span class="placeholder">[GitHub commits, releases, lines of code added]</span>
+- **Data:** <span class="placeholder">[Oracle feeds live, price data published, markets covered]</span>
+- **Community:** <span class="placeholder">[Discord members, bounties completed, contributors]</span>
+
+### 5. Financial Report
+<span class="placeholder">[Budget vs actual spend table]</span>
+
+### 6. Next Period Plan
+<span class="placeholder">[Milestones planned for next reporting period]</span></div>
+
+  <h3 id="grant-tracker">Tracker Setup (Notion / Airtable)</h3>
+  <h4>Airtable Base Structure</h4>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Values</th></tr></thead>
+    <tbody>
+      <tr><td>Funder</td><td>Text</td><td>Funder name</td></tr>
+      <tr><td>Program</td><td>Text</td><td>Program/grant name</td></tr>
+      <tr><td>Type</td><td>Select</td><td>Web3, AgriFinance, Dev Finance, AI/GEE</td></tr>
+      <tr><td>Amount (est.)</td><td>Currency</td><td>USD estimate</td></tr>
+      <tr><td>Deadline</td><td>Date</td><td>Application deadline</td></tr>
+      <tr><td>Status</td><td>Select</td><td>Identified → Briefing → Drafting → In Review → Submitted → Active → Closed</td></tr>
+      <tr><td>Assigned to</td><td>Person</td><td>Grant intern + supervisor</td></tr>
+      <tr><td>Application URL</td><td>URL</td><td>Portal link</td></tr>
+      <tr><td>Submission ref</td><td>Text</td><td>Confirmation number after submitting</td></tr>
+      <tr><td>Next action</td><td>Text + Date</td><td>What to do and by when</td></tr>
+      <tr><td>Notes</td><td>Long text</td><td>Eligibility notes, fit concerns, supervisor comments</td></tr>
+      <tr><td>GitHub milestone</td><td>URL</td><td>Link to GitHub milestone used for reporting</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-warn"><strong>Never submit without supervisor sign-off.</strong> All grant applications represent PODRWA officially. Supervisor A must review the full application, especially the technical section and budget, before submission. Log the approval (name + date) in the tracker Notes field.</div>
+
+  <h4>Weekly Grant Intern Checklist</h4>
+  <ul class="checklist">
+    <li>Run Claude weekly discovery prompt — add new opportunities to tracker</li>
+    <li>Check all deadlines in tracker — flag anything due within 4 weeks</li>
+    <li>Update status of submitted applications — note any responses</li>
+    <li>Draft or advance one application in the pipeline</li>
+    <li>Post one grant-related update in Discord #internal/grant-pipeline</li>
+    <li>Link this week's GitHub releases/milestones to active grant records</li>
+  </ul>
+</div>
+
+</div><!-- end .main -->
+</body>
+</html>
