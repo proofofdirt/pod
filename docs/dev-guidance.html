@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PODRWA Dev Docs — Combined Dev Guidance (Tracks A &amp; B)</title>
+<title>Proof of Dirt — Dev Guidance (Tracks A &amp; B)</title>
 <style>
 :root {
   --soil:#1A120B; --earth:#2C1F14; --loam:#3D2B1F;
@@ -104,7 +104,7 @@ td code{font-size:0.72rem;}
 <body>
 
 <nav class="sidebar">
-  <div class="sidebar-logo">$PODRWA · <span>Tracks A+B</span><br>Dev Guidance (Combined)</div>
+  <div class="sidebar-logo">PROOF OF DIRT · <span>Tracks A+B</span><br>Dev Guidance</div>
   <div class="nav-section">Start Here</div>
   <a href="#priorities" class="doc-link">Build Priority Stack</a>
   <div class="nav-section">Foundation</div>
@@ -132,8 +132,8 @@ td code{font-size:0.72rem;}
   <a href="#dev04-sar" class="sub-link">SAR Plowing</a>
   <a href="#dev04-ndvi" class="sub-link">NDVI / Yield</a>
   <a href="#dev04-publish" class="sub-link">Publish to Oracle</a>
-  <div class="nav-section">Investor (Track B)</div>
-  <a href="#dev05" class="doc-link">DEV-05 Investor Dashboard</a>
+  <div class="nav-section">Financier (Track B)</div>
+  <a href="#dev05" class="doc-link">DEV-05 Financier Dashboard</a>
   <a href="#dev05-setup" class="sub-link">Next.js Setup</a>
   <a href="#dev05-walletless" class="sub-link">Walletless View</a>
   <a href="#dev05-wallet" class="sub-link">Phantom Connect</a>
@@ -149,11 +149,17 @@ td code{font-size:0.72rem;}
   <a href="#dev07-sqlite" class="sub-link">SQLite Queue</a>
   <a href="#dev07-capture" class="sub-link">GPS + Camera</a>
   <a href="#dev07-sync" class="sub-link">Sync Worker</a>
+  <a href="#dev09" class="doc-link">DEV-09 Baseline Upgrades</a>
+  <a href="#dev09-rfid" class="sub-link">RFID Registry</a>
+  <a href="#dev09-credit" class="sub-link">Credit Scoring</a>
+  <a href="#dev09-insurance" class="sub-link">Insurance Lines</a>
   <div class="nav-section">Testing (Both)</div>
   <a href="#dev08" class="doc-link">DEV-08 Integration Testing</a>
   <a href="#dev08-anchor" class="sub-link">Anchor Tests</a>
   <a href="#dev08-e2e" class="sub-link">E2E Flows</a>
   <a href="#dev08-ci" class="sub-link">GitHub Actions CI</a>
+  <div class="nav-section">Appendix</div>
+  <a href="#prompts" class="doc-link">AI Agent Prompts</a>
 </nav>
 
 <div class="main">
@@ -173,17 +179,17 @@ td code{font-size:0.72rem;}
     </div>
   </div>
 
-  <div class="callout callout-warn"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Investor capital is raised in fiat (SAR/USD) by PODRWA SPV (KSA) and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Field agents are paid in ETB by Turmi — no wallets. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
+  <div class="callout callout-warn"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Capital comes from <strong>buyer-financed offtake, Ethiopian FI loans, and DFI impact debt</strong> — raised and held in fiat by the SPV / partner FI and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Field agents are paid in ETB by Turmi — no wallets. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
 
   <table>
     <thead><tr><th>Priority</th><th>Component</th><th>Bounty / Doc</th><th>Lead</th><th>Unblocks</th></tr></thead>
     <tbody>
       <tr><td>🔴 P0</td><td>SAR Plowing Detection</td><td>BOUNTY-001 · DEV-04</td><td>Supervisor A</td><td>Oracle credibility, T1 tranche gate</td></tr>
-      <tr><td>🔴 P0</td><td>NDVI Crop Health + Yield Prediction</td><td>BOUNTY-002 · DEV-04</td><td>Supervisor A</td><td>T2/T3 tranche gates, investor pitch</td></tr>
+      <tr><td>🔴 P0</td><td>NDVI Crop Health + Yield Prediction</td><td>BOUNTY-002 · DEV-04</td><td>Supervisor A</td><td>T2/T3 tranche gates, financier pitch</td></tr>
       <tr><td>🔴 P0</td><td>Agent App + Contract Farming Module</td><td>BOUNTY-004 · DEV-07</td><td>Supervisor B</td><td>Farm onboarding, ground truth data</td></tr>
-      <tr><td>🔴 P0</td><td>Commodity Price + Cost-of-Production datasets</td><td>Finance Guild · feeds DEV-03</td><td>Finance Guild (not student work)</td><td>Export Margin Calculator, investor pitch</td></tr>
+      <tr><td>🔴 P0</td><td>Commodity Price + Cost-of-Production datasets</td><td>Finance Guild · feeds DEV-03</td><td>Finance Guild (not student work)</td><td>Export Margin Calculator, financier pitch</td></tr>
       <tr><td>🟠 P1</td><td>BCS Livestock Scoring</td><td>BOUNTY-005</td><td>A (ML model) + B (app capture)</td><td>Livestock vault, animal cycle T1 gate</td></tr>
-      <tr><td>🟠 P1</td><td>$PODRWA Vault Contracts (receipt + state)</td><td>ESCROW-003 · DEV-01</td><td>Supervisor A</td><td>On-chain financing records, financier reporting</td></tr>
+      <tr><td>🟠 P1</td><td>Vault Records Program (financing records + state)</td><td>ESCROW-003 · DEV-01</td><td>Supervisor A</td><td>On-chain financing records, financier reporting</td></tr>
       <tr><td>🟠 P1</td><td>Tranche Dashboard (SPV ops)</td><td>DEV-05 extension</td><td>Supervisor B</td><td>SPV can execute fiat wires from oracle approvals</td></tr>
       <tr><td>⏸ HOLD</td><td>Receipt-record bridge (no token)</td><td>BRIDGE-008</td><td>—</td><td>Only if fiat recordkeeping ever requires it</td></tr>
       <tr><td>🟡 P2</td><td>On-chain Disbursement Log</td><td>part of DEV-01 vault</td><td>Supervisor A</td><td>Audit trail for fiat tranches</td></tr>
@@ -204,7 +210,7 @@ td code{font-size:0.72rem;}
     <div class="doc-badge">DEV-00 · All Developers · Read First</div>
     <h1>Platform <em>Architecture</em> Overview</h1>
     <p style="color:var(--mist);margin-top:8px;">Monorepo structure, module boundaries, environment setup, feed ID registry, and Sprint 0 checklist. Every developer reads this before touching code.</p>
-    <div class="callout callout-warn" style="margin-top:14px;"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Investor capital is raised in fiat (SAR/USD) by PODRWA SPV (KSA) and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
+    <div class="callout callout-warn" style="margin-top:14px;"><strong>V1 vs V2 — money never moves on-chain in V1.</strong> Ethiopia prohibits stablecoins and cryptocurrencies. In V1 the Solana layer carries <strong>verified data only</strong>: oracle feeds, fiat financing records, tranche approval events, audit hashes. Capital comes from <strong>buyer-financed offtake, Ethiopian FI loans, and DFI impact debt</strong> — raised and held in fiat by the SPV / partner FI and wired in fiat to Turmi (or another Ethiopian operator) when a tranche is approved. Fully on-chain systems are V2, gated on Ethiopian regulation.</div>
     <div class="doc-meta">
       <span class="meta-chip chip-a">All Tracks</span>
       <span class="meta-chip chip-b">Devnet First</span>
@@ -220,7 +226,7 @@ td code{font-size:0.72rem;}
 ├── app/                        <span class="comment"># React Native agent app (Expo)</span>
 │   └── apps/agent-app/
 ├── web/                        <span class="comment"># Web frontends (Next.js)</span>
-│   ├── investor-dashboard/
+│   ├── financier-dashboard/
 │   └── agent-dashboard/
 ├── agents/                     <span class="comment"># Python data agents</span>
 │   ├── oracle-publisher/       <span class="comment"># Switchboard price feed updater</span>
@@ -321,7 +327,7 @@ earthengine set_project YOUR_GEE_PROJECT_ID</code></pre>
     </div>
   </div>
 
-  <div class="callout callout-warn"><strong>V1 architecture — read before coding:</strong> Ethiopian law prohibits stablecoin/cryptocurrency transactions. The vault holds <strong>no investor funds on-chain</strong>. Investors subscribe in <strong>fiat (SAR/USD)</strong> with PODRWA SPV (KSA); the SPV authority records each confirmed financing on-chain as a plain record (no tokens are minted — the project does not issue a token). When oracle conditions are met (KSA sheep price ≥ threshold AND SAR confirms plowing AND NDVI confirms crop health), the program <strong>approves</strong> the tranche — it emits an on-chain approval event with a disbursement hash, and SPV ops execute a <strong>fiat bank wire</strong> to Turmi (or another Ethiopian operator) via the Ethiopian financial institution partner. In V1 the chain carries <strong>verified data only</strong>: oracle records, subscriptions, approvals, audit logs. Fully on-chain settlement is a V2 goal, contingent on Ethiopian regulation.</div>
+  <div class="callout callout-warn"><strong>V1 architecture — read before coding:</strong> Ethiopian law prohibits stablecoin/cryptocurrency transactions. The vault holds <strong>no funds on-chain</strong>. Financiers — buyers (offtake prepayment), Ethiopian FIs (oracle-collateralized loans), DFIs (impact debt) — commit <strong>fiat</strong> via the SPV or partner FI; the SPV/FI authority records each confirmed financing on-chain as a plain record (no tokens are minted — the project does not issue a token). When oracle conditions are met (KSA sheep price ≥ threshold AND SAR confirms plowing AND NDVI confirms crop health), the program <strong>approves</strong> the tranche — it emits an on-chain approval event with a disbursement hash, and SPV ops execute a <strong>fiat bank wire</strong> to Turmi (or another Ethiopian operator) via the Ethiopian financial institution partner. In V1 the chain carries <strong>verified data only</strong>: oracle records, subscriptions, approvals, audit logs. Fully on-chain settlement is a V2 goal, contingent on Ethiopian regulation.</div>
 
   <div class="callout callout-info"><strong>No token:</strong> the project does not mint an SPL token. The vault program works entirely with plain account records. (A non-transferable receipt instrument may be revisited later only if fiat recordkeeping requires it.)</div>
 
@@ -660,7 +666,7 @@ FEEDS = {
     </div>
   </div>
 
-  <div class="callout callout-info"><strong>Phase 1 (now):</strong> Use Google Earth Engine Python API for all satellite processing. <strong>Phase 2 (rev 2):</strong> Pull data directly from Copernicus CDSE into PODRWA's own virtual database. This document covers Phase 1 only. A separate DEV-04b document will cover Phase 2.</div>
+  <div class="callout callout-info"><strong>Phase 1 (now):</strong> Use Google Earth Engine Python API for all satellite processing. <strong>Phase 2 (rev 2):</strong> Pull data directly from Copernicus CDSE into the project's own virtual database. This document covers Phase 1 only. A separate DEV-04b document will cover Phase 2.</div>
 
   <div class="callout callout-warn"><strong>Do first:</strong> Apply for GEE non-commercial research project at <a href="https://earthengine.google.com/noncommercial_signup">earthengine.google.com/noncommercial_signup</a>. Free. Takes ~1 week. You cannot run GEE API calls without an approved project.</div>
 
@@ -820,7 +826,7 @@ YIELD_MODEL_INTERCEPT = -500   <span class="comment"># kg/ha base</span>
     run_and_publish(now.year, now.month)</code></pre>
 
   <h4>Phase 2 Roadmap Note</h4>
-  <div class="callout callout-info"><strong>Phase 2 (future):</strong> Replace GEE with direct Copernicus CDSE (creodias.eu) API. Benefits: no GEE quota limits, data stored in PODRWA's own PostGIS database, faster iteration. CDSE provides free access to Sentinel data with an EU account. Architecture: CDSE → rasterio/GDAL processing → PostGIS raster storage → same oracle publish step. Create DEV-04b when team is ready.</div>
+  <div class="callout callout-info"><strong>Phase 2 (future):</strong> Replace GEE with direct Copernicus CDSE (creodias.eu) API. Benefits: no GEE quota limits, data stored in the project's own PostGIS database, faster iteration. CDSE provides free access to Sentinel data with an EU account. Architecture: CDSE → rasterio/GDAL processing → PostGIS raster storage → same oracle publish step. Create DEV-04b when team is ready.</div>
 
   <h4>Pipeline Test Checklist</h4>
   <ul class="checklist">
@@ -841,8 +847,8 @@ YIELD_MODEL_INTERCEPT = -500   <span class="comment"># kg/ha base</span>
 <div class="doc-section" id="dev05">
   <div class="doc-header">
     <div class="doc-badge">DEV-05 · Supervisor B · Student 3</div>
-    <h1>Investor <em>Dashboard</em></h1>
-    <p style="color:var(--mist);margin-top:8px;">Next.js web app. Works fully without a wallet (public read-only view of vault state and oracle prices). Optional Phantom/Backpack wallet connect to show personal investor positions.</p>
+    <h1>Financier <em>Dashboard</em></h1>
+    <p style="color:var(--mist);margin-top:8px;">Next.js web app for buyers, Ethiopian FIs, and DFIs. Public view: unfunded farms with estimated financing requirement, ROI (insurance-inclusive), and credit band. Private view (financing party only, post-funding): SAR/NDVI, RFID/BCS, tranche history, settlement. Plus the SPV/FI ops queue: approval events → fiat wire execution.</p>
     <div class="doc-meta">
       <span class="meta-chip chip-b">Track B</span>
       <span class="meta-chip chip-c">Next.js · @solana/wallet-adapter · Chart.js</span>
@@ -852,16 +858,16 @@ YIELD_MODEL_INTERCEPT = -500   <span class="comment"># kg/ha base</span>
   <div class="callout callout-info"><strong>Design principle:</strong> Anyone can view vault progress and MENA prices without connecting a wallet. Wallet connect is optional and unlocks the personal portfolio view. The walletless view should be the primary experience for most visitors.</div>
 
   <h3 id="dev05-setup">Project Setup</h3>
-  <pre><code><span class="comment"># Scaffold Next.js app inside web/investor-dashboard/</span>
-npx create-next-app@latest investor-dashboard --typescript --tailwind --app
-cd investor-dashboard
+  <pre><code><span class="comment"># Scaffold Next.js app inside apps/financier-dashboard/</span>
+npx create-next-app@latest financier-dashboard --typescript --tailwind --app
+cd financier-dashboard
 
 <span class="comment"># Add Solana dependencies</span>
 npm install @solana/web3.js @solana/wallet-adapter-react \
   @solana/wallet-adapter-react-ui @solana/wallet-adapter-wallets \
   @switchboard-xyz/solana.js chart.js react-chartjs-2</code></pre>
 
-  <div class="file-tree">web/investor-dashboard/
+  <div class="file-tree">apps/financier-dashboard/
 ├── app/
 │   ├── layout.tsx              <span class="comment"># WalletProvider wraps app</span>
 │   ├── page.tsx                <span class="comment"># Public dashboard (no wallet needed)</span>
@@ -992,7 +998,7 @@ npm install @solana/web3.js @solana/wallet-adapter-react \
     <li>Public page loads and shows vault data with no wallet connected</li>
     <li>Oracle prices display correctly (divide raw value by 10000 for sheep price)</li>
     <li>Phantom wallet connects and disconnects cleanly</li>
-    <li>Portfolio page shows investor position when wallet connected</li>
+    <li>Private farm view shows only the financing party's farms when authenticated</li>
     <li>Mobile responsive layout works on 375px width</li>
   </ul>
 </div>
@@ -1077,7 +1083,7 @@ npm install @solana/web3.js @solana/wallet-adapter-react \
   <div class="doc-header">
     <div class="doc-badge">DEV-07 · Supervisor B · Student 4</div>
     <h1>Agent App — <em>React Native</em> (Offline-First)</h1>
-    <p style="color:var(--mist);margin-top:8px;">Mobile app for field agents in Ethiopia. Build on existing v0 codebase. Offline-first is a hard requirement — network connectivity is unreliable in the field. All data queued locally, synced when signal available.</p>
+    <p style="color:var(--mist);margin-top:8px;">Mobile capture layer for field agents in Ethiopia. <strong>Build on the Turmi baseline</strong> (<code>apps/agent-app/BASELINE.md</code> → <code>D:\TurmiAppDev</code>): farmers, farms, plots, financing lifecycle, contracts, and cost templates already exist — extend, don't rewrite. Offline-first is a hard requirement — network connectivity is unreliable in the field. All data queued locally, synced when signal available.</p>
     <div class="doc-meta">
       <span class="meta-chip chip-b">Track B</span>
       <span class="meta-chip chip-c">React Native · Expo · SQLite</span>
@@ -1087,6 +1093,8 @@ npm install @solana/web3.js @solana/wallet-adapter-react \
   <div class="callout callout-warn"><strong>Offline-first is non-negotiable.</strong> Field agents in UKE Welega (West Ethiopia) frequently have no internet. The app must work completely without network access. Data is stored locally and synced in batches when connectivity is detected. Never block the user from completing a task due to network issues.</div>
 
   <div class="callout callout-info"><strong>No wallets, no tokens:</strong> agents log in with a phone-number-based agent ID (OTP). Task rewards are shown in <strong>ETB</strong> and paid by Turmi payroll against verified submissions — the app never touches crypto.</div>
+
+  <div class="callout callout-warn"><strong>RFID intake flow (livestock):</strong> every animal gets an RFID tag at intake. The agent captures tag ID + geolocated photo; the <strong>intake-complete event triggers the purchase reimbursement</strong>. Monthly BCS photo scoring then gates feed/vet disbursements through the fattening cycle. Tag → trace → export: the RFID is the animal's identity end-to-end (full data model in DEV-09).</div>
 
   <h3 id="dev07-sqlite">SQLite Offline Queue</h3>
   <pre><code><span class="kw">import</span> * as SQLite from <span class="str">'expo-sqlite'</span>;
@@ -1276,6 +1284,76 @@ eas build --platform android --profile preview</code></pre>
 <hr class="section-divider">
 
 <!-- ============================================================ -->
+<!-- DEV-09 -->
+<!-- ============================================================ -->
+<div class="doc-section" id="dev09">
+  <div class="doc-header">
+    <div class="doc-badge">DEV-09 · Both Tracks · Turmi Baseline Upgrades</div>
+    <h1>RFID Registry, <em>Credit Scoring</em> &amp; Insurance</h1>
+    <p style="color:var(--mist);margin-top:8px;">The three upgrades that turn the Turmi baseline (<code>turmi-backend-lite</code>, Django/PostGIS) into POD's production system. The baseline already has the tables you need to build on: <code>FinancingRequest</code>, <code>RepaymentInstallment</code>, <code>RepaymentRecord</code>, <code>BuybackSettlement</code>, <code>ProduceMarketRate</code>, crop/livestock cost templates, and farmer KYC with plots.</p>
+    <div class="doc-meta">
+      <span class="meta-chip chip-a">Track A: scoring + anchoring</span>
+      <span class="meta-chip chip-b">Track B: capture + surfaces</span>
+      <span class="meta-chip chip-c">Django · PostGIS · Python</span>
+    </div>
+  </div>
+
+  <h3 id="dev09-rfid">1 — RFID Animal Registry</h3>
+  <p>New Django app <code>livestock/</code> in the baseline backend. The RFID tag is the animal's identity from intake to export.</p>
+  <pre><code><span class="comment"># livestock/models.py</span>
+<span class="kw">class</span> <span class="ty">AnimalRecord</span>(models.Model):
+    rfid_tag        = models.CharField(max_length=64, unique=<span class="kw">True</span>)  <span class="comment"># scanned at intake</span>
+    farm            = models.ForeignKey(<span class="str">"kyc.Plot"</span>, ...)            <span class="comment"># farm-level financing link</span>
+    species         = models.CharField(choices=[(<span class="str">"cattle"</span>,…),(<span class="str">"sheep"</span>,…),(<span class="str">"goat"</span>,…)])
+    intake_at       = models.DateTimeField()
+    intake_photo    = models.ImageField()                              <span class="comment"># geolocated (EXIF GPS required)</span>
+    intake_lat/lng  = models.DecimalField(...)
+    status          = models.CharField(choices=[(<span class="str">"intake"</span>,…),(<span class="str">"fattening"</span>,…),(<span class="str">"export"</span>,…),(<span class="str">"settled"</span>,…)])
+
+<span class="kw">class</span> <span class="ty">BCSReading</span>(models.Model):
+    animal     = models.ForeignKey(AnimalRecord, related_name=<span class="str">"bcs_history"</span>)
+    score      = models.DecimalField(max_digits=2, decimal_places=1)   <span class="comment"># 1.0–5.0</span>
+    confidence = models.FloatField()                                   <span class="comment"># model confidence ≥ 0.80 to count</span>
+    photo      = models.ImageField()
+    scored_at  = models.DateTimeField()</code></pre>
+  <ul class="checklist">
+    <li><strong>Intake-complete event</strong> (tag + geolocated photo validated) → Oracle API notification → <strong>triggers purchase reimbursement</strong></li>
+    <li>Monthly BCS readings (score ≥ 2.5, improving trajectory, confidence ≥ 0.80) gate the monthly feed/vet disbursement</li>
+    <li>Animal record hash anchored on-chain at intake and at each status change (Track A: Oracle API writer)</li>
+    <li>Head-count check: dashboard reconciles expected vs. scored animals per farm per month</li>
+  </ul>
+
+  <h3 id="dev09-credit">2 — Producer Credit Scoring</h3>
+  <p>Score engine over the ledger that already exists in the baseline. Computed off-chain, <strong>hash-anchored on-chain per cycle close</strong>.</p>
+  <pre><code><span class="comment"># finance/scoring.py — v0 rule-based; replace weights after 2–3 cycles of data</span>
+<span class="kw">def</span> <span class="fn-name">compute_score</span>(farmer) -&gt; int:        <span class="comment"># 0–100</span>
+    cycles      = farmer.financing_requests.filter(status=<span class="str">"settled"</span>)
+    on_time     = repayment_on_time_ratio(farmer)      <span class="comment"># RepaymentRecord vs InstallmentDue  (45%)</span>
+    yield_perf  = delivered_vs_predicted(farmer)       <span class="comment"># harvest vs oracle forecast        (25%)</span>
+    compliance  = oracle_compliance_ratio(farmer)      <span class="comment"># tranche checks passed first try   (20%)</span>
+    history     = min(cycles.count(), 5) / 5           <span class="comment"># completed cycles                  (10%)</span>
+    <span class="kw">return</span> round(100 * (0.45*on_time + 0.25*yield_perf + 0.20*compliance + 0.10*history))</code></pre>
+  <table>
+    <thead><tr><th>Score band</th><th>% of CoP financed</th><th>Disbursement mode</th><th>Fees / insurance tier</th></tr></thead>
+    <tbody>
+      <tr><td>New producer (no history)</td><td>~60%</td><td>Reimburse after verification</td><td>Standard</td></tr>
+      <tr><td>50–75</td><td>70–85%</td><td>Reimburse, fast-tracked</td><td>Reduced</td></tr>
+      <tr><td>75+</td><td>90–100%</td><td><strong>Advance payment</strong> to service providers</td><td>Lowest</td></tr>
+    </tbody>
+  </table>
+  <p>Exact thresholds are a governance parameter (multisig), not hardcoded. Score surfaces on the farmer profile (agent app) and as the credit band on the financier dashboard.</p>
+
+  <h3 id="dev09-insurance">3 — Insurance in the Cost Basis</h3>
+  <ul>
+    <li>Add an <strong>insurance premium line type</strong> to <code>CropFinancingTemplate</code> / <code>LivestockCostTemplate</code> — premiums are part of CoP, so they are financed and tranche-disbursed like any input</li>
+    <li>ROI calculator (<code>oracle/roi/</code>) must include the premium in the cost stack shown to financiers</li>
+    <li>Policy document hash anchored with the farm contract; claims flow logged against the cycle</li>
+  </ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
 <!-- DEV-08 -->
 <!-- ============================================================ -->
 <div class="doc-section" id="dev08">
@@ -1322,8 +1400,8 @@ describe(<span class="str">'POD Vault'</span>, () =&gt; {
     <thead><tr><th>Flow</th><th>Steps</th><th>Expected outcome</th></tr></thead>
     <tbody>
       <tr>
-        <td>Investor subscription (fiat via SPV)</td>
-        <td>1. SPV confirms fiat receipt off-chain → 2. SPV authority calls record_subscription($1000) → 3. Check investor balance</td>
+        <td>Financing commitment (fiat via SPV/FI)</td>
+        <td>1. SPV confirms fiat receipt off-chain → 2. SPV/FI authority calls record_subscription($1000) → 3. Check financing record</td>
         <td>Financing record created; total_subscribed_usd_cents increases (no tokens, no USDC on-chain)</td>
       </tr>
       <tr>
@@ -1377,10 +1455,79 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
       - run: yarn install
-      - run: yarn workspace investor-dashboard test --passWithNoTests
+      - run: yarn workspace financier-dashboard test --passWithNoTests
       - run: yarn workspace agent-dashboard test --passWithNoTests</code></pre>
 
   <div class="callout callout-ok"><strong>Branch strategy:</strong> <code>main</code> = production-ready only. <code>develop</code> = integration branch. Students work on <code>feature/dev0X-description</code> branches and open PRs into <code>develop</code>. Supervisor reviews and merges. See COMM-01 for full GitHub conventions.</div>
+</div>
+
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- APPENDIX: AI AGENT PROMPTS -->
+<!-- ============================================================ -->
+<div class="doc-section" id="prompts">
+  <div class="doc-header">
+    <div class="doc-badge">Appendix · All Tracks · Claude / AI Agents</div>
+    <h1>AI Agent <em>Prompts</em> for Builders</h1>
+    <p style="color:var(--mist);margin-top:8px;">Paste the context block first, then the task prompt. Always review AI output before committing — you own the merge, not the agent.</p>
+  </div>
+
+  <h3>Shared context block (paste at the start of every session)</h3>
+  <pre><code>You are helping build Proof of Dirt (proofofdirt.com, github.com/proofofdirt/pod):
+an open-source trust layer for farm finance in Ethiopia. Hard constraints:
+- NO TOKEN. The project never mints or transfers value on-chain. The Solana layer
+  carries verified data only: oracle records, fiat financing records, tranche
+  approval events, audit hashes. Anything that moves money on-chain is wrong.
+- Capital is fiat: buyer-financed offtake, Ethiopian FI loans (oracle as collateral
+  + floor-price purchase agreements, settled at market), DFI impact debt.
+- Field agents have no wallets; they are paid in ETB by Turmi against verified work.
+- Trust tech works for plots 1 ha+; financing minimums are a DAO economics setting.
+- Tech stack: Rust/Anchor (vault records), Python/GEE (satellite), Django/PostGIS
+  (Turmi baseline backend), Next.js (dashboards), React Native (agent capture).
+Read ROADMAP.md and docs/dev-guidance.html in the repo for full architecture.</code></pre>
+
+  <h3>Track A — Anchor vault records program (DEV-01)</h3>
+  <pre><code>Task: implement [record_subscription | approve_tranche | settle] in programs/pod-vault.
+Requirements: Anchor ≥0.30; no SPL token operations anywhere; approve_tranche reads the
+oracle record PDA, enforces confidence ≥0.85 and compliance==Registered (T1 only), writes
+approved state + disbursement_hash, emits TrancheApprovedEvent — and performs NO transfer.
+Write the instruction, account constraints (SPV/FI authority gated), error enum, and a full
+anchor test: happy path, below-threshold rejection, double-approval rejection, wrong-authority
+rejection. Devnet only.</code></pre>
+
+  <h3>Track A — Satellite pipeline (DEV-04)</h3>
+  <pre><code>Task: improve detect_plowing() in oracle/satellite/sar/ for small plots (1–10 ha).
+Constraints: Sentinel-1 GRD IW VV/VH only (Copernicus open data); GEE Python API;
+output must match the JSON schema in bounties/SAR-001.md (status, confidence, sar_delta_db,
+scene_ids); report accuracy per plot-size band (1–10, 10–100, 100+ ha) against the ground
+truth set; never fabricate scene IDs. Propose the feature set first, then implement.</code></pre>
+
+  <h3>Both tracks — Turmi baseline upgrades (DEV-09)</h3>
+  <pre><code>Task: add [livestock RFID app | finance/scoring.py | insurance template lines] to
+turmi-backend-lite (Django/PostGIS). Build ON the existing models — FinancingRequest,
+RepaymentInstallment/Record, CropFinancingTemplate, LivestockCostTemplate, kyc.FarmerProfile,
+kyc.Plot — do not create parallel tables. Include migrations, DRF serializers/views matching
+the existing RBAC scoping pattern (see contracts/tests/test_rbac_scoping.py), and tests.
+Spec: docs/dev-guidance.html DEV-09.</code></pre>
+
+  <h3>Track B — Financier dashboard (DEV-05)</h3>
+  <pre><code>Task: build the [public unfunded-farm list | private funded-farm view | SPV/FI ops queue]
+in apps/financier-dashboard (Next.js). Rules: public view shows estimated financing
+requirement, insurance-inclusive ROI, and credit band for every unfunded farm; once funded,
+all operational data is visible ONLY to the financing party (server-side authz, not CSS);
+ops queue lists TrancheApprovedEvents awaiting fiat wire execution with disbursement_hash.
+Read-only Solana RPC; no wallet required to browse.</code></pre>
+
+  <h3>Any track — PR review assistant</h3>
+  <pre><code>Review this PR against: (1) the no-token / no-on-chain-money rule; (2) the bounty spec it
+claims (bounties/*.md); (3) test coverage of failure paths; (4) no secrets, no hardcoded
+keys, authority checks via Anchor constraints; (5) agent-facing flows must work offline and
+never require a wallet. Output: blocking issues, non-blocking suggestions, and a one-line
+merge recommendation. Diff follows:</code></pre>
+
+  <div class="callout callout-ok"><strong>House rules for AI-assisted work:</strong> AI may draft, you verify — every claim about the baseline models must be checked against the actual code; never let an agent invent table names or oracle schemas. Disclose substantial AI assistance in the PR description. Bounty submissions are judged on working, tested code regardless of how it was written.</div>
 </div>
 
 </div><!-- end .main -->

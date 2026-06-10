@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The POD Oracle: SAR plowing detection, NDVI crop health, RFID livestock tracing, and on-chain records that gate milestone financing.">
-    <title>POD Oracle — Ground truth, verifiable by anyone | Proof of Dirt</title>
+    <meta name="description" content="Proof of Dirt DAO transparency: public treasury data, 3-of-5 multisig with 12-month elected signer terms, and the team.">
+    <title>DAO — Public Data &amp; Team | Proof of Dirt</title>
     <style>
         /* ═══════════════════════════════════════════════════════
            DESIGN SYSTEM — "SAHARA MODERN"
@@ -652,7 +652,7 @@
     .card p{font-size:0.88rem;line-height:1.7;color:var(--body);}
     section.pad{padding:90px 7vw;}
     .mono-note{font-family:Consolas,'Courier New',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--subtle);}
-    table.reg{width:100%;border-collapse:collapse;margin-top:30px;font-size:0.86rem;background:var(--bg-card);border:var(--border-card);border-radius:8px;overflow:hidden;}
+    table.reg{width:100%;border-collapse:collapse;margin-top:36px;font-size:0.86rem;background:var(--bg-card);border:var(--border-card);border-radius:8px;overflow:hidden;}
     table.reg th{font-family:Consolas,'Courier New',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle);text-align:left;padding:12px 16px;border-bottom:var(--border);background:var(--bg-2);}
     table.reg td{padding:12px 16px;border-bottom:var(--border);color:var(--body);vertical-align:top;}
     </style>
@@ -673,10 +673,10 @@
         Proof of <em>Dirt</em>
     </a>
     <ul class="nav-links">
-        <li><a href="../oracle/index.html" style="color:var(--ink)">Oracle</a></li>
+        <li><a href="../oracle/index.html">Oracle</a></li>
         <li><a href="../contribute/index.html">Contribute</a></li>
-        <li><a href="../dao/index.html">DAO</a></li>
-        <li><a href="../dao/index.html#donate">Donate</a></li>
+        <li><a href="../dao/index.html" style="color:var(--ink)">DAO</a></li>
+        <li><a href="#donate">Donate</a></li>
         <li><a href="https://github.com/proofofdirt" class="nav-cta">GitHub ↗</a></li>
     </ul>
 </nav>
@@ -684,57 +684,83 @@
 
 <section class="sub-hero">
     <div class="hero-grid"></div>
-    <div class="hero-eyebrow">POD Oracle · Satellite Trust Layer</div>
-    <h1>Ground truth,<br><em>verifiable</em> by anyone.</h1>
-    <p>Satellites and field agents observe the work. The oracle turns it into permanent on-chain records. Financing releases only when the records say so.</p>
+    <div class="hero-eyebrow">DAO · Public Data · Elected Signers</div>
+    <h1>Open books.<br><em>Elected</em> stewards.</h1>
+    <p>A community-owned, builder-managed DAO. Every balance is public, every key decision clears a multisig, and every signer faces re-election every 12 months.</p>
 </section>
 
 <section class="pad" style="background:var(--bg);">
-    <div class="eyebrow" style="color:var(--cerulean)"><span style="display:inline-block;width:20px;height:1px;background:var(--cerulean)"></span>What the Oracle Verifies</div>
-    <h2 class="section-title">Six instruments. <em>One trust layer.</em></h2>
-    <div class="grid3">
-        <div class="card"><span class="tag" style="color:var(--cerulean)">SENTINEL-1 · RADAR</span><h3>SAR plowing detection</h3><p>C-band radar sees through Ethiopia's cloud cover and confirms land preparation on plots from 1 ha — date, location, confidence score.</p></div>
-        <div class="card"><span class="tag" style="color:var(--sage)">SENTINEL-2 · OPTICAL</span><h3>NDVI crop health &amp; yield</h3><p>Vegetation time-series tracks crop development and predicts yield 6–8 weeks before harvest.</p></div>
-        <div class="card"><span class="tag" style="color:var(--amber)">RFID · FIELD PHOTOS</span><h3>Livestock tracing</h3><p>Every animal carries an RFID tag from intake to export. Monthly ML body-condition scoring confirms healthy weight gain.</p></div>
-        <div class="card"><span class="tag" style="color:var(--violet)">LEGAL · COMPLIANCE</span><h3>Farm contracts</h3><p>Contract-farming agreements (Ethiopian Proclamation 578/2008) hashed and anchored on-chain with registration status.</p></div>
-        <div class="card"><span class="tag" style="color:var(--cerulean)">MARKETS</span><h3>Pricing feeds</h3><p>Monthly feed, live-animal, and carcass prices — farm gate to CIF destination — published as oracle feeds.</p></div>
-        <div class="card"><span class="tag" style="color:var(--sage)">HISTORY</span><h3>Credit records</h3><p>Funded amounts, tranche releases, repayments, and settlements build each producer a portable, auditable credit history.</p></div>
+    <div class="eyebrow" style="color:var(--amber)"><span style="display:inline-block;width:20px;height:1px;background:var(--amber)"></span>Public Treasury Data</div>
+    <h2 class="section-title">Verify it <em>yourself.</em></h2>
+    <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card"><span class="tag" style="color:var(--amber)">CRYPTO · SOLANA</span><h3>Treasury multisig wallet</h3>
+            <p>The DAO's only wallet. All crypto grants and donations land here; all USDC/SOL payouts leave from here.</p>
+            <p style="margin-top:12px;"><code style="font-family:Consolas,'Courier New',monospace;font-size:0.72rem;background:var(--bg-2);border:var(--border);border-radius:4px;padding:8px 10px;display:block;word-break:break-all;color:var(--amber);">POD_TREASURY_MULTISIG_ADDRESS</code></p>
+            <p style="margin-top:10px;"><a href="https://solscan.io/account/POD_TREASURY_MULTISIG_ADDRESS" target="_blank" rel="noopener" style="font-family:Consolas,'Courier New',monospace;font-size:0.7rem;color:var(--cerulean);">VERIFY ON SOLSCAN ↗</a></p></div>
+        <div class="card"><span class="tag" style="color:var(--sage)">FIAT · ETHIOPIA</span><h3>Org bank account</h3>
+            <p>DFI and institutional grants/donations are received in the registered org's Ethiopian bank account. A monthly balance snapshot and every inflow/outflow are posted publicly.</p></div>
+        <div class="card"><span class="tag" style="color:var(--cerulean)">LOGS &amp; REPORTS</span><h3>Continuous disclosure</h3>
+            <p>Every treasury movement posted to the public <strong>#treasury-log</strong> within 48 hours · monthly treasury snapshot · quarterly grant/donation report · annual community report.</p></div>
     </div>
+    <table class="reg">
+        <thead><tr><th>Disclosure</th><th>Cadence</th><th>Where</th></tr></thead>
+        <tbody>
+            <tr><td>Treasury movements (crypto + fiat)</td><td>Within 48h</td><td>#treasury-log (Discord, public)</td></tr>
+            <tr><td>Balance snapshots (both accounts)</td><td>Monthly</td><td>#treasury-log + this page</td></tr>
+            <tr><td>Grants &amp; donations received</td><td>Quarterly report</td><td>GitHub + this page</td></tr>
+            <tr><td>Bounty payouts</td><td>Per payout</td><td>On-chain tx signature, linked on the bounty issue</td></tr>
+            <tr><td>Annual community report</td><td>Yearly</td><td>GitHub</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ── DONATE (moved from landing) ────────────────────────────────────── -->
+    <div id="donate" style="margin-top:56px;background:var(--bg-ink);border-radius:10px;padding:44px 40px;color:#F2EDE4;">
+        <div style="font-family:Consolas,'Courier New',monospace;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-glow);margin-bottom:14px;">Donate · No Forms · No Emails</div>
+        <h3 style="font-family:Georgia,'Times New Roman',serif;font-size:1.7rem;font-weight:600;margin-bottom:10px;">Send SOL or USDC straight to the treasury.</h3>
+        <p style="font-size:0.88rem;line-height:1.75;color:rgba(242,237,228,0.55);max-width:560px;margin-bottom:24px;">Anonymous donations welcome — no questions asked. This is the DAO's only wallet — a multisig signed by representatives from developers to producers to buyers. Every inflow and outflow is public and verifiable on-chain.</p>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <code id="treasury-addr" style="font-family:Consolas,'Courier New',monospace;font-size:0.82rem;background:rgba(0,0,0,0.35);border:1px solid rgba(242,237,228,0.15);border-radius:5px;padding:12px 16px;color:var(--amber-glow);word-break:break-all;">POD_TREASURY_MULTISIG_ADDRESS</code>
+            <button onclick="copyAddr(this)" style="font-family:Consolas,'Courier New',monospace;font-size:0.72rem;letter-spacing:0.08em;background:var(--amber);color:#1C1814;border:none;border-radius:4px;padding:12px 20px;cursor:pointer;font-weight:700;">COPY</button>
+            <a href="https://solscan.io/account/POD_TREASURY_MULTISIG_ADDRESS" target="_blank" rel="noopener" style="font-family:Consolas,'Courier New',monospace;font-size:0.72rem;letter-spacing:0.08em;color:rgba(242,237,228,0.6);text-decoration:none;border:1px solid rgba(242,237,228,0.2);border-radius:4px;padding:12px 20px;">VERIFY ON SOLSCAN ↗</a>
+        </div>
+        <p style="margin-top:22px;font-size:0.78rem;color:rgba(242,237,228,0.4);">Institutional / DFI giving or fiat donations: <a href="mailto:info@proofofdirt.com" style="color:var(--amber-glow);">info@proofofdirt.com</a> · Financiers: <a href="mailto:ir@proofofdirt.com" style="color:var(--amber-glow);">ir@proofofdirt.com</a></p>
+    </div>
+    <script>
+    function copyAddr(btn){
+        navigator.clipboard.writeText(document.getElementById('treasury-addr').textContent.trim()).then(function(){
+            btn.textContent = 'COPIED ✓';
+            setTimeout(function(){ btn.textContent = 'COPY'; }, 2000);
+        });
+    }
+    </script>
 </section>
 
 <section class="pad" style="background:var(--bg-2);border-top:var(--border);border-bottom:var(--border);">
-    <div class="eyebrow" style="color:var(--amber)"><span style="display:inline-block;width:20px;height:1px;background:var(--amber)"></span>Milestone Financing</div>
-    <h2 class="section-title">How a tranche <em>releases.</em></h2>
-    <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-        <div class="card"><span class="tag" style="color:var(--amber)">STEP 1</span><h3>Oracle confirms</h3><p>Satellite or field verification passes its confidence threshold — plowing detected, crop on track, herd scoring healthy.</p></div>
-        <div class="card"><span class="tag" style="color:var(--amber)">STEP 2</span><h3>Approval on-chain</h3><p>The vault program emits a tranche-approval event with a hash of the disbursement instruction. Permanent, public, auditable.</p></div>
-        <div class="card"><span class="tag" style="color:var(--amber)">STEP 3</span><h3>Fiat moves</h3><p>The financing party wires local currency to the service providers doing the work — input suppliers, tractor operators, vets, feed suppliers.</p></div>
-        <div class="card"><span class="tag" style="color:var(--amber)">STEP 4</span><h3>Cycle settles</h3><p>Export documents and buyer receipt close the cycle at market price. Repayment updates the producer's credit score.</p></div>
+    <div class="eyebrow" style="color:var(--violet)"><span style="display:inline-block;width:20px;height:1px;background:var(--violet)"></span>Multisig &amp; Elections</div>
+    <h2 class="section-title">Five seats. <em>Twelve-month terms.</em></h2>
+    <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card"><span class="tag" style="color:var(--violet)">STRUCTURE</span><h3>3-of-5 multisig</h3>
+            <p>Signers represent the full chain: <strong>developers</strong> who build the trust tech, <strong>producers / field operations</strong> who grow the product, and <strong>buyers</strong> who take it to market — plus the coordinator and an external advisor. No single party controls the treasury or the rules.</p></div>
+        <div class="card"><span class="tag" style="color:var(--violet)">DECISIONS</span><h3>What requires approval</h3>
+            <p>Treasury disbursements, bounty payouts, oracle parameter changes, financing rules, signer changes, and any future recordkeeping instrument — all clear the multisig; major policy changes carry a 7-day community notice.</p></div>
+        <div class="card"><span class="tag" style="color:var(--violet)">ELECTIONS</span><h3>Annual signer election</h3>
+            <p>Every <strong>12 months</strong> each seat goes to a community election: contributors vote to <strong>keep or replace</strong> the signer. Results are executed on-chain as a Squads member-change proposal — the election outcome and the key rotation are both permanent public records.</p></div>
     </div>
-    <p class="mono-note" style="margin-top:30px;">NO FUNDS MOVE ON-CHAIN — THE CHAIN CARRIES VERIFIED DATA ONLY. ALL MONEY EXCHANGES ARE FIAT.</p>
+    <p class="mono-note" style="margin-top:26px;">ELECTION MECHANICS ARE CONFIGURED AT MULTISIG SETUP (SQUADS, SOLANA) · SEE GOVERNANCE CHARTER ON GITHUB</p>
 </section>
 
 <section class="pad" style="background:var(--bg);">
-    <div class="eyebrow" style="color:var(--sage)"><span style="display:inline-block;width:20px;height:1px;background:var(--sage)"></span>On-Chain Records</div>
-    <h2 class="section-title">What lives <em>on-chain.</em></h2>
-    <table class="reg">
-        <thead><tr><th>Record</th><th>Cadence</th><th>Form</th></tr></thead>
-        <tbody>
-            <tr><td>Satellite confirmations (SAR, NDVI, yield)</td><td>Monthly + per milestone</td><td>Oracle records with confidence + scene IDs</td></tr>
-            <tr><td>Commodity pricing (feed, live animal, carcass)</td><td>Monthly</td><td>Oracle feed values</td></tr>
-            <tr><td>Farm contracts &amp; plot boundaries</td><td>At onboarding</td><td>Document + GeoJSON hashes</td></tr>
-            <tr><td>Funded amounts &amp; tranche approvals</td><td>Per financing event</td><td>Financing records + approval events with disbursement hashes</td></tr>
-            <tr><td>Livestock identity &amp; condition (RFID, BCS)</td><td>Intake + monthly</td><td>Animal record hashes</td></tr>
-            <tr><td>Producer credit scores &amp; settlements</td><td>Per cycle</td><td>Score snapshots + settlement events</td></tr>
-        </tbody>
-    </table>
-</section>
-
-<section class="pad" style="background:var(--bg-ink);text-align:center;">
-    <div class="hero-eyebrow" style="justify-content:center;">For Institutions</div>
-    <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:2.2rem;font-weight:600;color:#F2EDE4;">Built for banks, DFIs, and insurers.</h2>
-    <p style="color:rgba(242,237,228,0.55);max-width:560px;margin:18px auto 30px;font-size:0.95rem;line-height:1.8;">Underwrite against verified production instead of land collateral. Watch every funded farm live, from plowing to settlement. Talk to us about pilots and oracle access.</p>
-    <a href="mailto:ir@proofofdirt.com" class="btn-primary">ir@proofofdirt.com</a>
+    <div class="eyebrow" style="color:var(--sage)"><span style="display:inline-block;width:20px;height:1px;background:var(--sage)"></span>Team</div>
+    <h2 class="section-title">The people <em>behind it.</em></h2>
+    <p style="margin-top:10px;font-size:0.9rem;color:var(--subtle);">Full profiles are being prepared — roles below, names and bios coming soon.</p>
+    <div class="grid3">
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--bg-2);border:var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--muted);font-size:1.4rem;">?</div><span class="tag" style="color:var(--amber)">COORDINATOR · MULTISIG SIGNER</span><h3>Profile coming soon</h3><p style="color:var(--subtle);">Strategy, partnerships, and external relations.</p></div>
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--bg-2);border:var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--muted);font-size:1.4rem;">?</div><span class="tag" style="color:var(--cerulean)">DEVELOPMENT LEADER · CHAIN &amp; DATA</span><h3>Profile coming soon</h3><p style="color:var(--subtle);">Vault records, oracle publishing, satellite pipelines.</p></div>
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--bg-2);border:var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--muted);font-size:1.4rem;">?</div><span class="tag" style="color:var(--cerulean)">DEVELOPMENT LEADER · INTERFACES</span><h3>Profile coming soon</h3><p style="color:var(--subtle);">Agent app, financier and contributor dashboards.</p></div>
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--bg-2);border:var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--muted);font-size:1.4rem;">?</div><span class="tag" style="color:var(--violet)">DEVREL &amp; GRANTS</span><h3>Profile coming soon</h3><p style="color:var(--subtle);">Community, bounties, AI competitions, grants.</p></div>
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--bg-2);border:var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--muted);font-size:1.4rem;">?</div><span class="tag" style="color:var(--sage)">GROUND TRUTH LEADER · MULTISIG SIGNER</span><h3>Profile coming soon</h3><p style="color:var(--subtle);">Field operations, data quality, the producer voice.</p></div>
+        <div class="card" style="text-align:center;"><div style="width:72px;height:72px;border-radius:50%;background:var(--amber-pale);border:1px solid var(--amber);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:Consolas,'Courier New',monospace;color:var(--amber);font-size:1.4rem;">+</div><span class="tag" style="color:var(--amber)">YOU?</span><h3>Open seats</h3><p style="color:var(--subtle);">Volunteers, AI researchers, and interns grow into supervisor and signer roles.</p><p style="margin-top:8px;"><a href="../contribute/index.html" style="color:var(--amber);font-size:0.85rem;">How to join →</a></p></div>
+    </div>
 </section>
 
 
