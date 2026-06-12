@@ -8,7 +8,7 @@ Sources: selinawamucii.com, UN COMTRADE, OEC, trade contacts
 ## Context
 
 Live small ruminants are PoD's primary export product from the Ethiopia corridor.
-Ethiopian Rift Valley and Omo Valley are significant sources for KSA/UAE markets.
+Ethiopian Rift Valley and southern lowlands are significant sources for KSA/UAE markets.
 Pricing is highly seasonal (Hajj/Eid spikes), origin-sensitive (disease ban risk),
 and grade-dependent (live weight, body condition score, age/sex).
 

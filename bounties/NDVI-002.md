@@ -1,4 +1,4 @@
-# BOUNTY-002 — NDVI Yield Prediction (Sorghum & Maize, Omo Valley)
+# BOUNTY-002 — NDVI Yield Prediction (Sorghum & Maize, UKE Welega)
 
 **Repository:** `proofofdirt/pod` → `oracle/satellite/ndvi/`  
 **Status:** 🟢 OPEN  
@@ -10,13 +10,13 @@
 
 ## Objective
 
-Build a Sentinel-2 NDVI time-series model that predicts **sorghum and maize** yield **6–8 weeks before harvest** in Ethiopia's Omo Valley. Target RMSE of less than 15% of actual mean yield.
+Build a Sentinel-2 NDVI time-series model that predicts **sorghum and maize** yield **6–8 weeks before harvest** in Ethiopia's UKE Welega pilot region (West Ethiopia). Target RMSE of less than 15% of actual mean yield.
 
 ---
 
 ## Why These Crops, Why This Timing
 
-KSA imports **100% of its animal feed requirements**. Ethiopia's Omo Valley — with its fertile soils and growing season — is geographically positioned to be a key supplier of sorghum and maize to MENA animal feed markets. These are the primary crops in the POD Oracle's MVP commodity tracking pipeline.
+KSA imports **100% of its animal feed requirements**. Ethiopia's UKE Welega region — with its fertile soils and growing season — is geographically positioned to be a key supplier of sorghum and maize to MENA animal feed markets. These are the primary crops in the POD Oracle's MVP commodity tracking pipeline.
 
 Yield prediction issued 6–8 weeks pre-harvest gives MENA commodity buyers the forward visibility they need to price import contracts with confidence. This data feeds directly into the POD Oracle's forward-contract price transparency layer.
 
@@ -44,10 +44,10 @@ Yield prediction issued 6–8 weeks pre-harvest gives MENA commodity buyers the 
 ```
 
 ### Technical Constraints
-- **RMSE:** < 15% of mean yield on the Omo Valley validation set
+- **RMSE:** < 15% of mean yield on the pilot-region validation set
 - **Prediction horizon:** Model output must be issuable 6–8 weeks before observable harvest NDVI decline
 - **Crops in scope:** Sorghum and maize (other crops out of scope for this bounty)
-- **Calibration region:** SNNP Region / Omo Valley growing conditions
+- **Calibration region:** the UKE Welega pilot region (West Ethiopia) growing conditions
 - **Cloud handling:** Must apply cloud masking using Sentinel-2 SCL band; persistent cloud gaps must be handled (interpolation or gap-filling strategy required)
 
 ---
@@ -56,12 +56,12 @@ Yield prediction issued 6–8 weeks pre-harvest gives MENA commodity buyers the 
 
 ### Sentinel-2 Imagery (Free)
 - GEE collection: `COPERNICUS/S2_SR_HARMONIZED`
-- Pilot region: Omo Valley, SNNP Region, Ethiopia
+- Pilot region: UKE Welega, Horo Guduru Welega Zone, West Ethiopia
 - Bands of interest: B4 (Red), B8 (NIR) for NDVI; full multispectral stack for LAI / EVI
 
 ### Pre-compiled Data (in `oracle/satellite/data/`)
-- 3 seasons of NDVI time-series for the Omo Valley pilot area
-- Phenological calendars for sorghum and maize in the SNNP region
+- 3 seasons of NDVI time-series for the UKE Welega pilot area
+- Phenological calendars for sorghum and maize in the pilot region
 
 ### Yield Records (Restricted)
 - Turmi Technologies field yield records from the 2024–2025 test season

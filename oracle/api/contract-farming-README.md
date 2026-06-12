@@ -42,6 +42,6 @@ Every funded plot must have on record, before vault payment authorises:
 All contract templates and compliance UI must be available in:
 - **English** (en)
 - **Amharic** (am) — Ethiopia's official working language
-- **Oromifa / Afaan Oromoo** (or) — primary language of SNNP Region / Omo Valley
+- **Oromifa / Afaan Oromoo** (or) — primary language of the UKE Welega pilot region (West Ethiopia)
 
 Translations must be reviewed by a native speaker with legal background before merge.

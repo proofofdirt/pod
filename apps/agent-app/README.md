@@ -1,6 +1,6 @@
 # apps/agent-app — Field Agent Mobile App
 
-> React Native offline-first app for Turmi Technologies field agents operating in Ethiopia's Omo Valley.
+> React Native offline-first app for Turmi Technologies field agents operating in Ethiopia's UKE Welega pilot region (Horo Guduru Welega Zone, West Ethiopia).
 
 The Agent App is the human layer of the POD Oracle — the interface through which field agents submit GeoJSON plot boundaries, record agricultural activity, capture contract farming compliance documents, and score livestock body condition.
 
@@ -37,7 +37,7 @@ Minimum offline capability:
 All UI and contract templates must be available in:
 - **English** (en)
 - **Amharic** (am) — Ethiopia's official working language
-- **Oromifa / Afaan Oromoo** (or) — primary language of SNNP Region / Omo Valley
+- **Oromifa / Afaan Oromoo** (or) — primary language of the UKE Welega pilot region (West Ethiopia)
 
 ### GPS Accuracy
 - Flag all submissions where GPS accuracy is > 5 metres

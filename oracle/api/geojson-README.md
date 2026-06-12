@@ -31,7 +31,7 @@ GeoJSON validation, spatial operations, and cross-validation tools for field age
     "area_ha": 143.2,
     "woreda": "Salamago",
     "zone": "South Omo",
-    "region": "SNNP",
+    "region": "Oromia",
     "land_rights_verified": true,
     "contract_farming_status": "REGISTERED"
   },

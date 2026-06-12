@@ -1,6 +1,6 @@
 # AI Competition Program — Optimizing SAR & NDVI Detection
 
-**Status:** Planned (Phase 1 prep → Phase 2–3 launch) · **Funding:** grant/donation budget (USD prizes) · **License requirement:** all winning solutions released MIT
+**Status:** POST-FUNDING — opens once grants/donations fund the treasury and pilot cycles have produced enough labels · **Funding:** grant/donation budget (USD prizes) · **License requirement:** all winning solutions released MIT
 
 ## Why
 

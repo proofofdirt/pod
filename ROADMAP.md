@@ -98,7 +98,6 @@ The working baseline lives in `D:\TurmiAppDev` (`turmi-frontend-lite` Next.js da
 - [ ] CoP + logistics datasets v1 (insurance premium included), hash-anchored
 - [ ] ROI calculator per farm (market-rate return + buyer discount view)
 - [ ] SAR plowing + NDVI pipelines on pilot AOI; BCS model started
-- [ ] AI competition prep: package labeled SAR/NDVI challenge datasets + baseline notebooks (see `bounties/AI-COMPETITIONS.md`)
 - [ ] RFID animal registry + intake flow in agent app; offline mobile capture MVP
 - [ ] Credit score v0: scoring rules defined, computed from existing repayment ledger
 - [ ] **Legal (parallel):** SPV jurisdiction + formation; Shariah advisor; buyer offtake template **with floor-price + market-settlement clause**; Ethiopian FI partner engagement with oracle-as-collateral proposal; NBE-compliant USD inflow design
@@ -116,7 +115,7 @@ The working baseline lives in `D:\TurmiAppDev` (`turmi-frontend-lite` Next.js da
 - [ ] Feed cycle: T1→T2→T3 wires on oracle confirmation, every wire hash-anchored
 - [ ] Fattening cycle: RFID intake reimbursement + monthly BCS-gated disbursements
 - [ ] Yield prediction live; export margin calculator (gated); insurance claims flow tested
-- [ ] Launch external AI competitions (Zindi/Kaggle/AI for Good) to beat the SAR + NDVI baselines; winning models integrated open source
+- [ ] **Post-funding:** package labeled SAR/NDVI challenge datasets, then launch external AI competitions (Zindi/Kaggle/AI for Good) to beat the baselines; winning models integrated open source. Paid bounty program activates with the funded treasury
 - [ ] Credit scores updating from live repayment events
 
 ### Phase 4 — Export, Settlement, Proof (Months 10–14)
@@ -149,26 +148,4 @@ PODFinal/
 │   └── api/                    # oracle REST API + on-chain anchoring
 ├── programs/pod-vault/         # Anchor: financing records + approvals (no tokens, no transfers)
 ├── apps/
-│   ├── agent-app/              # baseline = D:\TurmiAppDev (see BASELINE.md) + upgrades
-│   ├── financier-dashboard/    # buyers, DFIs, Ethiopian FI partners
-│   └── contributor-dashboard/  # dev bounties, payouts, agent-mgmt ETB reports
-├── bounties/                   # single canonical bounty folder
-├── workflows/                  # tranche release, new corridor, grant application
-├── scripts/                    # ops reporting, payout tooling
-└── assets/branding/
-```
-
----
-
-## 9. Risks & Mitigations
-
-| Risk | Mitigation |
-|---|---|
-| Ethiopian FI unfamiliar with oracle-as-collateral | Lead with the live dashboard + floor-price offtake backstop; start with one pilot facility, small ticket |
-| Floor-price buyer reneges at settlement | Binding offtake with floor clause; settlement at market only above floor; SPV holds export docs |
-| FI/SPV/DFI timelines slip | Three capital sources pursued in parallel; buyer prepayment carries cycle 1 if needed |
-| Single-operator dependence (Turmi) | Contracts name a substitutable "managed services entity"; oracle data is operator-agnostic |
-| FX / USD inflow friction | NBE-compliant design from Phase 1; wires only to service providers |
-| Oracle errors gate real money | Accuracy floors (SAR >90%, BCS confidence ≥0.80), held-out validation, human ops sign-off on every wire |
-| New-producer default | Credit-score-sized loans (lower % of CoP), insurance in cost basis, reimburse-after-verify for unproven producers |
-| Animal substitution/fraud | RFID per animal + geolocated photos + BCS continuity checks from intake to export |
+│   ├── agent-app/              # baseline = D:\TurmiAppDev (see BASELINE.

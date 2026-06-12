@@ -1,11 +1,11 @@
 # oracle/satellite/ndvi — Sentinel-2 Vegetation & Yield Analysis
 
-NDVI time-series processing for sorghum and maize feed crops in Ethiopia's Omo Valley. Yield prediction 6–8 weeks pre-harvest enables MENA buyers to price forward contracts with confidence.
+NDVI time-series processing for sorghum and maize feed crops in Ethiopia's UKE Welega pilot region. Yield prediction 6–8 weeks pre-harvest enables MENA buyers to price forward contracts with confidence.
 
 ## What Gets Built Here
 
 - **Preprocessing:** Atmospheric correction (L2A), cloud masking (SCL band), phenological stage classification
-- **Yield models:** NDVI time-series regression calibrated for sorghum and maize (SNNP Region growing conditions)
+- **Yield models:** NDVI time-series regression calibrated for sorghum and maize (West Ethiopia pilot growing conditions)
 - **Validation tools:** RMSE comparison against Turmi field yield records
 
 ## Active Bounty
